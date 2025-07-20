@@ -1,14 +1,24 @@
+'use client'
+
 import Image from "next/image";
 import Link from "next/link";
 import styles from "../styles/Header.module.css";
 import { deleteSessionCookie, isSessionValid } from "../lib/session";
-import { useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { redirect } from "next/navigation";
+import LogoutButton from "./logout-btn";
 
-export default async function Header() {
+export default function Header() {
 
-    const isLogged = await isSessionValid();
-    console.log("isLogged:", isLogged);
+    const [isLogged, setIsLogged] = useState(false);
+
+    useEffect(() => {
+        const checkSession = async () => {
+            const valid = await isSessionValid();
+            setIsLogged(valid != false);
+        };
+        checkSession();
+    }, []);
 
     const roll = useCallback((destino: string) => {
         if (destino === 'login') {
@@ -32,17 +42,12 @@ export default async function Header() {
         });
     };
 
-    const logout = async () => {
-        'use server';
-        await deleteSessionCookie();
-        redirect('/');
-    }
-
     return(
         <header className={styles.header}>
             <nav className={styles.navegationBar}>
                 <div style={{ position: "relative", width: "150px", height: "60px" }}>
-                    <Image id="imgLogo" src="/CopiaDeLogoLaranja.png" alt="Imagem da logo da Fundação Asimo" fill style={{ objectFit: "contain", cursor: "pointer" }} onClick={scrollToTop} />
+                    {!isLogged && <Image id="imgLogo" src="/CopiaDeLogoLaranja.png" alt="Imagem da logo da Fundação Asimo" fill style={{ objectFit: "contain", cursor: "pointer" }} onClick={scrollToTop}/>}
+                    {isLogged && <Image id="imgLogo" src="/CopiaDeLogoLaranja.png" alt="Imagem da logo da Fundação Asimo" fill style={{ objectFit: "contain", cursor: "pointer" }} onClick={() => redirect('/main')}/>}
                 </div>
                 <ul id="navUl">
                     {!isLogged && <li><a onClick={() => roll("sobre")}>Quem Somos?</a></li>}
@@ -57,7 +62,7 @@ export default async function Header() {
                     {isLogged && <li><Link href="https://drive.google.com/drive/folders/1wEhCZUAgwSYat5SqRdnrFv-2BcZXhgCB?usp=drive_link">Drive</Link></li>}
                     {isLogged && <li><Link href="/main/agenda">Agenda</Link></li>}
                     {isLogged && <li><Link href="/main/tools">Tools</Link></li>}
-                    {isLogged && <li><a onClick={() => logout()}>Logout</a></li>}
+                    {isLogged && <li><LogoutButton/></li>}
                 </ul>
             </nav>
         </header>

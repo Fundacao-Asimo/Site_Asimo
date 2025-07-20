@@ -41,7 +41,6 @@ export default function LoginPage(){
             return;
         }
         
-
         const loginValidacao = await validateCredentials(loginData);
 
         if(loginValidacao){
@@ -53,21 +52,9 @@ export default function LoginPage(){
 
     return (
         <div className={styles['login-container']}>
-            <div className={styles['login-background']}>
-                <Image 
-                    src="/campo.avif"
-                    alt="Campo de futebol"
-                    fill
-                    className={styles['background-image']}
-                    priority
-                />
-                <div className={styles.overlay}></div>
-            </div>
-            
             <form className={styles['login-form']} action={loginAction}>
                 <div className={styles['logo-container']}>
-                    <h1 className={styles['login-title']}>⚽ Futebol League Manager</h1>
-                    <p className={styles['login-subtitle']}>Entre para gerenciar sua liga!</p>
+                    <h1 className={styles['login-title']}>Fundação Asimo</h1>
                 </div>
                 
                 <div className={styles['inputs-container']}>
@@ -88,13 +75,8 @@ export default function LoginPage(){
                 
                 <button className={styles['login-button']} type="submit">
                     <span className={styles['button-text']}>Entrar</span>
-                    <span className={styles['button-icon']}>⚽</span>
                 </button>
-                
-                <div className={styles['link-cadastrar']}>
-                    Não tem conta? Clique <Link className={styles['btn-criar-conta']} href="/create">aqui</Link>
-                </div>
             </form>
         </div>
-    )
+    );
 }
