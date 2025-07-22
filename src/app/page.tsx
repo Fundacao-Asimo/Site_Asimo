@@ -1,11 +1,15 @@
-"use client"
-
 import Image from "next/image";
 import styles from "./page.module.css";
+import Header from "./ui/Header";
+import { isSessionValid } from "./lib/session";
 
-export default function Home() {
+export default async function Home() {
+
+    const isLogged = await isSessionValid();
+
     return (
         <>
+            <Header isLogged={isLogged != false}/>
             <main className={styles.main}>
                 <div className={styles.viewPrincipal}>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit...</p>

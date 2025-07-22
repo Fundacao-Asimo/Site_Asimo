@@ -1,24 +1,14 @@
-'use client'
+'use client';
 
 import Image from "next/image";
 import Link from "next/link";
 import styles from "../styles/Header.module.css";
-import { deleteSessionCookie, isSessionValid } from "../lib/session";
-import { useCallback, useEffect, useState } from "react";
-import { redirect } from "next/navigation";
+import { useCallback } from "react";
+import { useRouter } from "next/navigation";
 import LogoutButton from "./logout-btn";
 
-export default function Header() {
-
-    const [isLogged, setIsLogged] = useState(false);
-
-    useEffect(() => {
-        const checkSession = async () => {
-            const valid = await isSessionValid();
-            setIsLogged(valid != false);
-        };
-        checkSession();
-    }, []);
+export default function Header({ isLogged }: { isLogged: boolean }) {
+    const router = useRouter();
 
     const roll = useCallback((destino: string) => {
         if (destino === 'login') {
@@ -47,7 +37,7 @@ export default function Header() {
             <nav className={styles.navegationBar}>
                 <div style={{ position: "relative", width: "150px", height: "60px" }}>
                     {!isLogged && <Image id="imgLogo" src="/CopiaDeLogoLaranja.png" alt="Imagem da logo da Fundação Asimo" fill style={{ objectFit: "contain", cursor: "pointer" }} onClick={scrollToTop}/>}
-                    {isLogged && <Image id="imgLogo" src="/CopiaDeLogoLaranja.png" alt="Imagem da logo da Fundação Asimo" fill style={{ objectFit: "contain", cursor: "pointer" }} onClick={() => redirect('/main')}/>}
+                    {isLogged && <Image id="imgLogo" src="/CopiaDeLogoLaranja.png" alt="Imagem da logo da Fundação Asimo" fill style={{ objectFit: "contain", cursor: "pointer" }} onClick={() => router.push("/main")}/>}
                 </div>
                 <ul id="navUl">
                     {!isLogged && <li><a onClick={() => roll("sobre")}>Quem Somos?</a></li>}

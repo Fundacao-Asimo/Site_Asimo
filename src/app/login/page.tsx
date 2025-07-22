@@ -1,10 +1,8 @@
 'use client'
 
 import styles from '@/app/styles/login.module.css';
-import Image from 'next/image';
 import z from 'zod';
 import toast from 'react-hot-toast';
-import Link from 'next/link';
 import { validateCredentials } from '@/app/lib/credentials';
 
 export interface LoginCredentials {

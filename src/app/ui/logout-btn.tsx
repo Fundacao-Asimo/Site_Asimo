@@ -1,15 +1,9 @@
-'use server';
+'use client'
 
-import { redirect } from "next/navigation";
-import { deleteSessionCookie } from "../lib/session"
+import { logout } from "../lib/session"
 import styles from "../styles/Header.module.css";
 
-export default async function LogoutButton(){
-
-    const logout = async () => {
-        await deleteSessionCookie();
-        redirect('/login');
-    }
+export default function LogoutButton(){
 
     return(
         <form action={logout} className='logoutForm'>

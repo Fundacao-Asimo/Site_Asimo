@@ -2,6 +2,7 @@
 
 import { SignJWT, jwtVerify } from "jose";
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 
 console.log('Valor de process.env.TOKEN em session.ts:', process.env.TOKEN);
@@ -60,3 +61,7 @@ export async function deleteSessionCookie(){
     cookieStore.delete('session');
 }
 
+export async function logout() {
+        await deleteSessionCookie();
+        redirect('/login');
+    }
