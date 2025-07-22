@@ -2,6 +2,7 @@
   {
     "email": "fundacaoasimo@unifei.edu.br",
     "password": "$2b$10$e7LC3EJElURy9.HuVIsaHeD7xli3HWgnHupRk/5sUY8nA18kyFeEm",
-    "adm": "True"
+    "adm": true,
+    "nasc": "0000-00-00"
   }
 ]
