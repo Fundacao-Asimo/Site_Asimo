@@ -4,7 +4,6 @@ import { SignJWT, jwtVerify } from "jose";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
-
 console.log('Valor de process.env.TOKEN em session.ts:', process.env.TOKEN);
 
 async function openSessionToken(token: string){
@@ -22,12 +21,12 @@ async function openSessionToken(token: string){
     
 }
 
-export async function createSessionToken(userEmail: string, adm: boolean){
+export async function createSessionToken(userNick: string, userEmail: string, adm: boolean){
     const encodedKey = new TextEncoder().encode(process.env.TOKEN); 
     const expiresAt = Date.now() + 3600;
 
 
-    const session = await new SignJWT({userEmail, adm}).setProtectedHeader({
+    const session = await new SignJWT({userNick, userEmail, adm}).setProtectedHeader({
         alg: 'HS256'
     })
     .setExpirationTime('1h') 
