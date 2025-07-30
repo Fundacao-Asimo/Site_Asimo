@@ -1,87 +1,76 @@
-/* Resetando algumas configurações padrão */
-.page {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
-    background-color: rgb(240, 240, 240);
-}
 
-/* Seção Principal */
+
+/* Main */
 .main {
-    padding-top: 6rem;
+  padding: 0;
+  padding-top: 6rem;
 }
 
+/* Seção principal com imagem de fundo */
 .viewPrincipal {
-    background-image: url("/fundacao-membros.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: 50% 55%;
-    transition: background-image 0.5s ease;
-    height: 30rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
+  background-image: url("/fundacao-membros.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 50% 55%;
+  transition: background-image 0.5s ease;
+  height: 30rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
 }
 
-.viewPrincipal p {
-    color: #FF7A00;
-    margin: 0 2rem;
-    max-width: 90%;
-    font-size: 30pt;
-    font-weight: bold;
+/* Texto dentro da viewPrincipal */
+.textoPrincipal {
+  color: #FF7A00;
+  margin: 0 2rem;
+  max-width: 90%;
+  font-size: 30pt;
+  font-weight: bold;
 }
 
+/* Animação */
 @keyframes appear {
-    from {
-        opacity: 0;
-        scale: 0.5;
-    }
-    to {
-        opacity: 1;
-        scale: 1;
-    }
+  from {
+    opacity: 0;
+    scale: 0.5;
+  }
+  to {
+    opacity: 1;
+    scale: 1;
+  }
 }
 
+/* Blocos de conteúdo */
 .topicos {
-    background-color: white;
-    margin: 3rem 2rem;
-    overflow: hidden;
-    border-radius: 2rem;
-    animation: appear linear;
-    animation-timeline: view();
-    animation-range: entry 0 cover 30%;
+  display: flex;
+  align-items: start;
+  background-color: white;
+  margin: 3rem 2rem;
+  overflow: hidden;
+  border-radius: 2rem;
+  animation: appear linear;
+  animation-timeline: view();
+  animation-range: entry 0 cover 30%;
 }
 
+/* Conteúdo interno dos blocos */
 .topicos div {
-    display: block;
-    margin: 3rem 4rem;
+  display: block;
+  margin: 3rem 4rem;
+  padding: 0;
 }
 
-.topicos p {
-    font-size: 20px;
-    color: #666;
-    line-height: 1.6;
-}
-
-#sobre,
-#escolas {
-    display: flex;
-    justify-content: center;
-    align-items: start;
-}
-
-#sobre img,
-#escolas img {
-    width: 50%;
-    display: block;
-    margin: 0;
-}
-
+/* Título */
 .h2 {
-    font-size: 45px;
-    color: #333;
-    margin-bottom: 15px;
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+/* Parágrafos */
+.topicos p {
+  font-size: 20px;
+  color: #666;
+  line-height: 1.6;
 }
