@@ -21,12 +21,12 @@ async function openSessionToken(token: string){
     
 }
 
-export async function createSessionToken(userNick: string, userEmail: string, adm: boolean){
+export async function createSessionToken(userId: number, isAdm: boolean){
     const encodedKey = new TextEncoder().encode(process.env.TOKEN); 
     const expiresAt = Date.now() + 3600;
 
 
-    const session = await new SignJWT({userNick, userEmail, adm}).setProtectedHeader({
+    const session = await new SignJWT({userId, isAdm}).setProtectedHeader({
         alg: 'HS256'
     })
     .setExpirationTime('1h') 
@@ -61,6 +61,6 @@ export async function deleteSessionCookie(){
 }
 
 export async function logout() {
-        await deleteSessionCookie();
-        redirect('/login');
-    }
+    await deleteSessionCookie();
+    redirect('/login');
+}

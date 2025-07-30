@@ -11,6 +11,7 @@ export interface MembroProps {
     nick: any,
     email: string,
     password: string,
+    ingresso: any,
     adm: boolean,
     nasc: any,
     foto: any
@@ -18,12 +19,12 @@ export interface MembroProps {
 
 const arquivo = 'usuarios-db.json';
 
-export default function MembroCard(props: MembroProps) {
+export default async function MembroCard(props: MembroProps) {
 
     const deleteMembro = async (form: FormData) => {
-        const email = Number(form.get('membro-email'));
+        const id = Number(form.get('membro-id'));
         const listaMembros = await ConexaoBD.retornaBD(arquivo);
-        const membroIdx = listaMembros.findIndex((d) => d.email === email);
+        const membroIdx = listaMembros.findIndex((d) => d.id === id);
 
         listaMembros.splice(membroIdx,1);
         await ConexaoBD.armazenaBD(arquivo, listaMembros);
@@ -40,10 +41,11 @@ export default function MembroCard(props: MembroProps) {
                    height={200}
             />
             <section className="membro-edit-buttons-container">
-                <Link href={`/main/membros/edit/${props.email}`} className="link-edit-membro">Editar</Link>
+                <Link href={`/main/membros/edit/${props.id}`} className="link-edit-membro">Editar</Link>
+                <Link href={`/main/membros/advertencia/${props.id}`} className="link-adver-membro">Adivertencia</Link>
                 <form action={deleteMembro}>
                     <button>Remover</button>
-                    <input defaultValue={props.email} name="membro-email" hidden/>
+                    <input defaultValue={props.id} name="membro-id" hidden/>
                 </form>
             </section>
         </div>

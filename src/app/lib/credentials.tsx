@@ -52,7 +52,7 @@ export async function validateCredentials(data: LoginCredentials){
 
     if(isMatch)
     {
-        await createSessionToken(user.nick, user.email, user.adm);
+        await createSessionToken(user.id, user.adm);
         redirect('/main');
     }
     else{

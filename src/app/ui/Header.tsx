@@ -7,7 +7,7 @@ import { useCallback } from "react";
 import { useRouter } from "next/navigation";
 import LogoutButton from "./logout-btn";
 
-export default function Header({ isLogged }: { isLogged: boolean }) {
+export default function Header({ isLogged, isAdm }: {isLogged: boolean, isAdm: boolean}) {
     const router = useRouter();
 
     const roll = useCallback((destino: string) => {
@@ -52,6 +52,7 @@ export default function Header({ isLogged }: { isLogged: boolean }) {
                     {isLogged && <li><Link href="https://drive.google.com/drive/folders/1wEhCZUAgwSYat5SqRdnrFv-2BcZXhgCB?usp=drive_link">Drive</Link></li>}
                     {isLogged && <li><Link href="/main/agenda">Agenda</Link></li>}
                     {isLogged && <li><Link href="/main/tools">Tools</Link></li>}
+                    {isLogged && isAdm && <li><Link href="/main/membros">Membros</Link></li>}
                     {isLogged && <li><LogoutButton/></li>}
                 </ul>
             </nav>

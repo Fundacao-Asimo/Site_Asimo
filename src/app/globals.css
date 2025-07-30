@@ -16,3 +16,8 @@ a {
   color: inherit;
   text-decoration: none;
 }
+
+main {
+  min-height: 80vh;
+  padding-top: 6rem;
+}

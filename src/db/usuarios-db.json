@@ -2,9 +2,10 @@
   {
     "id": 0,
     "nome": "Fundação Asimo",
-    "nick": null,
+    "nick": "ASIMO",
     "email": "fundacaoasimo@unifei.edu.br",
     "password": "$2b$10$e7LC3EJElURy9.HuVIsaHeD7xli3HWgnHupRk/5sUY8nA18kyFeEm",
+    "ingresso": null,
     "adm": true,
     "nasc": null,
     "foto": null

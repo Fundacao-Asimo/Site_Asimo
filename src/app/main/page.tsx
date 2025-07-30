@@ -14,10 +14,12 @@ export interface AniversarianteProps {
 
 export default async function MainPage() {
     
-    const usuarioLogado = await isSessionValid();
-    const usuario = usuarioLogado as {userNick: string};
+    const session = await isSessionValid();
+    const usuarioId = session as {userId: number};
     const mesAtual = new Date().getMonth() + 1;
     const membros = await ConexaoBD.retornaBD(arquivo);
+
+    const usuarioLogado = membros.find((d) => d.id === usuarioId.userId);
 
     const aniversariantes: AniversarianteProps[] = membros
         .filter((membro: MembroProps) => {
@@ -41,7 +43,7 @@ export default async function MainPage() {
 
     return(
         <main>
-            <h1>Bem Vindo {usuario?.userNick ?? "usuário"}!</h1>
+            <h1>Bem Vindo {usuarioLogado?.nick ?? "usuário"}!</h1>
             <section>
                 <h2>Aniversariantes do Mês</h2>
                 {aniversariantesMap}

@@ -8,9 +8,9 @@ export default async function ListMembrosPage() {
 
     const membros = await ConexaoBD.retornaBD(arquivo);
 
-    const membrosMap = membros.filter(membro => membro.email !== "fundacaoasimo@unifei.edu.br")
+    const membrosMap = membros.filter(membro => membro.id !== 0)
         .map((membro: MembroProps) => {
-        return <MembroCard key={membro.email} {...membro}/>
+        return <MembroCard key={membro.id} {...membro}/>
     });
 
     return(

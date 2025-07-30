@@ -12,6 +12,10 @@ export const config = {
 const publicRoutes = [
     '/',
     '/login'
+];
+
+const admRoutes = [
+    '/membros'
 ]
 
 export async function middleware(req: NextRequest){
@@ -20,16 +24,19 @@ export async function middleware(req: NextRequest){
 
     //verificar se a requisicao possui credenciais validas para criar uma session
     const session = await isSessionValid();
+    const isAdm = session as {isAdm: boolean};
 
-    if(publicRoutes.includes(pathname) && session)
-    {
+    if(publicRoutes.includes(pathname) && session) {
         return NextResponse.redirect(new URL('/main', req.nextUrl));
     }
     
-    if(!session && !publicRoutes.includes(pathname)){
+    if(!session && !publicRoutes.includes(pathname)) {
         return NextResponse.redirect(new URL('/login', req.nextUrl));
     }
 
+    if(admRoutes.some(route => pathname.includes(route)) && !(isAdm.isAdm)) {
+        return NextResponse.redirect(new URL('/main', req.nextUrl));
+    }
     
     return NextResponse.next();
       

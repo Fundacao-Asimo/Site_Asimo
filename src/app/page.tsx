@@ -4,11 +4,12 @@ import Header from "./ui/Header";
 import { isSessionValid } from "./lib/session";
 
 export default async function Home() {
+
     const isLogged = await isSessionValid();
 
     return (
         <>
-            <Header isLogged={isLogged != false} />
+            <Header isLogged={isLogged != false} isAdm={false} />
             <main className={styles.main}>
                 <div className={styles.viewPrincipal}>
                     
