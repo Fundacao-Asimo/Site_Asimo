@@ -5,15 +5,15 @@ import z from 'zod';
 import toast from 'react-hot-toast';
 import { validateCredentials } from '@/app/lib/credentials';
 
-export interface LoginCredentials {
-    email: string,
-    password: string
-}
-
 const LoginSchema = z.object({
     email: z.string().trim().email('Email com formato incorreto'),
     password: z.string({message: 'Insira uma senha'}).trim().min(2, {message: 'Senha requer no mínimo 2 caracteres'})
 })
+
+export interface LoginCredentials {
+    email: string,
+    password: string
+}
 
 export default function LoginPage(){
 
