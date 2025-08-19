@@ -4,9 +4,20 @@
     "nome": "Fundação Asimo",
     "nick": "ASIMO",
     "email": "fundacaoasimo@unifei.edu.br",
-    "password": "$2b$10$e7LC3EJElURy9.HuVIsaHeD7xli3HWgnHupRk/5sUY8nA18kyFeEm",
+    "password": "$2b$10$Y9Tp1o4tolz919VAtyhvZe544WN1YBmTcpVVr5CA1OPPuYX90vsEi",
     "ingresso": null,
     "adm": true,
+    "nasc": null,
+    "foto": null
+  },
+  {
+    "id": 1,
+    "nome": "Luiz Augusto Silva",
+    "nick": "Luizinho",
+    "email": "luizaugustosilva871@gmail.com",
+    "password": "$2b$10$Y9Tp1o4tolz919VAtyhvZe544WN1YBmTcpVVr5CA1OPPuYX90vsEi",
+    "ingresso": null,
+    "adm": false,
     "nasc": null,
     "foto": null
   }

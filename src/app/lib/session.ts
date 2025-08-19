@@ -4,8 +4,6 @@ import { SignJWT, jwtVerify } from "jose";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
-console.log('Valor de process.env.TOKEN em session.ts:', process.env.TOKEN);
-
 async function openSessionToken(token: string){
     
     const encodedKey = new TextEncoder().encode(process.env.TOKEN);
@@ -17,13 +15,15 @@ async function openSessionToken(token: string){
         return payload;
     }catch(e){
         console.log('Erro ao verificar session token', e);
+        await deleteSessionCookie();
+        return false;
     }
     
 }
 
 export async function createSessionToken(userId: number, isAdm: boolean){
     const encodedKey = new TextEncoder().encode(process.env.TOKEN); 
-    const expiresAt = Date.now() + 3600;
+    const expiresAt = new Date(Date.now() + 1000 * 60 * 60);
 
 
     const session = await new SignJWT({userId, isAdm}).setProtectedHeader({
@@ -35,7 +35,7 @@ export async function createSessionToken(userId: number, isAdm: boolean){
     const cookieStore = await cookies();
     
     cookieStore.set('session', session, {
-        expires: expiresAt * 1000,
+        expires: expiresAt,
         path: '/',
         httpOnly: true
     });
