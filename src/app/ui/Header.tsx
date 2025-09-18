@@ -36,8 +36,8 @@ export default function Header({ isLogged, isAdm }: {isLogged: boolean, isAdm: b
         <header className={styles.header}>
             <nav className={styles.navegationBar}>
                 <div style={{ position: "relative", width: "150px", height: "60px" }}>
-                    {!isLogged && <Image id="imgLogo" src="/LogoLaranja.png" alt="Imagem da logo da Fundação Asimo" fill style={{ objectFit: "contain", cursor: "pointer" }} onClick={scrollToTop}/>}
-                    {isLogged && <Image id="imgLogo" src="/LogoLaranja.png" alt="Imagem da logo da Fundação Asimo" fill style={{ objectFit: "contain", cursor: "pointer" }} onClick={() => router.push("/main")}/>}
+                    {!isLogged && <Image id="imgLogo" src="/Robo.png" alt="Imagem da logo da Fundação Asimo" fill style={{ objectFit: "contain", cursor: "pointer" }} onClick={scrollToTop}/>}
+                    {isLogged && <Image id="imgLogo" src="/Robo.png" alt="Imagem da logo da Fundação Asimo" fill style={{ objectFit: "contain", cursor: "pointer" }} onClick={() => router.push("/main")}/>}
                 </div>
                 <ul id="navUl">
                     {!isLogged && <li><a onClick={() => roll("sobre")}>Quem Somos?</a></li>}

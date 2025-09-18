@@ -60,8 +60,6 @@ export default function CreateMembro() {
             router.push('/login');
         }
     }
-
-
     return(
         <main className="create-membro-container">
             <h1>Inserir Inserir Membro</h1>
