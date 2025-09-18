@@ -1,16 +1,46 @@
+import ConexaoBD from "@/app/lib/ConexaoBD";
 import Link from "next/link";
+import { redirect } from "next/navigation";
+import toast from "react-hot-toast";
 
-interface formAddMembro {
-    nome: string,
-    nick: string,
-    email: string,
-    password: string,
-}
+const arquivo = "usuarios-db.json";
 
-export default function CreateMembro() {
+export default async function CreateMembro() {
 
-    const addMembro = (formdata: FormData) => {
+    const addMembro = async (formdata: FormData) => {
+        const nome = formdata.get("nome");
+        const nick = formdata.get("nick");
+        const email = formdata.get("email");
+        const senha = formdata.get("password");
+        const senhaConfirmacao = formdata.get("password-confirm");
 
+        const membros = await ConexaoBD.retornaBD(arquivo);
+
+        const idNovo = membros[-1].id + 1;
+
+        if(senha === senhaConfirmacao) {
+
+            const novoMembro = {
+                id: idNovo,
+                nome: nome,
+                nick: nick,
+                email: email,
+                password: senha,
+                ingresso: null,
+                adm: false,
+                nasc: null,
+                foto: null
+            }
+        }
+        else {
+            toast.error("Senhas não são iguais");
+            return;
+        }
+
+        membros.push(novoMembro);
+        await ConexaoBD.armazenaBD(membros);
+
+        redirect("/main/membros");
     }
 
     return(

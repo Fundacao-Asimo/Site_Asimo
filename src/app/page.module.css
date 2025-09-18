@@ -8,12 +8,13 @@
 
 /* Seção principal com imagem de fundo */
 .viewPrincipal {
-  background-image: url("/fundacao-membros.png");
+  background-image: url("/LogoLaranja.png");
+  background-color: #00294c;
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: 70%;
   background-position: 50% 55%;
   transition: background-image 0.5s ease;
-  height: 30rem;
+  height: 82vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -45,7 +46,8 @@
 .topicos {
   display: flex;
   align-items: start;
-  background-color: white;
+  background-color: transparent;
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.4);
   margin: 3rem 2rem;
   overflow: hidden;
   border-radius: 2rem;
@@ -60,17 +62,20 @@
   margin: 3rem 4rem;
   padding: 0;
 }
+.topicos img {
+  border-radius: 2rem;
+}
 
 /* Título */
 .h2 {
   font-size: 2.5rem;
-  color: #333;
+  color: white;
   margin-bottom: 15px;
 }
 
 /* Parágrafos */
 .topicos p {
   font-size: 20px;
-  color: #666;
+  color: white;
   line-height: 1.6;
 }

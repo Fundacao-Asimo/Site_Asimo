@@ -47,6 +47,9 @@ export default async function MainPage() {
             <section>
                 <h2>Aniversariantes do Mês</h2>
                 {aniversariantesMap}
+                <div>
+                    <p>{usuarioLogado.nome}</p>
+                </div>
             </section>
         </main>
     );
