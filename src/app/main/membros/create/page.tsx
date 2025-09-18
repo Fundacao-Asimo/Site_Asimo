@@ -1,48 +1,65 @@
-import ConexaoBD from "@/app/lib/ConexaoBD";
+'use client';
+
+import z from 'zod';
 import Link from "next/link";
-import { redirect } from "next/navigation";
-import toast from "react-hot-toast";
+import { useRouter } from "next/router";
+import toast from 'react-hot-toast';
+import { createUser } from '@/app/lib/credentials';
+import { MembroProps } from '@/app/ui/membro-card';
 
-const arquivo = "usuarios-db.json";
+const CreateUserSchema = z.object({
+    email: z.string().trim().email('Email com formato incorreto'),
+    password: z.string({message: 'Insira uma senha'}).trim().min(4, {message: 'Senha precisa no mínimo 4 caracteres'}),
+    confPassword: z.string({message: 'Insira uma confirmação de senha'}).trim().min(1, {message: 'Confirmar Senha não pode ser vazia'}),
+}).refine((data) => data.password === data.confPassword, {
+    message: "Senhas não conferem",
+    path: ["confPassword"]
+});
 
-export default async function CreateMembro() {
+export default function CreateMembro() {
 
-    const addMembro = async (formdata: FormData) => {
-        const nome = formdata.get("nome");
-        const nick = formdata.get("nick");
-        const email = formdata.get("email");
-        const senha = formdata.get("password");
-        const senhaConfirmacao = formdata.get("password-confirm");
+    const router = useRouter();
 
-        const membros = await ConexaoBD.retornaBD(arquivo);
+    const addMembro = async (formData: FormData) => {
 
-        const idNovo = membros[-1].id + 1;
-
-        if(senha === senhaConfirmacao) {
-
-            const novoMembro = {
-                id: idNovo,
-                nome: nome,
-                nick: nick,
-                email: email,
-                password: senha,
-                ingresso: null,
-                adm: false,
-                nasc: null,
-                foto: null
-            }
+        const createUserData = {
+            id: 0 as number,
+            nome: formData.get('nome') as string,
+            nick: formData.get('nick') as string,
+            email: formData.get('email') as string,
+            password: formData.get('password') as string,
+            confPassword: formData.get('conf-password') as string,
+            nasc: formData.get('data_nasc') as string,
+            ingresso: new Date().toISOString().split('T')[0] as string,
+            adm: false as boolean,
+            foto: null
         }
-        else {
-            toast.error("Senhas não são iguais");
+
+        const result = CreateUserSchema.safeParse(createUserData);
+
+        if(!result.success){
+
+            let errorMsg = '';
+
+            result.error.issues.forEach((issue) => {
+                errorMsg = errorMsg + issue.message + '. ';
+            });
+
+            toast.error(errorMsg);
+
             return;
         }
+        
+        const retorno = await createUser(createUserData as MembroProps);
 
-        membros.push(novoMembro);
-        await ConexaoBD.armazenaBD(membros);
-
-        redirect("/main/membros");
+        if(retorno.error){
+            toast.error(retorno.error);
+            return;
+        }else if(retorno.success){
+            toast.success(retorno.success);
+            router.push('/login');
+        }
     }
-
     return(
         <main className="create-membro-container">
             <h1>Inserir Inserir Membro</h1>
@@ -80,6 +97,14 @@ export default async function CreateMembro() {
                 </section>
                 <section className="membro-input">
                     <input
+                        type="date"
+                        id="data_nasc"
+                        name="data_nasc"
+                        required
+                    />
+                </section>
+                <section className="membro-input">
+                    <input
                         type="password"
                         id="password"
                         name="password"
@@ -91,8 +116,8 @@ export default async function CreateMembro() {
                 <section className="membro-input">
                     <input
                         type="password"
-                        id="password-confirm"
-                        name="password-confirm"
+                        id="conf-password"
+                        name="conf-password"
                         placeholder="Confirme Senha do Membro"
                         aria-label="Confirme Senha do Membro"
                         required
