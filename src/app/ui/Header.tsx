@@ -41,9 +41,9 @@ export default function Header({ isLogged, isAdm }: {isLogged: boolean, isAdm: b
                 </div>
                 <ul id="navUl">
                     {!isLogged && <li><a onClick={() => roll("sobre")}>Quem Somos?</a></li>}
-                    {!isLogged && <li><a onClick={() => roll("comoparticipar")}>Como Participar</a></li>}
+                    {!isLogged && <li><a onClick={() => roll("missao")}>Nossa Missão</a></li>}
                     {!isLogged && <li><a onClick={() => roll("eventos")}>Eventos</a></li>}
-                    {!isLogged && <li><a onClick={() => roll("escolas")}>Nossas Escolas</a></li>}
+                    {!isLogged && <li><a onClick={() => roll("areas")}>Nossas Áreas</a></li>}
                     {!isLogged && <li><Link href="/login">Login</Link></li>}
                     {isLogged && <li><Link href="/main">Home</Link></li>}
                     {isLogged && <li><Link href="/main/dados-pessoais">Dados Pessoais</Link></li>}

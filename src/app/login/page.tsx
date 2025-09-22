@@ -8,7 +8,7 @@ import { validateCredentials } from '@/app/lib/credentials';
 const LoginSchema = z.object({
     email: z.string().trim().email('Email com formato incorreto'),
     password: z.string({message: 'Insira uma senha'}).trim().min(2, {message: 'Senha requer no mínimo 2 caracteres'})
-})
+});
 
 export interface LoginCredentials {
     email: string,

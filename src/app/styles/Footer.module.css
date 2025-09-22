@@ -3,9 +3,10 @@
     background-color: #00294c;
     color: white;
     justify-content: center;
-    padding: 0.5rem;
+    padding: 3rem;
     flex-wrap: wrap;
     font-family: 'Poppins', sans-serif;
+    height: 40vh;
 }
 
 
