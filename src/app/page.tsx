@@ -5,6 +5,7 @@ import styles from "./page.module.css";
 import Header from "./ui/Header";
 import FlipCard from "./ui/FlipCard";
 import CardEventos from "./ui/CardEventos";
+import EventosRotativos from "./ui/EventosRotativos";
 
 export default function Home() {
 
@@ -19,10 +20,10 @@ export default function Home() {
                 <div className={styles.topicos} id="sobre">
                     <div className={styles.imagemPtext}>
                         <Image
-                            src="/fundacao-membros.png"
+                            src="/fundacao-membros-3.png"
                             alt="Imagem dos membros da segurando a bandeira da Fundação Asimo"
                             width={500}
-                            height={350}
+                            height={281}
                         />
                         <div className={styles.textosTopicos}>
                             <h2 className={styles.h2}>Quem Somos?</h2>
@@ -44,17 +45,22 @@ export default function Home() {
                             </p>
                         </div>
                         <Image
-                            src="/fundacao-membros.png"
+                            src="/fundacao-membros-2.png"
                             alt="Imagem dos membros da segurando a bandeira da Fundação Asimo"
                             width={500}
-                            height={350}
+                            height={281}
                         />
                     </div>
                 </div>
 
-                <div className={styles.topicos} id="eventos">
+                <div className={styles.topicoEventos} id="eventos">
+                    <h2>Eventos</h2>
+                    <EventosRotativos/>
+                </div>
+
+                <div className={styles.topicos} id="escolas">
                     <div className={styles.conteudo}>
-                        <h2 className={styles.h2}>Eventos</h2>
+                        <h2 className={styles.h2}>Nossas Escolas</h2>
                         <ul>
                             <li><CardEventos imageSrc="/paraiso.png" title="Teste"/></li>
                             <li><CardEventos imageSrc="/paraiso.png" title="Teste"/></li>
@@ -68,9 +74,9 @@ export default function Home() {
                         <h2 className={styles.h2}>Conheça nossas áreas</h2>
                         <ul>
                             <li><FlipCard txtFrente="Docência" txtAtras="Ministra aulas de robótica e programação em escolas parceiras" txtImg="/docencia.png"/></li>
-                            <li><FlipCard txtFrente="Projetos" txtAtras="Desenvolve protótipos e soluções eletrônicas para as aulas e eventos" txtImg="/docencia.png"/></li>
-                            <li><FlipCard txtFrente="Marketing" txtAtras="Divulga o projeto e fortalece sua imagem em redes e eventos" txtImg="/docencia.png"/></li>
-                            <li><FlipCard txtFrente="Gestão" txtAtras="Cuida do bem-estar dos membros e do processo seletivo" txtImg="/docencia.png"/></li>
+                            <li><FlipCard txtFrente="Projetos" txtAtras="Desenvolve protótipos e soluções eletrônicas para as aulas e eventos" txtImg="/projetos.png"/></li>
+                            <li><FlipCard txtFrente="Marketing" txtAtras="Divulga o projeto e fortalece sua imagem em redes e eventos" txtImg="/marketing.png"/></li>
+                            <li><FlipCard txtFrente="Gestão" txtAtras="Cuida do bem-estar dos membros e do processo seletivo" txtImg="/gestao.png"/></li>
                         </ul>
                     </div>
                 </div>

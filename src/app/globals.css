@@ -3,6 +3,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: #00294c;
   line-height: 1.6;
+  color: white;
 }
 
 * {

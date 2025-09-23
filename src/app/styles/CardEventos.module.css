@@ -11,9 +11,6 @@
 }
 
 .image {
-    position: absolute;
-    top: 0;
-    left: 0;
     width: 100%;
     height: 100%;
     border-radius: 1rem;
@@ -26,8 +23,6 @@
 }
 
 .overlay {
-  position: absolute;
-  inset: 0;
   background-color: rgba(0,0,0,0.4); /* camada escura */
   display: flex;
   justify-content: center;
