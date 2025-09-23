@@ -4,8 +4,8 @@ import Image from "next/image";
 import styles from "./page.module.css";
 import Header from "./ui/Header";
 import FlipCard from "./ui/FlipCard";
-import CardEventos from "./ui/CardEventos";
 import EventosRotativos from "./ui/EventosRotativos";
+import CardEscolas from "./ui/CardEscolas";
 
 export default function Home() {
 
@@ -20,6 +20,7 @@ export default function Home() {
                 <div className={styles.topicos} id="sobre">
                     <div className={styles.imagemPtext}>
                         <Image
+                            className={styles.imagemTopico}
                             src="/fundacao-membros-3.png"
                             alt="Imagem dos membros da segurando a bandeira da Fundação Asimo"
                             width={500}
@@ -45,6 +46,7 @@ export default function Home() {
                             </p>
                         </div>
                         <Image
+                            className={styles.imagemTopico}
                             src="/fundacao-membros-2.png"
                             alt="Imagem dos membros da segurando a bandeira da Fundação Asimo"
                             width={500}
@@ -62,9 +64,9 @@ export default function Home() {
                     <div className={styles.conteudo}>
                         <h2 className={styles.h2}>Nossas Escolas</h2>
                         <ul>
-                            <li><CardEventos imageSrc="/paraiso.png" title="Teste"/></li>
-                            <li><CardEventos imageSrc="/paraiso.png" title="Teste"/></li>
-                            <li><CardEventos imageSrc="/paraiso.png" title="Teste"/></li>
+                            <li><CardEscolas imageSrc="/granja.png" title="Granja"/></li>
+                            <li><CardEscolas imageSrc="/WNeto.png" title="Wenceslau Neto"/></li>
+                            <li><CardEscolas imageSrc="/barao.png" title="Barão do Rio Branco"/></li>
                         </ul>
                     </div>
                 </div>

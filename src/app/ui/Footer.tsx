@@ -9,8 +9,8 @@ export default function Footer() {
                 <p>Contatos</p>
                 <ul>
                     <li><Link href="mailto:fundacaoasimo@unifei.edu.br" target="_blank"><Image className={styles.contatoImg} src="/icon-email.png" alt="Email" width={30} height={30} />fundacaoasimo@unifei.edu.br</Link></li>
-                    <li><Link href="https://www.youtube.com/@Funda%C3%A7%C3%A3oAsimo" target="_blank"><Image className={styles.contatoImg} src="/icon-youtube.png" alt="Youtube" width={30} height={30} />Youtube</Link></li>
                     <li><Link href="https://www.instagram.com/fundacaoasimo/" target="_blank"><Image className={styles.contatoImg} src="/icon-instagram.png" alt="Instagram" width={30} height={30} />@fundacaoasimo</Link></li>
+                    <li><Link href="https://www.youtube.com/@Funda%C3%A7%C3%A3oAsimo" target="_blank"><Image className={styles.contatoImg} src="/icon-youtube.png" alt="Youtube" width={30} height={30} />Youtube</Link></li>
                     <li><Link href="https://br.linkedin.com/company/fundacao-asimo" target="_blank"><Image className={styles.contatoImg} src="/icon-linkedin.png" alt="LinkedIn" width={30} height={30} />Linkedin</Link></li>
                 </ul>
             </section>

@@ -114,7 +114,7 @@
   padding: 0;
 }
 
-.topicos img {
+.topicos .imagemTopico {
   margin-right: 2rem;
   margin-left: 2rem;
   border-radius: 1rem;
@@ -182,23 +182,25 @@
   flex-direction: column;
   justify-content: center;
   align-items: start;
-  right: 15%;
-  bottom: 8%;
+  right: 10%;
+  bottom: 5%;
+  width: 50vw;
 }
 
 .topicoEventos h2 {
   position: absolute;
-  font-size: 3.5rem;
+  font-size: 3.7rem;
   top: 3rem;
   right: 4rem;
 }
 
 .topicoEventos h3 {
   font-size: 2.5rem;
+  width: 100%;
 }
 
 .textosEventos p {
-  width: 40vw;
+  width: 100%;
   font-size: 1.5rem;
 }
 
@@ -206,4 +208,18 @@
   width: 100%;
   height: 100%;
   display: flex;
+  position: relative;
+  overflow: hidden;
+}
+
+.slideWrapper {
+  width: 100%;
+  transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.slideOut {
+  transform: translateX(-5%); /* sai para a esquerda */
+  opacity: 0;
 }
