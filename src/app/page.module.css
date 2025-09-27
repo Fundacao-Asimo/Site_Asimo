@@ -13,7 +13,6 @@
   background-repeat: no-repeat;
   background-size: 70%;
   background-position: 50% 55%;
-  transition: background-image 0.5s ease;
   height: 82vh;
   display: flex;
   justify-content: center;
@@ -31,7 +30,7 @@
 }
 
 /* Animação */
-@keyframes appear {
+/*@keyframes appear {
   from {
     opacity: 0;
     scale: 0.5;
@@ -40,37 +39,107 @@
     opacity: 1;
     scale: 1;
   }
-}
+}*/
 
 /* Blocos de conteúdo */
 .topicos {
   display: flex;
-  align-items: start;
-  background-color: transparent;
-  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.4);
-  margin: 3rem 2rem;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 0;
+  margin-top: 2rem;
+  /*background-color: transparent;
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.4);*/
+  height: 70vh;
+  width: 100%;
+  /*margin: 3rem 2rem;*/
   overflow: hidden;
-  border-radius: 2rem;
   animation: appear linear;
   animation-timeline: view();
   animation-range: entry 0 cover 30%;
 }
 
+:global(#areas) {
+  background-color: #FF7A00;
+  h2 {
+    margin-bottom: 4rem;
+    text-shadow: -0.5rem 0.5rem 1.5rem rgba(0, 0, 0, 0.9);
+  }
+  box-shadow: inset 0rem 1rem 5rem 0.1rem rgba(0, 0, 0, 0.4),
+              inset 0rem -1rem 5rem 0.1rem rgba(0, 0, 0, 0.4);
+}
+
+:global(#escolas) {
+  h2 {
+    margin-bottom: 4rem;
+  }
+}
+
+:global(#missao) {
+  background-color: #FF7A00;
+  h2 {
+    text-shadow: -0.2rem 0.2rem 1rem rgba(0, 0, 0, 0.9);
+  }
+  p {
+    text-shadow: -0.2rem 0.2rem 1rem rgba(0, 0, 0, 0.9);
+  }
+  box-shadow: inset 0rem 1rem 5rem 0.1rem rgba(0, 0, 0, 0.4),
+              inset 0rem -1rem 5rem 0.1rem rgba(0, 0, 0, 0.4);
+}
+
+.imagemPtext {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0 9rem;
+}
+
+.imagemPtext .textosTopicos {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 /* Conteúdo interno dos blocos */
-.topicos div {
-  display: block;
-  margin: 3rem 4rem;
+.conteudo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin: 0;
   padding: 0;
 }
-.topicos img {
-  border-radius: 2rem;
+
+.topicos .imagemTopico {
+  margin-right: 2rem;
+  margin-left: 2rem;
+  border-radius: 1rem;
+  box-shadow: -1rem 1rem 5rem 0.1rem rgba(0, 0, 0, 0.4);
+}
+
+.topicos .conteudo ul {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  width: 100%;
+  list-style: none;
+  padding: 0;
+  flex-wrap: wrap;
+}
+
+.topicos .conteudo ul li {
+  padding: 0;
+  margin: 0;
 }
 
 /* Título */
 .h2 {
   font-size: 2.5rem;
   color: white;
-  margin-bottom: 15px;
+  margin-bottom: 25px;
 }
 
 /* Parágrafos */
@@ -78,4 +147,101 @@
   font-size: 20px;
   color: white;
   line-height: 1.6;
+}
+
+.topicoEventos {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin-top: 0;
+  height: 70vh;
+  width: 100%;
+  overflow: hidden;
+  animation: appear linear;
+  animation-timeline: view();
+  animation-range: entry 0 cover 30%;
+}
+
+.imagensEventos {
+  height: 100%;
+  width: auto;
+  object-fit: cover;
+
+  mask-image: linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 90%);
+  mask-repeat: no-repeat;
+  mask-size: 100% 100%;
+}
+
+.textosEventos {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+  right: 10%;
+  bottom: 5%;
+  width: 50vw;
+}
+
+.topicoEventos h2 {
+  position: absolute;
+  font-size: 3.7rem;
+  top: 3rem;
+  right: 4rem;
+}
+
+.topicoEventos h3 {
+  font-size: 2.5rem;
+  width: 100%;
+}
+
+.textosEventos p {
+  width: 100%;
+  font-size: 1.5rem;
+}
+
+.conteudoEventos {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  position: relative;
+  overflow: hidden;
+}
+
+.slideWrapper {
+  width: 100%;
+  transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.slideOut {
+  transform: translateX(-5%); /* sai para a esquerda */
+  opacity: 0;
+}
+
+.setaTroca {
+  position: absolute;
+  width: 100vw;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  span {
+    margin: 2rem;
+    cursor: pointer;
+    color: #FF7A00;
+    transition: color 0.3s ease;
+    font-size: 5rem;
+    font-weight: bold;
+    text-shadow: -0.5rem 0.5rem 1rem rgba(0, 0, 0, 0.4);
+    /*transform: translateY(50%);*/
+  }
+
+  span:hover {
+    color: white;
+  }
 }
