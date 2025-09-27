@@ -4,6 +4,7 @@ import styles from '@/app/styles/login.module.css';
 import z from 'zod';
 import toast from 'react-hot-toast';
 import { validateCredentials } from '@/app/lib/credentials';
+import HeaderLogin from '../ui/Header-login';
 
 const LoginSchema = z.object({
     email: z.string().trim().email('Email com formato incorreto'),
@@ -49,32 +50,35 @@ export default function LoginPage(){
     }
 
     return (
-        <main className={styles['login-container']}>
-            <form className={styles['login-form']} action={loginAction}>
-                <div className={styles['logo-container']}>
-                    <h1 className={styles['login-title']}>Fundação Asimo</h1>
-                </div>
-                
-                <div className={styles['inputs-container']}>
-                    <section className={styles['user-input']}>
-                        <div className={styles['input-icon']}>
-                            <span className={styles.icon}>👤</span>
-                        </div>
-                        <input type="email" name="email" id="email" placeholder="Email" className={styles['form-input']}/>
-                    </section>
+        <>
+            <HeaderLogin />
+            <main className={styles['login-container']}>
+                <form className={styles['login-form']} action={loginAction}>
+                    <div className={styles['logo-container']}>
+                        <h1 className={styles['login-title']}>Fundação Asimo</h1>
+                    </div>
                     
-                    <section className={styles['user-input']}>
-                        <div className={styles['input-icon']}>
-                            <span className={styles.icon}>🔒</span>
-                        </div>
-                        <input type="password" name="password" id="password" placeholder="Senha" className={styles['form-input']}/>
-                    </section>
-                </div>
-                
-                <button className={styles['login-button']} type="submit">
-                    <span className={styles['button-text']}>Entrar</span>
-                </button>
-            </form>
-        </main>
+                    <div className={styles['inputs-container']}>
+                        <section className={styles['user-input']}>
+                            <div className={styles['input-icon']}>
+                                <span className={styles.icon}>👤</span>
+                            </div>
+                            <input type="email" name="email" id="email" placeholder="Email" className={styles['form-input']}/>
+                        </section>
+                        
+                        <section className={styles['user-input']}>
+                            <div className={styles['input-icon']}>
+                                <span className={styles.icon}>🔒</span>
+                            </div>
+                            <input type="password" name="password" id="password" placeholder="Senha" className={styles['form-input']}/>
+                        </section>
+                    </div>
+                    
+                    <button className={styles['login-button']} type="submit">
+                        <span className={styles['button-text']}>Entrar</span>
+                    </button>
+                </form>
+            </main>
+        </>
     );
 }

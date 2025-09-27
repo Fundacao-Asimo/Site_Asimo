@@ -41,4 +41,5 @@
 .navegationBar ul li:hover, .loginButton:hover {
     color: #FF7A00;
     cursor: pointer;
+    font-weight: bold;
 }

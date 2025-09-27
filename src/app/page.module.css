@@ -13,7 +13,6 @@
   background-repeat: no-repeat;
   background-size: 70%;
   background-position: 50% 55%;
-  transition: background-image 0.5s ease;
   height: 82vh;
   display: flex;
   justify-content: center;
@@ -148,7 +147,6 @@
   font-size: 20px;
   color: white;
   line-height: 1.6;
-  text-align: left;
 }
 
 .topicoEventos {
@@ -222,4 +220,28 @@
 .slideOut {
   transform: translateX(-5%); /* sai para a esquerda */
   opacity: 0;
+}
+
+.setaTroca {
+  position: absolute;
+  width: 100vw;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  span {
+    margin: 2rem;
+    cursor: pointer;
+    color: #FF7A00;
+    transition: color 0.3s ease;
+    font-size: 5rem;
+    font-weight: bold;
+    text-shadow: -0.5rem 0.5rem 1rem rgba(0, 0, 0, 0.4);
+    /*transform: translateY(50%);*/
+  }
+
+  span:hover {
+    color: white;
+  }
 }

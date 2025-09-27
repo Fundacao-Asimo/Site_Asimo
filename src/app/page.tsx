@@ -13,9 +13,7 @@ export default function Home() {
         <>
             <Header isLogged={false} isAdm={false} />
             <main className={styles.main}>
-                <div className={styles.viewPrincipal}>
-                    
-                </div>
+                <div className={styles.viewPrincipal}></div>
 
                 <div className={styles.topicos} id="sobre">
                     <div className={styles.imagemPtext}>
@@ -64,9 +62,9 @@ export default function Home() {
                     <div className={styles.conteudo}>
                         <h2 className={styles.h2}>Nossas Escolas</h2>
                         <ul>
-                            <li><CardEscolas imageSrc="/granja.png" title="Granja"/></li>
-                            <li><CardEscolas imageSrc="/WNeto.png" title="Wenceslau Neto"/></li>
-                            <li><CardEscolas imageSrc="/barao.png" title="Barão do Rio Branco"/></li>
+                            <li><CardEscolas imageSrc="/granja.png" title="Centro de Apoio Nossa Senhora do Sagrado Coração"/></li>
+                            <li><CardEscolas imageSrc="/WNeto.png" title="Escola Wenceslau Neto"/></li>
+                            <li><CardEscolas imageSrc="/barao.png" title="Escola Estadual Barão do Rio Branco"/></li>
                         </ul>
                     </div>
                 </div>
@@ -78,7 +76,7 @@ export default function Home() {
                             <li><FlipCard txtFrente="Docência" txtAtras="Ministra aulas de robótica e programação em escolas parceiras" txtImg="/docencia.png"/></li>
                             <li><FlipCard txtFrente="Projetos" txtAtras="Desenvolve protótipos e soluções eletrônicas para as aulas e eventos" txtImg="/projetos.png"/></li>
                             <li><FlipCard txtFrente="Marketing" txtAtras="Divulga o projeto e fortalece sua imagem em redes e eventos" txtImg="/marketing.png"/></li>
-                            <li><FlipCard txtFrente="Gestão" txtAtras="Cuida do bem-estar dos membros e do processo seletivo" txtImg="/gestao.png"/></li>
+                            <li><FlipCard txtFrente="Gestão" txtAtras="Cuida do bem-estar dos membros e dos processos internos" txtImg="/gestao.png"/></li>
                         </ul>
                     </div>
                 </div>

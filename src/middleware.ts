@@ -1,8 +1,6 @@
 import { isSessionValid } from "@/app/lib/session";
 import {NextRequest, NextResponse} from "next/server";
 
-
-
 //regex retirada diretamente da documentação do NextJS
 export const config = {
   // https://nextjs.org/docs/app/building-your-application/routing/middleware#matcher

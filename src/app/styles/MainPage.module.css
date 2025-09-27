@@ -1,0 +1,45 @@
+.titulo {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  margin-left: 3rem;
+  margin-top: 1rem;
+}
+
+.quadro {
+  position: relative;
+  width: 50%;
+  height: 70%;
+  max-width: 80rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgb(240, 240, 240);
+  border: 1rem solid;
+  box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.3);
+  border-image: url('/madeira.png') 30 round;
+  border-radius: 0.5rem;
+}
+
+.quadro h2 {
+  font-family: "Segoe Script", cursive;
+  color: red;
+  margin: 1.5rem 0;
+}
+
+.title {
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+  color: #555;
+  text-decoration: underline;
+  text-decoration-color: #38bdf8; /* azul claro estilo marcador */
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+  gap: 2rem;
+  justify-items: center;
+}

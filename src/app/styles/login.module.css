@@ -1,12 +1,11 @@
 /* Login Page - Tema Futebol */
 
 .login-container {
-    min-height: 100vh;
+    min-height: auto;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
-    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
     font-family: 'Arial', sans-serif;
 }
 
