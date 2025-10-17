@@ -1,6 +1,6 @@
 .card {
-  width: 17rem;
-  height: 17rem;
+  width: 35vh;
+  height: 35vh;
   perspective: 1500px;
   cursor: pointer;
   transition: transform 0.3s ease;
