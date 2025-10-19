@@ -14,7 +14,7 @@ export default function Home() {
             <Header isLogged={false} isAdm={false} />
             <main className={styles.main}>
                 <div className={styles.viewPrincipal}></div>
-
+                    
                 <div className={styles.topicos} id="sobre">
                     <div className={styles.imagemPtext}>
                         <Image
@@ -45,7 +45,7 @@ export default function Home() {
                         </div>
                         <Image
                             className={styles.imagemTopico}
-                            src="/fundacao-membros-2.png"
+                            src="/missao.png"
                             alt="Imagem dos membros da segurando a bandeira da Fundação Asimo"
                             width={500}
                             height={281}

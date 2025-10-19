@@ -20,34 +20,13 @@
   overflow: hidden;
 }
 
-/* Texto dentro da viewPrincipal */
-.textoPrincipal {
-  color: #FF7A00;
-  margin: 0 2rem;
-  max-width: 90%;
-  font-size: 30pt;
-  font-weight: bold;
-}
-
-/* Animação */
-/*@keyframes appear {
-  from {
-    opacity: 0;
-    scale: 0.5;
-  }
-  to {
-    opacity: 1;
-    scale: 1;
-  }
-}*/
-
 /* Blocos de conteúdo */
 .topicos {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 17vh 2rem;
-  margin-top: 2rem;
+  padding: 17vh 1.5rem;
+  margin-bottom: 2rem;
   /*background-color: transparent;
   box-shadow: 0 8px 12px rgba(0, 0, 0, 0.4);*/
   height: auto;
@@ -77,6 +56,7 @@
 
 :global(#missao) {
   background-color: #FF7A00;
+  margin-bottom: 0;
   h2 {
     text-shadow: -0.2rem 0.2rem 1rem rgba(0, 0, 0, 0.9);
   }
@@ -91,16 +71,52 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  flex-wrap: wrap;
   width: 100%;
   height: 100%;
   margin: 0;
-  padding: 0 9rem;
+  padding: 0 2rem;
 }
 
-.imagemPtext .textosTopicos {
+.textosTopicos {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  width: 50%;
+  text-align: justify;
+}
+
+.imagemTopico {
+  width: 44%;
+  height: auto;
+  margin: 0rem 2rem;
+  border-radius: 1rem;
+  box-shadow: -1rem 1rem 5rem 0.1rem rgba(0, 0, 0, 0.4);
+}
+
+@media (max-width: 768px) {
+  .textosTopicos{
+    width: 100%;
+  }
+
+  .imagemTopico {
+    width: 100%;
+    height: auto;
+    margin: 2rem 0rem;
+  }
+
+  .viewPrincipal {
+    height: 20vh;
+    background-size: 90%;
+  }
+
+  .topicos {
+    padding: 10vh 0.4rem;
+  }
+
+  :global(#sobre) {
+    padding-top: 5vh;
+  }
 }
 
 /* Conteúdo interno dos blocos */
@@ -111,13 +127,6 @@
   width: 100%;
   margin: 0;
   padding: 0;
-}
-
-.topicos .imagemTopico {
-  margin-right: 2rem;
-  margin-left: 2rem;
-  border-radius: 1rem;
-  box-shadow: -1rem 1rem 5rem 0.1rem rgba(0, 0, 0, 0.4);
 }
 
 .topicos .conteudo ul {
@@ -137,7 +146,7 @@
 
 /* Título */
 .h2 {
-  font-size: 2.5rem;
+  font-size: 2.2rem;
   color: white;
   margin-bottom: 25px;
   text-wrap: wrap;
@@ -146,7 +155,7 @@
 
 /* Parágrafos */
 .topicos p {
-  font-size: 20px;
+  font-size: 1.2rem;
   color: white;
   line-height: 1.6;
 }
@@ -185,6 +194,7 @@
   right: 10%;
   bottom: 5%;
   width: 50vw;
+  text-align: justify;
 }
 
 .topicoEventos h2 {
@@ -195,13 +205,14 @@
 }
 
 .topicoEventos h3 {
-  font-size: 2.5rem;
+  font-size: 2.2rem;
   width: 100%;
+  text-align: start;
 }
 
 .textosEventos p {
   width: 100%;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
 }
 
 .conteudoEventos {

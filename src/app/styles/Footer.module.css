@@ -3,7 +3,7 @@
     background-color: #00294c;
     color: white;
     justify-content: center;
-    padding: 3rem;
+    padding: 0rem;
     flex-wrap: wrap;
     font-family: 'Poppins', sans-serif;
     height: 40vh;
@@ -14,8 +14,9 @@
     font-family: 'Lastwaerk', sans-serif;
     font-size: 2rem;
     font-weight: bold;
-    margin-bottom: 1rem;
+    margin-bottom: 0.3rem;
     color: #FF7A00;
+    margin-top: 1rem;
 }
 
 .footer ul {

@@ -3,12 +3,14 @@
 import Image from "next/image";
 import Link from "next/link";
 import styles from "../styles/Header.module.css";
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import { useRouter } from "next/navigation";
 import LogoutButton from "./logout-btn";
 
 export default function Header({ isLogged, isAdm }: {isLogged: boolean, isAdm: boolean}) {
     const router = useRouter();
+
+    const [menuOpen, setMenuOpen] = useState(false);
 
     const roll = useCallback((destino: string) => {
         if (destino === 'login') {
@@ -35,11 +37,16 @@ export default function Header({ isLogged, isAdm }: {isLogged: boolean, isAdm: b
     return(
         <header className={styles.header}>
             <nav className={styles.navegationBar}>
-                <div style={{ position: "relative", width: "150px", height: "60px" }}>
-                    {!isLogged && <Image id="imgLogo" src="/Robo.png" alt="Imagem da logo da Fundação Asimo" fill style={{ objectFit: "contain", cursor: "pointer" }} onClick={scrollToTop}/>}
-                    {isLogged && <Image id="imgLogo" src="/Robo.png" alt="Imagem da logo da Fundação Asimo" fill style={{ objectFit: "contain", cursor: "pointer" }} onClick={() => router.push("/main")}/>}
-                </div>
-                <ul id="navUl">
+                {!isLogged && <Image id="imgLogo" className={styles.img} src="/Robo.png" alt="Imagem da logo da Fundação Asimo" width={50} height={70} style={{ objectFit: "contain", cursor: "pointer" }} onClick={scrollToTop}/>}
+                {isLogged && <Image id="imgLogo" className={styles.img} src="/Robo.png" alt="Imagem da logo da Fundação Asimo" width={50} height={70} style={{ objectFit: "contain", cursor: "pointer" }} onClick={() => router.push("/main")}/>}
+                <button
+                    className={styles.menuButton}
+                    onClick={() => setMenuOpen(!menuOpen)}
+                    aria-label="Abrir menu"
+                >
+                    ☰
+                </button>
+                <ul id="navUl" className={`${styles.menu} ${menuOpen ? styles.menuOpen : ""}`} onClick={() => setMenuOpen(false)}>
                     {!isLogged && <li><a onClick={() => roll("sobre")}>Quem Somos?</a></li>}
                     {!isLogged && <li><a onClick={() => roll("missao")}>Nossa Missão</a></li>}
                     {!isLogged && <li><a onClick={() => roll("eventos")}>Eventos</a></li>}
