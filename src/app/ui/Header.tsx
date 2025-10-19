@@ -52,7 +52,7 @@ export default function Header({ isLogged, isAdm }: {isLogged: boolean, isAdm: b
                     {!isLogged && <li><a onClick={() => roll("eventos")}>Eventos</a></li>}
                     {!isLogged && <li><a onClick={() => roll("escolas")}>Escolas</a></li>}
                     {!isLogged && <li><a onClick={() => roll("areas")}>Nossas Áreas</a></li>}
-                    {!isLogged && <li><Link href="/login">Login</Link></li>}
+                    {/* {!isLogged && <li><Link href="/login">Login</Link></li>} */}
                     {isLogged && <li><Link href="/main">Home</Link></li>}
                     {isLogged && <li><Link href="/main/dados-pessoais">Dados Pessoais</Link></li>}
                     {isLogged && <li><Link href="/main/horarios-pessoais">Horários Pessoais</Link></li>}
@@ -61,7 +61,7 @@ export default function Header({ isLogged, isAdm }: {isLogged: boolean, isAdm: b
                     {isLogged && <li><Link href="/main/agenda">Agenda</Link></li>}
                     {isLogged && <li><Link href="/main/tools">Tools</Link></li>}
                     {isLogged && isAdm && <li><Link href="/main/membros">Membros</Link></li>}
-                    {isLogged && <li><LogoutButton/></li>}
+                    {/* {isLogged && <li><LogoutButton/></li>} */}
                 </ul>
             </nav>
         </header>
