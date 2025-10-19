@@ -1,95 +1,86 @@
+'use client';
+
 import Image from "next/image";
 import styles from "./page.module.css";
+import Header from "./ui/Header";
+import FlipCard from "./ui/FlipCard";
+import EventosRotativos from "./ui/EventosRotativos";
+import CardEscolas from "./ui/CardEscolas";
 
 export default function Home() {
-  return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>src/app/page.tsx</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
 
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+    return (
+        <>
+            <Header isLogged={false} isAdm={false} />
+            <main className={styles.main}>
+                <div className={styles.viewPrincipal}></div>
+                    
+                <div className={styles.topicos} id="sobre">
+                    <div className={styles.imagemPtext}>
+                        <Image
+                            className={styles.imagemTopico}
+                            src="/fundacao-membros-3.png"
+                            alt="Imagem dos membros da segurando a bandeira da Fundação Asimo"
+                            width={500}
+                            height={281}
+                        />
+                        <div className={styles.textosTopicos}>
+                            <h2 className={styles.h2}>Quem Somos?</h2>
+                            <p>
+                                A Fundação Asimo é um projeto de extensão da UNIFEI que leva educação em STEAM — Ciência, Tecnologia, Engenharia, Artes e Matemática — a escolas públicas de Itajubá.
+    Nossa equipe de estudantes e professores promove oficinas de robótica, programação e eletrônica, criando experiências que despertam curiosidade, criatividade e trabalho em equipe.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div className={styles.topicos} id="missao">
+                    <div className={styles.imagemPtext}>
+                        <div className={styles.textosTopicos}>
+                            <h2 className={styles.h2}>Nossa Missão</h2>
+                            <p>
+                                Reduzir desigualdades por meio da educação tecnológica.
+    Aplicamos metodologias ativas para estimular lógica, resolução de problemas e interesse por ciência e engenharia, aproximando universidade e comunidade e inspirando jovens a transformar sua realidade.
+                            </p>
+                        </div>
+                        <Image
+                            className={styles.imagemTopico}
+                            src="/missao.png"
+                            alt="Imagem dos membros da segurando a bandeira da Fundação Asimo"
+                            width={500}
+                            height={281}
+                        />
+                    </div>
+                </div>
+
+                <div className={styles.topicoEventos} id="eventos">
+                    <h2>Eventos</h2>
+                    <EventosRotativos/>
+                </div>
+
+                <div className={styles.topicos} id="escolas">
+                    <div className={styles.conteudo}>
+                        <h2 className={styles.h2}>Nossas Escolas</h2>
+                        <ul>
+                            <li><CardEscolas imageSrc="/granja.png" title="Centro de Apoio Nossa Senhora do Sagrado Coração"/></li>
+                            <li><CardEscolas imageSrc="/WNeto.png" title="Escola Wenceslau Neto"/></li>
+                            <li><CardEscolas imageSrc="/barao.png" title="Escola Estadual Barão do Rio Branco"/></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div className={styles.topicos} id="areas">
+                    <div className={styles.conteudo}>
+                        <h2 className={styles.h2}>Conheça nossas áreas</h2>
+                        <ul>
+                            <li><FlipCard txtFrente="Docência" txtAtras="Ministra aulas de robótica e programação em escolas parceiras" txtImg="/docencia.png"/></li>
+                            <li><FlipCard txtFrente="Projetos" txtAtras="Desenvolve protótipos e soluções eletrônicas para as aulas e eventos" txtImg="/projetos.png"/></li>
+                            <li><FlipCard txtFrente="Marketing" txtAtras="Divulga o projeto e fortalece sua imagem em redes e eventos" txtImg="/marketing.png"/></li>
+                            <li><FlipCard txtFrente="Gestão" txtAtras="Cuida do bem-estar dos membros e dos processos internos" txtImg="/gestao.png"/></li>
+                        </ul>
+                    </div>
+                </div>
+            </main>
+        </>
+    );
 }
