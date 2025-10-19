@@ -1,6 +1,6 @@
 .header {
     background-color: #00294c;
-    padding: 10px 0;
+    padding: 0;
     align-items: center;
     height: 6rem;
     width: 100%;
@@ -12,30 +12,75 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 20px;
+    padding: 0 1.5rem;
     width: 100%;
     height: 100%;
 }
 
-.navegationBar img {
-    max-height: 100%;
-    height: auto;
+.img {
+    height: 80%;
     cursor: pointer;
 }
 
-.navegationBar ul {
-    list-style: none;
+.menu {
+  column-gap: 1rem;
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.menuButton {
+  display: none;
+  font-size: 1.7rem;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .menuButton {
+    display: block;
+  }
+
+  .menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #00294c;
+    opacity: 0.9;
+    flex-direction: column;
+    align-items: flex-end;
+    width: 100%;
     display: flex;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.3s ease-out, padding 0.3s ease;
+    border-radius: 0 0 8px 8px;
+  }
+
+  .menuOpen {
+    display: flex; /* mostra quando aberto */
+    padding: 1rem 0;
+    max-height: 15rem; /* altura máxima suficiente pro conteúdo */
+    transition: max-height 0.3s ease-in, padding 0.3s ease;
+  }
+
+  .navegationBar ul li, .loginButton {
+    margin-right: 1rem;
+  }
 }
 
 .navegationBar ul li, .loginButton {
-    margin: 0 15px;
-    color: white;
-    font-weight: bold;
-    font-size: 18px;
-    transition: color 0.3s ease;
-    background: transparent;
-    border: transparent;
+  color: white;
+  font-weight: bold;
+  font-size: 1.1rem;
+  transition: color 0.3s ease;
+  background: transparent;
+  border: transparent;
 }
 
 .navegationBar ul li:hover, .loginButton:hover {

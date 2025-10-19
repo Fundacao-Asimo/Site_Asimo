@@ -9,7 +9,7 @@ export const config = {
 
 const publicRoutes = [
     '/',
-    '/login'
+    //'/login'
 ];
 
 const admRoutes = [

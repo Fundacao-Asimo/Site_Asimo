@@ -15,19 +15,25 @@ const conteudos = [
     img: "/paraiso.png",
     alt: "Imagem do circuito asimo realizado em Paraisópolis Mg",
     titulo: "Circuito Asimo - Paraisópolis MG",
-    texto: "Em 2024, realizamos o Evento Circuito Asimo em Paraisópolis – MG, uma ação voltada para alunos do ensino fundamental, que trouxe demonstrações de robótica e atividades interativas para a comunidade. A iniciativa envolveu cerca de 800 estudantes, aproximando-os da tecnologia e despertando o interesse pela ciência e pela inovação."
+    texto: "Em 2024, realizamos o Evento Circuito Asimo em Paraisópolis - MG, uma ação voltada para alunos do ensino fundamental, que trouxe demonstrações de robótica e atividades interativas para a comunidade. A iniciativa envolveu cerca de 800 estudantes, aproximando-os da tecnologia e despertando o interesse pela ciência e pela inovação."
   },
   {
     img: "/brazopi.png",
     alt: "Imagem do circuito asimo realizado em Brazópolis Mg",
     titulo: "Circuito Asimo - Brazópolis MG",
-    texto: "Em 2024, levamos o Circuito Asimo a Brazópolis – MG, promovendo um evento voltado para estudantes do ensino médio. A ação contou com demonstrações de robótica e atividades interativas, proporcionando aos jovens uma oportunidade única de se aproximar da tecnologia e explorar o universo da ciência e da inovação. Cerca de 800 alunos participaram, vivenciando experiências que despertaram curiosidade e incentivaram o interesse por novas descobertas."
+    texto: "Em 2024, levamos o Circuito Asimo a Brazópolis - MG, promovendo um evento para estudantes do ensino médio com demonstrações de robótica e atividades interativas. Cerca de 800 alunos participaram, explorando tecnologia e ciência de forma prática e inspiradora."
+  },
+  {
+    img: "/mariadafe.png",
+    alt: "Imagem do circuito asimo realizado em Maria da Fé Mg",
+    titulo: "Circuito Asimo - Maria da Fé MG",
+    texto: "Em 2025, o Circuito Asimo chegou a Maria da Fé - MG, oferecendo aos estudantes do ensino fundamental uma imersão em ciência e tecnologia. Com oficinas práticas e demonstrações de robótica, cerca de 900 jovens tiveram a chance de interagir com a inovação de forma divertida e educativa."
   },
   {
     img: "/obr.png",
     alt: "Foto da premiação da nossa equipe de alunos na OBR (Olimpiada Brasileira de Robôtica)",
     titulo: "OBR",
-    texto: "Formamos e orientamos um grupo de alunos do esino médio da Escola Estadual Barão do Rio Branco para competir na Olimpíada Brasileira de Robótica (OBR). Em 2025, esse time conquistou 3º lugar na fase estadual, resultado que celebra o talento dos estudantes e o trabalho conjunto entre eles e nossa equipe de apoio."
+    texto: "Formamos e orientamos um grupo de alunos do ensino médio da Escola Estadual Barão do Rio Branco para competir na Olimpíada Brasileira de Robótica (OBR). Em 2025, esse time conquistou 3º lugar na fase estadual, resultado que celebra o talento dos estudantes e o trabalho conjunto entre eles e nossa equipe de apoio."
   }
 ];
 

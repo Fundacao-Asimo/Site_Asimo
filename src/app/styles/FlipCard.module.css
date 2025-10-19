@@ -1,6 +1,6 @@
 .card {
-  width: 17rem;
-  height: 17rem;
+  width: 35vh;
+  height: 35vh;
   perspective: 1500px;
   cursor: pointer;
   transition: transform 0.3s ease;
@@ -64,7 +64,7 @@
   justify-content: center;
   height: 100%;
   width: 100%;
-  font-size: 1.3rem;
+  font-size: 60%;
   text-align: center;
   font-weight: bold;
   padding: 2rem;

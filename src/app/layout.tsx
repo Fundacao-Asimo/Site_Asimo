@@ -13,6 +13,9 @@ const poppins = Poppins({
 export const metadata: Metadata = {
   title: 'Fundação Asimo',
   description: 'Site da Fundação Asimo.',
+  icons: {
+    icon: '/docencia.png'
+  }
 };
 
 export default function RootLayout({
