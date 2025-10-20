@@ -117,10 +117,10 @@ export default function EventosRotativos() {
           <h3 className={styles.h2}>{atual.titulo}</h3>
           <p>{atual.texto}</p>
         </div>
-      </div>
-      <div className={styles.setaTroca}>
-        <span className={quicksand.className} onClick={handleAnterior}>&lt;</span>
-        <span className={quicksand.className} onClick={handleProximo}>&gt;</span>
+        <div className={styles.setaTroca}>
+          <span className={quicksand.className} onClick={handleAnterior}>&lt;</span>
+          <span className={quicksand.className} onClick={handleProximo}>&gt;</span>
+        </div>
       </div>
     </div>
   );
