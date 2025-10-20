@@ -38,7 +38,7 @@
   animation-range: entry 0 cover 30%;
 }
 
-:global(#areas) {
+.main :global(#areas) {
   background-color: #FF7A00;
   h2 {
     margin-bottom: 4rem;
@@ -48,13 +48,13 @@
               inset 0rem -1rem 5rem 0.1rem rgba(0, 0, 0, 0.4);
 }
 
-:global(#escolas) {
+.main :global(#escolas) {
   h2 {
     margin-bottom: 4rem;
   }
 }
 
-:global(#missao) {
+.main :global(#missao) {
   background-color: #FF7A00;
   margin-bottom: 0;
   h2 {
@@ -91,7 +91,7 @@
   height: auto;
   margin: 0rem 2rem;
   border-radius: 1rem;
-  box-shadow: -1rem 1rem 5rem 0.1rem rgba(0, 0, 0, 0.4);
+  box-shadow: -1rem 1rem 2rem 0.1rem rgba(0, 0, 0, 0.4);
 }
 
 @media (max-width: 768px) {
@@ -114,7 +114,7 @@
     padding: 10vh 0.4rem;
   }
 
-  :global(#sobre) {
+  .main :global(#sobre) {
     padding-top: 5vh;
   }
 }
@@ -239,6 +239,7 @@
   position: absolute;
   width: 100vw;
   height: 100%;
+  top: 5%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -256,5 +257,73 @@
 
   span:hover {
     color: white;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Wrapper geral */
+  .topicoEventos {
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 2.5rem;
+  }
+
+  .topicoEventos h2 {
+    position: inherit;
+    top: 0;
+    right: 0;
+    margin-bottom: 2rem;
+  }
+
+  .slideWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+  }
+
+  /* Imagem ocupa toda a largura */
+  .imagensEventos {
+    width: 75%;
+    height: auto;
+    border-radius: 1rem;
+    object-fit: cover;
+    mask-image: none; /* remove o fade lateral */
+  }
+
+  /* Texto abaixo da imagem */
+  .textosEventos {
+    position: inherit;
+    width: 90%;
+    height: auto;
+    margin-top: 1.5rem;
+    padding: 0 1rem;
+    align-items: center;
+  }
+
+  .textosEventos h3 {
+    position: inherit;
+    font-size: 1.5rem;
+    text-align: center;
+  }
+
+  .textosEventos p {
+    font-size: 1rem;
+    line-height: 1.5;
+    text-align: justify;
+    height: auto;
+  }
+
+  /* Setas menores e mais próximas da borda */
+  .setaTroca {
+    position: absolute;
+    top: 0%;
+    width: 100%;
+    span {
+      font-size: 2.5rem;
+      margin: 0 1rem;
+    }
   }
 }

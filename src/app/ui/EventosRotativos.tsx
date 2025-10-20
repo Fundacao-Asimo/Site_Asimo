@@ -40,7 +40,7 @@ const conteudos = [
 export default function EventosRotativos() {
   const [indice, setIndice] = useState(0);
   const [animando, setAnimando] = useState(false);
-  const intervalRef = useRef(null);
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   // Função para iniciar/renovar o intervalo
   const iniciarIntervalo = () => {
@@ -83,20 +83,20 @@ export default function EventosRotativos() {
     }
     window.addEventListener("keydown", handleKeyDown);
     return () => {
-      clearInterval(intervalRef.current);
+      if (intervalRef.current) clearInterval(intervalRef.current);
       window.removeEventListener("keydown", handleKeyDown);
     }
   }, []);
 
   // Clique que também reseta o tempo
   const handleProximo = () => {
-    clearInterval(intervalRef.current);
+    if (intervalRef.current) clearInterval(intervalRef.current);
     proximo();
     iniciarIntervalo();
   };
 
   const handleAnterior = () => {
-    clearInterval(intervalRef.current);
+    if (intervalRef.current) clearInterval(intervalRef.current);
     anterior();
     iniciarIntervalo();
   };
@@ -117,10 +117,10 @@ export default function EventosRotativos() {
           <h3 className={styles.h2}>{atual.titulo}</h3>
           <p>{atual.texto}</p>
         </div>
-      </div>
-      <div className={styles.setaTroca}>
-        <span className={quicksand.className} onClick={handleAnterior}>&lt;</span>
-        <span className={quicksand.className} onClick={handleProximo}>&gt;</span>
+        <div className={styles.setaTroca}>
+          <span className={quicksand.className} onClick={handleAnterior}>&lt;</span>
+          <span className={quicksand.className} onClick={handleProximo}>&gt;</span>
+        </div>
       </div>
     </div>
   );

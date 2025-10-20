@@ -39,3 +39,7 @@ main {
   min-height: 80vh;
   padding-top: 6rem;
 }
+
+a, button, span, div {
+  -webkit-tap-highlight-color: transparent;
+}
