@@ -30,6 +30,12 @@ const conteudos = [
     texto: "Em 2025, o Circuito Asimo chegou a Maria da Fé - MG, oferecendo aos estudantes do ensino fundamental uma imersão em ciência e tecnologia. Com oficinas práticas e demonstrações de robótica, cerca de 900 jovens tiveram a chance de interagir com a inovação de forma divertida e educativa."
   },
   {
+    img: "/mariadafe2.png",
+    alt: "Imagem do circuito asimo realizado em Maria da Fé Mg2",
+    titulo: "Circuito Asimo - Maria da Fé MG",
+    texto: "Em 2025, o Circuito Asimo chegou a Maria da Fé - MG, oferecendo aos estudantes do ensino fundamental uma imersão em ciência e tecnologia. Com oficinas práticas e demonstrações de robótica, cerca de 900 jovens tiveram a chance de interagir com a inovação de forma divertida e educativa."
+  },
+  {
     img: "/obr.png",
     alt: "Foto da premiação da nossa equipe de alunos na OBR (Olimpiada Brasileira de Robôtica)",
     titulo: "OBR",
