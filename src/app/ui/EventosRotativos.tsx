@@ -24,7 +24,7 @@ const conteudos = [
     texto: "Em 2024, levamos o Circuito Asimo a Brazópolis - MG, promovendo um evento para estudantes do ensino médio com demonstrações de robótica e atividades interativas. Cerca de 800 alunos participaram, explorando tecnologia e ciência de forma prática e inspiradora."
   },
   {
-    img: "/mariadafe.png",
+    img: "/mariadafe2.png",
     alt: "Imagem do circuito asimo realizado em Maria da Fé Mg",
     titulo: "Circuito Asimo - Maria da Fé MG",
     texto: "Em 2025, o Circuito Asimo chegou a Maria da Fé - MG, oferecendo aos estudantes do ensino fundamental uma imersão em ciência e tecnologia. Com oficinas práticas e demonstrações de robótica, cerca de 900 jovens tiveram a chance de interagir com a inovação de forma divertida e educativa."

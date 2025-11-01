@@ -39,8 +39,8 @@ export default function Home() {
                         <div className={styles.textosTopicos}>
                             <h2 className={styles.h2}>Nossa Missão</h2>
                             <p>
-                                Reduzir desigualdades por meio da educação tecnológica.
-    Aplicamos metodologias ativas para estimular lógica, resolução de problemas e interesse por ciência e engenharia, aproximando universidade e comunidade e inspirando jovens a transformar sua realidade.
+                                Nossa missão é transformar a educação por meio da tecnologia, levando oportunidades de aprendizado criativo e acessível às escolas públicas. Buscamos reduzir desigualdades educacionais, despertando nos estudantes o interesse por ciência, engenharia e inovação.
+Acreditamos que, ao unir conhecimento e empatia, podemos formar jovens protagonistas capazes de construir um futuro mais justo e tecnológico.
                             </p>
                         </div>
                         <Image

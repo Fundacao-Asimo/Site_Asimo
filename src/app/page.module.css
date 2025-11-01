@@ -84,6 +84,8 @@
   justify-content: center;
   width: 50%;
   text-align: justify;
+  white-space: normal;
+  overflow-wrap: break-word;
 }
 
 .imagemTopico {
@@ -97,6 +99,12 @@
 @media (max-width: 768px) {
   .textosTopicos{
     width: 100%;
+  }
+
+  .textosTopicos p {
+    white-space: normal;
+    overflow-wrap: break-word;
+    hyphens: auto;
   }
 
   .imagemTopico {
@@ -286,10 +294,10 @@
 
   /* Imagem ocupa toda a largura */
   .imagensEventos {
-    width: 75%;
-    height: auto;
+    width: 75vw;
+    height: 56vw;
     border-radius: 1rem;
-    object-fit: cover;
+    object-fit: none;
     mask-image: none; /* remove o fade lateral */
   }
 
@@ -297,10 +305,11 @@
   .textosEventos {
     position: inherit;
     width: 90%;
-    height: auto;
+    height: 45vh;
     margin-top: 1.5rem;
     padding: 0 1rem;
     align-items: center;
+    justify-content: start;
   }
 
   .textosEventos h3 {
@@ -314,12 +323,15 @@
     line-height: 1.5;
     text-align: justify;
     height: auto;
+    white-space: normal;
+    overflow-wrap: break-word;
+    hyphens: auto;
   }
 
   /* Setas menores e mais próximas da borda */
   .setaTroca {
     position: absolute;
-    top: 0%;
+    top: 1.5%;
     width: 100%;
     span {
       font-size: 2.5rem;
