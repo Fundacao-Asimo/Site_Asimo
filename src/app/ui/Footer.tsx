@@ -27,7 +27,7 @@ export default function Footer() {
                 <ul>
                     <li><Link href="https://www.linkedin.com/in/luiz-augusto-silva-cco/" target="_blank"><Image className={styles.contatoImg} src="/icon-linkedin.png" alt="LinkedIn" width={30} height={30} />Luiz Augusto Silva</Link></li>
                     <li><Link href="https://www.linkedin.com/in/jo%C3%A3o-pedro-bas%C3%ADlio-dinareli-b010a2361/" target="_blank"><Image className={styles.contatoImg} src="/icon-linkedin.png" alt="LinkedIn" width={30} height={30} />João Pedro Basílio Dinareli</Link></li>
-                    <li><Link href="https://www.linkedin.com/in/leonardo-jose-siqueira-marinho/" target="_blank"><Image className={styles.contatoImg} src="/icon-linkedin.png" alt="LinkedIn" width={30} height={30} />Lonardo José Siqueira Marinho</Link></li>
+                    <li><Link href="https://www.linkedin.com/in/leonardo-jose-siqueira-marinho/" target="_blank"><Image className={styles.contatoImg} src="/icon-linkedin.png" alt="LinkedIn" width={30} height={30} />Leonardo José Siqueira Marinho</Link></li>
                 </ul>
             </section>
         </footer>
