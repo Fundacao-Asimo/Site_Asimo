@@ -42,6 +42,13 @@ export default function EventosRotativos() {
   const [animando, setAnimando] = useState(false);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
+  useEffect(() => {
+    conteudos.forEach((c) => {
+      const img = new window.Image();
+      img.src = c.img;
+    });
+  }, []);
+
   // Função para iniciar/renovar o intervalo
   const iniciarIntervalo = () => {
     intervalRef.current = setInterval(() => {
