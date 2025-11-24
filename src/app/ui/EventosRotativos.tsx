@@ -5,6 +5,12 @@ import { useState, useEffect, useRef } from "react";
 import styles from "../page.module.css";
 import { Quicksand } from 'next/font/google';
 
+//Imagens:
+import paraiso from "../../../public/paraiso.png";
+import brazopi from "../../../public/brazopi.png";
+import mariadafe2 from "../../../public/mariadafe2.png";
+import obr from "../../../public/obr.png";
+
 const quicksand = Quicksand({
   subsets: ['latin'],
   weight: ['400','700'],
@@ -12,25 +18,25 @@ const quicksand = Quicksand({
 
 const conteudos = [
   {
-    img: "/paraiso.png",
+    img: paraiso,
     alt: "Imagem do circuito asimo realizado em Paraisópolis Mg",
     titulo: "Circuito Asimo - Paraisópolis MG",
     texto: "Em 2024, realizamos o Evento Circuito Asimo em Paraisópolis - MG, uma ação voltada para alunos do ensino fundamental, que trouxe demonstrações de robótica e atividades interativas para a comunidade. A iniciativa envolveu cerca de 800 estudantes, aproximando-os da tecnologia e despertando o interesse pela ciência e pela inovação."
   },
   {
-    img: "/brazopi.png",
+    img: brazopi,
     alt: "Imagem do circuito asimo realizado em Brazópolis Mg",
     titulo: "Circuito Asimo - Brazópolis MG",
     texto: "Em 2024, levamos o Circuito Asimo a Brazópolis - MG, promovendo um evento para estudantes do ensino médio com demonstrações de robótica e atividades interativas. Cerca de 800 alunos participaram, explorando tecnologia e ciência de forma prática e inspiradora."
   },
   {
-    img: "/mariadafe2.png",
+    img: mariadafe2,
     alt: "Imagem do circuito asimo realizado em Maria da Fé Mg",
     titulo: "Circuito Asimo - Maria da Fé MG",
     texto: "Em 2025, o Circuito Asimo chegou a Maria da Fé - MG, oferecendo aos estudantes do ensino fundamental uma imersão em ciência e tecnologia. Com oficinas práticas e demonstrações de robótica, cerca de 900 jovens tiveram a chance de interagir com a inovação de forma divertida e educativa."
   },
   {
-    img: "/obr.png",
+    img: obr,
     alt: "Foto da premiação da nossa equipe de alunos na OBR (Olimpiada Brasileira de Robôtica)",
     titulo: "OBR",
     texto: "Formamos e orientamos um grupo de alunos do ensino médio da Escola Estadual Barão do Rio Branco para competir na Olimpíada Brasileira de Robótica (OBR). Em 2025, esse time conquistou 3º lugar na fase estadual, resultado que celebra o talento dos estudantes e o trabalho conjunto entre eles e nossa equipe de apoio."
@@ -41,13 +47,6 @@ export default function EventosRotativos() {
   const [indice, setIndice] = useState(0);
   const [animando, setAnimando] = useState(false);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
-
-  useEffect(() => {
-    conteudos.forEach((c) => {
-      const img = new window.Image();
-      img.src = c.img;
-    });
-  }, []);
 
   // Função para iniciar/renovar o intervalo
   const iniciarIntervalo = () => {
@@ -118,6 +117,7 @@ export default function EventosRotativos() {
           alt={atual.alt}
           width={500}
           height={281}
+          placeholder="blur"
           className={styles.imagensEventos}
         />
         <div className={styles.textosEventos}>
