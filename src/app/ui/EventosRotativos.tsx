@@ -42,14 +42,19 @@ export default function EventosRotativos() {
   const [animando, setAnimando] = useState(false);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
-  // Função para iniciar/renovar o intervalo
+  useEffect(() => {
+    conteudos.forEach((c) => {
+      const img = new window.Image();
+      img.src = c.img;
+    });
+  }, []);
+
   const iniciarIntervalo = () => {
     intervalRef.current = setInterval(() => {
       proximo();
     }, 15000);
   };
 
-  // Funções de navegação
   const proximo = () => {
     setAnimando(true);
     setTimeout(() => {
@@ -66,10 +71,9 @@ export default function EventosRotativos() {
     }, 500);
   };
 
-  // Monta intervalo inicial
   useEffect(() => {
     iniciarIntervalo();
-    const handleKeyDown = (event:KeyboardEvent) => {
+    const handleKeyDown = (event: KeyboardEvent) => {
       switch (event.key) {
         case "ArrowLeft":
           handleAnterior();
@@ -77,18 +81,15 @@ export default function EventosRotativos() {
         case "ArrowRight":
           handleProximo();
           break;
-        default:
-          break;
       }
-    }
+    };
     window.addEventListener("keydown", handleKeyDown);
     return () => {
       if (intervalRef.current) clearInterval(intervalRef.current);
       window.removeEventListener("keydown", handleKeyDown);
-    }
+    };
   }, []);
 
-  // Clique que também reseta o tempo
   const handleProximo = () => {
     if (intervalRef.current) clearInterval(intervalRef.current);
     proximo();
