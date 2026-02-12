@@ -1,51 +1,39 @@
 'use server';
 
 import { redirect } from "next/navigation";
-import ConexaoBD from "./ConexaoBD";
+import ConexaoBD, { MembroProps } from "./ConexaoBD";
 
 import bcrypt from "bcrypt";
 import { createSessionToken } from "./session";
-import { MembroProps } from "../ui/membro-card";
 import { LoginCredentials } from "../login/page";
+import DB from "./ConexaoBD";
 
-const userDBFile = 'usuarios-db.json';
-
-export async function createUser(data: MembroProps){
-
-    const password = data.password;
-
+export async function createUser(data: MembroProps)
+{
+    const password = data.senha;
     const passwordCrypt = await bcrypt.hash(password,10);
-    const users = await ConexaoBD.retornaBD(userDBFile);
 
-    for(const user of users)
+    data.senha = passwordCrypt;
+
+    const retorno = await DB.insert_user(data);
+
+    if(retorno)
     {
-        if(user.email === data.email){
-            return {error: 'Usuário ou senha incorretos'};
-        }
+        return null;
     }
-
-    const novoUser = data;
-    novoUser.id = (users[users.length - 1].id) + 1;
-    novoUser.password = passwordCrypt;
-
-    users.push(novoUser);
-    ConexaoBD.armazenaBD(userDBFile,users);
-    return {success: 'Usuário Criado com Sucesso'}
-
+    return {error: 'Usuário não inserido'};
 }
 
-export async function validateCredentials(data: LoginCredentials){
-
+export async function validateCredentials(data: LoginCredentials)
+{
     const email = data.email;
     const password = data.password;
 
-    const usuariosDB = await ConexaoBD.retornaBD(userDBFile);
-
-    const user = usuariosDB.find(user => user.email === email);
+    const user = await DB.query_user_email(email);
 
     if(!user)
         return {error: 'Usuário não encontrado'};
-    const isMatch = await bcrypt.compare(password, user.password);
+    const isMatch = await bcrypt.compare(password, user.senha);
 
     if(isMatch)
     {
@@ -53,7 +41,6 @@ export async function validateCredentials(data: LoginCredentials){
         redirect('/main');
     }
     else{
-        return {error: 'Usuario ou senhas incorretos'}
+        return {error: 'Usuario ou senhas incorretos'};
     }
-
 } 

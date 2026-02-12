@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import toast from 'react-hot-toast';
 import { createUser } from '@/app/lib/credentials';
-import { MembroProps } from '@/app/ui/membro-card';
+import { MembroProps } from '@/app/lib/ConexaoBD';
 
 const CreateUserSchema = z.object({
     email: z.string().trim().email('Email com formato incorreto'),
@@ -16,14 +16,13 @@ const CreateUserSchema = z.object({
     path: ["confPassword"]
 });
 
-export default function CreateMembro() {
-
+export default function CreateMembro()
+{
     const router = useRouter();
 
     const addMembro = async (formData: FormData) => {
 
         const createUserData = {
-            id: 0 as number,
             nome: formData.get('nome') as string,
             nick: formData.get('nick') as string,
             email: formData.get('email') as string,

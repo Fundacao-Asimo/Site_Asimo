@@ -4,8 +4,8 @@ import { SignJWT, jwtVerify } from "jose";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
-async function openSessionToken(token: string){
-    
+async function openSessionToken(token: string)
+{    
     const encodedKey = new TextEncoder().encode(process.env.TOKEN);
 
     try{
@@ -21,10 +21,10 @@ async function openSessionToken(token: string){
     
 }
 
-export async function createSessionToken(userId: number, isAdm: boolean){
+export async function createSessionToken(userId: number, isAdm: boolean)
+{
     const encodedKey = new TextEncoder().encode(process.env.TOKEN); 
     const expiresAt = new Date(Date.now() + 1000 * 60 * 60);
-
 
     const session = await new SignJWT({userId, isAdm}).setProtectedHeader({
         alg: 'HS256'
@@ -41,8 +41,8 @@ export async function createSessionToken(userId: number, isAdm: boolean){
     });
 }
 
-export async function isSessionValid(){
-
+export async function isSessionValid()
+{
     const sessionCookie = (await cookies()).get('session');
 
     if(sessionCookie)

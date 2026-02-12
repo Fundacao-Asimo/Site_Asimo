@@ -5,18 +5,6 @@ import Link from "next/link";
 import ConexaoBD from "../lib/ConexaoBD";
 import { redirect } from "next/navigation";
 
-export interface MembroProps {
-    id: number,
-    nome: string,
-    nick: any,
-    email: string,
-    password: string,
-    ingresso: any,
-    adm: boolean,
-    nasc: any,
-    foto: any
-}
-
 const arquivo = 'usuarios-db.json';
 
 export default async function MembroCard(props: MembroProps) {
