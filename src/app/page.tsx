@@ -2,7 +2,8 @@
 
 import Image from "next/image";
 import styles from "./page.module.css";
-import Header from "./ui/Header";
+import HeaderHome from "./ui/HeaderHome";
+import Footer from "./ui/Footer";
 import FlipCard from "./ui/FlipCard";
 import EventosRotativos from "./ui/EventosRotativos";
 import CardEscolas from "./ui/CardEscolas";
@@ -11,8 +12,8 @@ export default function Home() {
 
     return (
         <>
-            <Header isLogged={false} isAdm={false} />
-            <main className={styles.main}>
+            <HeaderHome />
+            <article className={styles.main}>
                 <div className={styles.viewPrincipal}></div>
                     
                 <div className={styles.topicos} id="sobre">
@@ -80,7 +81,8 @@ Acreditamos que, ao unir conhecimento e empatia, podemos formar jovens protagoni
                         </ul>
                     </div>
                 </div>
-            </main>
+            </article>
+            <Footer />
         </>
     );
 }

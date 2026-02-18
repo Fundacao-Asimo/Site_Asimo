@@ -27,6 +27,7 @@
   justify-content: center;
   padding: 17vh 1.5rem;
   margin-bottom: 2rem;
+  color: white;
   /*background-color: transparent;
   box-shadow: 0 8px 12px rgba(0, 0, 0, 0.4);*/
   height: auto;
@@ -86,6 +87,7 @@
   text-align: justify;
   white-space: normal;
   overflow-wrap: break-word;
+  color: white;
 }
 
 .imagemTopico {
@@ -133,6 +135,7 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
+  color: white;
   margin: 0;
   padding: 0;
 }
@@ -178,6 +181,7 @@
   height: 70vh;
   width: 100%;
   overflow: hidden;
+  color: white;
   animation: appear linear;
   animation-timeline: view();
   animation-range: entry 0 cover 30%;

@@ -1,27 +1,26 @@
 'use server';
 
 import { redirect } from "next/navigation";
-import ConexaoBD, { MembroProps } from "./ConexaoBD";
+import DB_user, { MembroInfo } from "./DB_user";
 
 import bcrypt from "bcrypt";
 import { createSessionToken } from "./session";
 import { LoginCredentials } from "../login/page";
-import DB from "./ConexaoBD";
 
-export async function createUser(data: MembroProps)
+export async function createUser(data: MembroInfo)
 {
     const password = data.senha;
     const passwordCrypt = await bcrypt.hash(password,10);
 
     data.senha = passwordCrypt;
 
-    const retorno = await DB.insert_user(data);
+    const retorno = await DB_user.insert_user(data);
 
     if(retorno)
     {
-        return null;
+        return {success: 'Usuário cadastrado com sucesso'};
     }
-    return {error: 'Usuário não inserido'};
+    return {error: 'Erro ao cadastrar usuário'};
 }
 
 export async function validateCredentials(data: LoginCredentials)
@@ -29,7 +28,7 @@ export async function validateCredentials(data: LoginCredentials)
     const email = data.email;
     const password = data.password;
 
-    const user = await DB.query_user_email(email);
+    const user = await DB_user.query_user_email(email);
 
     if(!user)
         return {error: 'Usuário não encontrado'};

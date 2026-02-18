@@ -1,29 +1,18 @@
-'use server';
-
 import Image from "next/image";
 import Link from "next/link";
-import ConexaoBD from "../lib/ConexaoBD";
-import { redirect } from "next/navigation";
+import DB_user, { MembroProps } from "../lib/DB_user";
 
-const arquivo = 'usuarios-db.json';
-
-export default async function MembroCard(props: MembroProps) {
-
-    const deleteMembro = async (form: FormData) => {
-        const id = Number(form.get('membro-id'));
-        const listaMembros = await ConexaoBD.retornaBD(arquivo);
-        const membroIdx = listaMembros.findIndex((d) => d.id === id);
-
-        listaMembros.splice(membroIdx,1);
-        await ConexaoBD.armazenaBD(arquivo, listaMembros);
-
-        redirect('/main');
+export default function MembroCard(props: MembroProps)
+{
+    async function deleteMembro(form: FormData) {
+        'use server';
+        await DB_user.delete_user(form.get('membro-id'));
     }
 
     return(
         <div className="membro-container-card">
-            <h1>{props.nome}</h1>
-            <Image src={props.foto}
+            <h1>{props.nome_completo}</h1>
+            <Image src={props.foto_url}
                    alt="Foto do membro"
                    width={200}
                    height={200}

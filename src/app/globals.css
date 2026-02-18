@@ -21,7 +21,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: #00294c;
   line-height: 1.6;
-  color: white;
+  color: black;
 }
 
 * {
@@ -35,9 +35,27 @@ a {
   text-decoration: none;
 }
 
-main {
+.layout {
+  min-height: 100vh;
+  width: 100%;
+}
+
+.conteudo {
+  padding-left: 20vw;
+  width: 100%;
+}
+
+article {
+  width: 100%;
   min-height: 80vh;
   padding-top: 6rem;
+}
+
+main {
+  width: 100%;
+  min-height: 100vh;
+  padding-top: 6rem;
+  background-color: whitesmoke;
 }
 
 a, button, span, div {

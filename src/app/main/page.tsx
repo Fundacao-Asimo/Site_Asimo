@@ -1,8 +1,7 @@
-import ConexaoBD, { MembroProps } from "../lib/ConexaoBD";
+import DB_user, { MembroProps } from "../lib/DB_user";
 import { isSessionValid } from "../lib/session";
 import AniversarianteCard from "../ui/aniversariante-card";
 import styles from "../styles/MainPage.module.css";
-import DB from "../lib/ConexaoBD";
 
 const arquivo = "usuarios-db.json";
 
@@ -17,7 +16,7 @@ export default async function MainPage()
 {
   const session = await isSessionValid();
   const usuarioId = session as { userId: number };
-  const usuarioLogado = await DB.query_user_id(usuarioId.userId);
+  const usuarioLogado = await DB_user.query_user_id(usuarioId.userId);
 
   // const mesAtual = new Date().getMonth() + 1;
   // const membros = await ConexaoBD.retornaBD(arquivo);

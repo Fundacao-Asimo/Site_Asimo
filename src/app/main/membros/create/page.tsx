@@ -2,42 +2,39 @@
 
 import z from 'zod';
 import Link from "next/link";
-import { useRouter } from "next/router";
 import toast from 'react-hot-toast';
 import { createUser } from '@/app/lib/credentials';
-import { MembroProps } from '@/app/lib/ConexaoBD';
+import DB_user, { MembroInfo } from '@/app/lib/DB_user';
 
 const CreateUserSchema = z.object({
     email: z.string().trim().email('Email com formato incorreto'),
-    password: z.string({message: 'Insira uma senha'}).trim().min(4, {message: 'Senha precisa no mínimo 4 caracteres'}),
-    confPassword: z.string({message: 'Insira uma confirmação de senha'}).trim().min(1, {message: 'Confirmar Senha não pode ser vazia'}),
-}).refine((data) => data.password === data.confPassword, {
+    senha: z.string({message: 'Insira uma senha'}).trim().min(8, {message: 'Senha precisa no mínimo 8 caracteres'}),
+    confSenha: z.string({message: 'Insira uma confirmação de senha'}).trim().min(1, {message: 'Confirmar Senha não pode ser vazia'}),
+}).refine((data) => data.senha === data.confSenha, {
     message: "Senhas não conferem",
     path: ["confPassword"]
 });
 
 export default function CreateMembro()
 {
-    const router = useRouter();
-
     const addMembro = async (formData: FormData) => {
 
         const createUserData = {
-            nome: formData.get('nome') as string,
-            nick: formData.get('nick') as string,
+            nome_completo: formData.get('nome_completo') as string,
+            apelido: formData.get('apelido') as string,
             email: formData.get('email') as string,
-            password: formData.get('password') as string,
-            confPassword: formData.get('conf-password') as string,
-            nasc: formData.get('data_nasc') as string,
-            ingresso: new Date().toISOString().split('T')[0] as string,
-            adm: false as boolean,
-            foto: null
+            senha: formData.get('senha') as string,
+            confSenha: formData.get('conf-senha') as string,
+            nasc_date: formData.get('nasc_date') as string,
+            ingresso_date: new Date().toISOString().split('T')[0] as string,
+            adm: formData.get('adm') !== null,
+            foto: formData.get('foto') as File
         }
 
         const result = CreateUserSchema.safeParse(createUserData);
 
-        if(!result.success){
-
+        if(!result.success)
+        {
             let errorMsg = '';
 
             result.error.issues.forEach((issue) => {
@@ -49,27 +46,56 @@ export default function CreateMembro()
             return;
         }
         
-        const retorno = await createUser(createUserData as MembroProps);
+        const url_nova_foto = await DB_user.upload_foto(createUserData.foto, createUserData.nome_completo);
+
+        if(!url_nova_foto){
+            toast.error('Não foi possível fazer upload do arquivo');
+            return;
+        }
+
+        const {confSenha, foto, ...rest} = createUserData;
+
+        const newUser: MembroInfo = {
+            ...rest,
+            foto_url: url_nova_foto
+        }
+
+        const retorno = await createUser(newUser);
 
         if(retorno.error){
             toast.error(retorno.error);
             return;
         }else if(retorno.success){
             toast.success(retorno.success);
-            router.push('/login');
+            // formData.set('nome_completo', "");
+            // formData.set('apelido', "");
+            // formData.set('email', "");
+            // formData.set('senha', "");
+            // formData.set('conf-senha', "");
+            // formData.set('nasc_date', "");
+            // formData.set('adm', "");
+            // formData.set('foto', "");
         }
     }
     return(
         <main className="create-membro-container">
-            <h1>Inserir Inserir Membro</h1>
-            <form action={addMembro} className="create-membro-form">
+            <h1>Inserir Membro</h1>
+            <form
+                onSubmit={async (e) => {
+                    e.preventDefault();
+                    const formData = new FormData(e.currentTarget);
+                    await addMembro(formData);
+                }}
+                encType="multipart/form-data"
+                className="create-membro-form"
+            >
                 <section className="membro-input">
                 </section>
                 <section className="membro-input">
                     <input
                         type="text"
-                        id="nome"
-                        name="nome"
+                        id="nome_completo"
+                        name="nome_completo"
                         placeholder="Nome do Membro"
                         aria-label="Nome do Membro"
                         required
@@ -78,8 +104,8 @@ export default function CreateMembro()
                 <section className="membro-input">
                     <input
                         type="text"
-                        id="nick"
-                        name="nick"
+                        id="apelido"
+                        name="apelido"
                         placeholder="Apelido do Membro"
                         aria-label="Apelido do Membro"
                     />
@@ -97,16 +123,24 @@ export default function CreateMembro()
                 <section className="membro-input">
                     <input
                         type="date"
-                        id="data_nasc"
-                        name="data_nasc"
+                        id="nasc_date"
+                        name="nasc_date"
+                        required
+                    />
+                </section>
+                <section className="membro-input">
+                    <input
+                        type="file"
+                        id="foto"
+                        name="foto"
                         required
                     />
                 </section>
                 <section className="membro-input">
                     <input
                         type="password"
-                        id="password"
-                        name="password"
+                        id="senha"
+                        name="senha"
                         placeholder="Senha do Membro"
                         aria-label="Senha do Membro"
                         required
@@ -115,11 +149,18 @@ export default function CreateMembro()
                 <section className="membro-input">
                     <input
                         type="password"
-                        id="conf-password"
-                        name="conf-password"
+                        id="conf-senha"
+                        name="conf-senha"
                         placeholder="Confirme Senha do Membro"
                         aria-label="Confirme Senha do Membro"
                         required
+                    />
+                </section>
+                <section className="membro-input">
+                    <input
+                        type="checkbox"
+                        id="adm"
+                        name="adm"
                     />
                 </section>
                 <button>Adicionar Membro</button>

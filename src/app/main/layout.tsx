@@ -1,6 +1,7 @@
 import "../globals.css";
 import { isSessionValid } from "../lib/session";
-import Header from "../ui/Header";
+import HeaderDinamic from "../ui/HeaderDinamic";
+import HeaderMain from "../ui/HeaderMain";
 
 export default async function MainLayout ({ children }: {children: React.ReactNode}){
 
@@ -8,9 +9,12 @@ export default async function MainLayout ({ children }: {children: React.ReactNo
     const isAdm = isLogged as {isAdm: boolean};
 
     return(
-        <>
-            <Header isLogged={isLogged != false} isAdm={isAdm.isAdm}/>
-            {children}
-        </>
+        <section className="layout">
+            <HeaderMain isAdm={isAdm.isAdm} />
+            <div className="conteudo">
+                <HeaderDinamic horas={5}/>
+                {children}
+            </div>
+        </section>
     )
 }

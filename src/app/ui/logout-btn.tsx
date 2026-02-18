@@ -1,7 +1,7 @@
 'use client'
 
 import { logout } from "../lib/session"
-import styles from "../styles/Header.module.css";
+import styles from "../styles/HeaderMain.module.css";
 
 export default function LogoutButton(){
 

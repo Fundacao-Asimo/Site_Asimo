@@ -52,7 +52,7 @@ export default function LoginPage(){
     return (
         <>
             <HeaderLogin />
-            <main className={styles['login-container']}>
+            <article className={styles['login-container']}>
                 <form className={styles['login-form']} action={loginAction}>
                     <div className={styles['logo-container']}>
                         <h1 className={styles['login-title']}>Fundação Asimo</h1>
@@ -78,7 +78,7 @@ export default function LoginPage(){
                         <span className={styles['button-text']}>Entrar</span>
                     </button>
                 </form>
-            </main>
+            </article>
         </>
     );
 }

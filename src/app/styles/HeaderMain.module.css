@@ -1,0 +1,116 @@
+.header {
+  background-color: #00294c;
+  padding: 0;
+  align-items: center;
+  height: 100%;
+  width: 20vw;
+  position: fixed;
+  z-index: 1000;
+}
+
+.navegationBar {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 0;
+  gap: 1.5rem;
+  width: 100%;
+  height: 100%;
+}
+
+.img {
+  width: 100%;
+  width: auto;
+  cursor: pointer;
+}
+
+.menu {
+  gap: 0.3rem;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  width: 100%;
+  height: auto;
+  margin: 0;
+  padding: 0.7rem 0;
+  box-sizing: border-box;
+  border-top: 0.5px solid #475569;
+  border-bottom: 0.5px solid #475569;
+}
+
+.menuButton {
+  display: none;
+  font-size: 1.7rem;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+
+.item, .loginButton {
+  color: white;
+  font-weight: bold;
+  font-size: 1.1rem;
+  padding: 0.5rem 1rem;
+  margin: 0 1rem;
+  transition: background-color 0.3s ease;
+  background: transparent;
+  border: transparent;
+  border-radius: 0.7rem;
+  display: flex;
+  a {
+    height: 100%;
+    width: 100%;
+  }
+}
+
+.item:hover, .loginButton:hover {
+  cursor: pointer;
+  font-weight: bold;
+  background-color: #475569;
+}
+
+.active {
+  background-color: #FF7A00;
+}
+
+.active:hover {
+  background-color: #FF7A00;
+}
+
+@media (max-width: 768px) {
+  .menuButton {
+    display: block;
+  }
+
+  .menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #00294c;
+    opacity: 0.9;
+    flex-direction: column;
+    align-items: flex-end;
+    width: 100%;
+    display: flex;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.3s ease-out, padding 0.3s ease;
+    border-radius: 0 0 8px 8px;
+  }
+
+  .menuOpen {
+    display: flex; /* mostra quando aberto */
+    padding: 1rem 0;
+    max-height: 15rem; /* altura máxima suficiente pro conteúdo */
+    transition: max-height 0.3s ease-in, padding 0.3s ease;
+  }
+
+  .navegationBar ul li, .loginButton {
+    margin-right: 1rem;
+  }
+}
