@@ -1,9 +1,4 @@
-import { createClient } from '@supabase/supabase-js'
-
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
-
-const supabase = createClient(supabaseUrl, supabaseAnonKey);
+import { supabase } from "./supabase";
 
 export interface MembroInfo {
     nome_completo: string,
@@ -75,7 +70,7 @@ async function list_user()
     const { data, error } = await supabase
         .from("usuarios")
         .select("*")
-        .order("id", { ascending: true })
+        .order("id", { ascending: true });
 
     if (error) {
         return [];
@@ -95,7 +90,7 @@ async function insert_user(dados: MembroInfo)
         return null;
     }
 
-  return data;
+    return data;
 }
 
 async function delete_user(id: number)
@@ -125,7 +120,7 @@ async function edit_user(dadosAtualizados: MembroProps)
         return null;
     }
 
-  return data;
+    return data;
 }
 
 async function upload_foto(foto: File, nome:string)

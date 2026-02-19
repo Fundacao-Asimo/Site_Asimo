@@ -49,6 +49,13 @@
   cursor: pointer;
 }
 
+.separacao {
+  border-top: 0.5px solid #475569;
+  color: yellow;
+  font-weight: bold;
+  font-size: 1.1rem;
+  padding: 1.5rem 1rem 0.5rem 2rem;
+}
 
 .item, .loginButton {
   color: white;
@@ -65,6 +72,10 @@
     height: 100%;
     width: 100%;
   }
+}
+
+.loginButton {
+  font-size: 1.5rem;
 }
 
 .item:hover, .loginButton:hover {

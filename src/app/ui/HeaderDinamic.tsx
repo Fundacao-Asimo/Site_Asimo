@@ -21,12 +21,12 @@ export default function HeaderDinamic({horas}: {horas: number})
         "/main/escolas-parceiras": "Escolas Parceiras",
         "/main/agenda-reunioes": "Agenda de Reuniões",
         "/main/controle-frequência": "Controle de Frequência",
-        "/main/eventos": "Eventos e Workshops",
+        "/main/eventos": "Eventos & Workshops",
         "/main/relatorios-horas": "Relatórios de Horas",
         "/main/controle-membros": "Gestão de Membros",
         "/main/controle-atividades": "Atribuir Atividades",
         "/main/caixa": "Caixa & Requisições",
-        "/main/Advertencias": "Advertências",
+        "/main/advertencias": "Advertências",
     };
 
     const title = titles[pathname] || "Dashboard";

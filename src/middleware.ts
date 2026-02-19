@@ -13,7 +13,17 @@ const publicRoutes = [
 ];
 
 const admRoutes = [
-    '/membros'
+    "/main/dashboard-principal",
+    "/main/free-time-geral",
+    "/main/escolas-parceiras",
+    "/main/agenda-reunioes",
+    "/main/controle-frequência",
+    "/main/eventos",
+    "/main/relatorios-horas",
+    "/main/controle-membros",
+    "/main/controle-atividades",
+    "/main/caixa",
+    "/main/advertencias",
 ]
 
 export async function middleware(req: NextRequest){
