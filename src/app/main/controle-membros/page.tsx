@@ -14,7 +14,7 @@ export default async function ListMembrosPage()
 
     return(
         <main className="list-container">
-            <Link href={'/main/membros/create'} className="link-add-membro">Adicionar</Link>
+            <Link href={'/main/controle-membros/create'} className="link-add-membro">Adicionar</Link>
             <div className="list-membros-container">
                 {membrosMap}
             </div>

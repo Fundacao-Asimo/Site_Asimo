@@ -1,3 +1,4 @@
+import DB_free from "./DB_free";
 import { supabase } from "./supabase";
 
 export interface MembroInfo {
@@ -87,6 +88,12 @@ async function insert_user(dados: MembroInfo)
         .single();
 
     if(error) {
+        return null;
+    }
+
+    const retorno = await DB_free.insert_free_vazia(data.id);
+
+    if(!retorno) {
         return null;
     }
 
