@@ -22,6 +22,7 @@ const dias = ["seg", "ter", "qua", "qui", "sex", "sab"];
 export default function MeuFreeTimePage()
 {
     const [data, setData] = useState<any>(null);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         load();
@@ -29,18 +30,22 @@ export default function MeuFreeTimePage()
 
     async function load()
     {
-        const isLogged = await isSessionValid();
-        const userId = isLogged as {userId: number};
-        const data = await DB_free.query_free_membro(userId.userId);
-        console.log(data.seg);
+        try {
+            const isLogged = await isSessionValid();
+            const userId = isLogged as { userId: number };
+            const data = await DB_free.query_free_membro(userId.userId);
 
-        if(!data)
-        {
-            toast.error("Não foi possível acessar seus dados!");
-            redirect("/main");
+            if (!data) {
+                toast.error("Não foi possível acessar seus dados!");
+                redirect("/main");
+            }
+
+            setData(data);
+        } catch (err) {
+            toast.error("Erro ao carregar dados");
+        } finally {
+            setLoading(false);
         }
-
-        setData(data);
     }
 
     function toggle(day: string, index: number)
@@ -66,7 +71,7 @@ export default function MeuFreeTimePage()
         toast.error("Não foi possível atualizar sua free time!");
     }
 
-    if (!data) return <div>Carregando...</div>;
+    if(loading) return <main><p style={{color: "black", fontSize: "3rem"}}>Carregando...</p></main>;
 
     return (
         <main>

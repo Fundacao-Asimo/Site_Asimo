@@ -87,6 +87,7 @@
   text-align: justify;
   white-space: normal;
   overflow-wrap: break-word;
+  hyphens: auto;
   color: white;
 }
 

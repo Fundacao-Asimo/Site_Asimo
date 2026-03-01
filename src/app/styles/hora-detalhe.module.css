@@ -1,0 +1,134 @@
+.box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    gap: 1.5rem;
+    background: white;
+    border-bottom: 1px solid #e2e8f0;
+    padding: 14px 18px;
+    font-size: 14px;
+}
+
+/* DATA */
+.data {
+    flex: 2;
+    font-weight: 600;
+    color: #0f172a;
+}
+
+/* DESCRIÇÃO */
+.descricao {
+    flex: 2.5;
+    color: #334155;
+    text-align: left;
+    text-justify: inter-word;
+    white-space: normal;
+    min-width: 0;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    hyphens: auto;
+}
+
+/* BADGES (TIPO) */
+.badge {
+    flex: 1.5;
+    padding: 4px 10px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 12px;
+    width: fit-content;
+    text-align: center;
+}
+
+/* TIPOS */
+.Reunião {
+    background: #E9D5FF;
+    color: #9333EA;
+}
+
+.Docência {
+    background: #FFF1E6;
+    color: #FF7A00;
+}
+
+.Projetos {
+    background-color: #DCEFF3;
+    color: #0F6B75;
+}
+
+.Marketing {
+    background: #DCEAFE;
+    color: #2563EB;
+}
+
+.Gestão {
+    background: #DCFCE7;
+    color: #16A34A;
+}
+
+.AudioVisual{
+    background: #FEE2E2;
+    color: #DC2626;
+}
+
+.Evento {
+    background: #E9D5FF;
+    color: #9333EA;
+}
+
+.Outro {
+    background: #FEF3C7;
+    color: #B45309;
+}
+
+/* HORAS */
+.horas {
+    flex: 0.8;
+    text-align: center;
+    font-weight: 600;
+    color: #2563eb;
+}
+
+/* STATUS */
+.status {
+    flex: 1;
+    padding: 4px 10px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    text-align: center;
+}
+
+/* STATUS CORES */
+.aprovado {
+    background: #DCFCE7;
+    color: #16A34A;
+}
+
+.pendente {
+    background: #FEF3C7;
+    color: #B45309;
+}
+
+.rejeitado {
+    background: #FEE2E2;
+    color: #DC2626;
+}
+
+/* BOTÃO */
+.excluir {
+    flex: 1;
+    border: none;
+    background: none;
+    color: #dc2626;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.excluir:hover {
+    color: #991b1b;
+}

@@ -5,6 +5,7 @@ import z from 'zod';
 import toast from 'react-hot-toast';
 import { validateCredentials } from '@/app/lib/credentials';
 import HeaderLogin from '../ui/Header-login';
+import Footer from '../ui/Footer';
 
 const LoginSchema = z.object({
     email: z.string().trim().email('Email com formato incorreto'),
@@ -79,6 +80,7 @@ export default function LoginPage(){
                     </button>
                 </form>
             </article>
+            <Footer />
         </>
     );
 }

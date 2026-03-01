@@ -2,6 +2,8 @@ import { supabase } from "./supabase";
 
 export interface HoraInfo {
     horas: number,
+    data: string,
+    tipo: string,
     descricao: string,
     aprovado: boolean | null,
     membro: number
@@ -10,6 +12,8 @@ export interface HoraInfo {
 export interface HoraProps {
     id: number,
     horas: number,
+    data: string,
+    tipo: string,
     descricao: string,
     aprovado: boolean | null,
     membro: number
@@ -34,7 +38,7 @@ async function list_horas_geral(aprovado: boolean | null = null)
     let query = supabase
         .from("horas")
         .select("*")
-        .order("id", { ascending: true });
+        .order("id", { ascending: false });
 
     if (aprovado !== null) {
         query = query.eq("aprovado", aprovado);
@@ -56,7 +60,7 @@ async function list_horas_membro(id: number, aprovado: boolean | null = null)
         .from("horas")
         .select("*")
         .eq("membro", id)
-        .order("id", { ascending: true });
+        .order("id", { ascending: false });
 
     if (aprovado !== null) {
         query = query.eq("aprovado", aprovado);

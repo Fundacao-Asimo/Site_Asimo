@@ -60,8 +60,8 @@
 .item, .loginButton {
   color: white;
   font-weight: bold;
-  font-size: 1.1rem;
-  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  padding: 0.5rem 0.7rem;
   margin: 0 1rem;
   transition: background-color 0.3s ease;
   background: transparent;
