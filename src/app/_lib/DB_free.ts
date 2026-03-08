@@ -49,10 +49,18 @@ async function query_free_membro(id: number)
     return free_time;
 }
 
-// async function list_user()
-// {
-    
-// }
+async function list_free()
+{
+    const { data, error } = await supabase
+        .from("free_time")
+        .select("*")
+        .order("id", { ascending: true });
+
+    if (error) {
+        return [];
+    }
+    return data;
+}
 
 async function insert_free_vazia(id: number)
 {
@@ -119,6 +127,7 @@ const DB_free = {
     insert_free,
     delete_free,
     edit_free,
+    list_free,
     query_free_membro,
     insert_free_vazia
 }

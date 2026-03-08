@@ -1,12 +1,12 @@
 'use server';
 
-import DB_user from "@/app/lib/DB_user";
-import MembroCard from "@/app/ui/membro-card";
+import { list_user } from "@/app/_actions/user";
+import MembroCard from "@/app/_ui/membro-card";
 import Link from "next/link";
 
 export default async function ListMembrosPage()
 {
-    const membros = await DB_user.list_user();
+    const membros = await list_user();
 
     const membrosMap = membros.map((membro) => {
         return <MembroCard key={membro.id} {...membro}/>

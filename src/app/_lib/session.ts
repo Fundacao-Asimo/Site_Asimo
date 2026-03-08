@@ -37,7 +37,9 @@ export async function createSessionToken(userId: number, isAdm: boolean)
     cookieStore.set('session', session, {
         expires: expiresAt,
         path: '/',
-        httpOnly: true
+        httpOnly: true,
+        secure: true,
+        sameSite: 'lax'
     });
 }
 

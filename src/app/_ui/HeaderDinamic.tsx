@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import styles from "../styles/HeaderDinamic.module.css";
+import styles from "../_styles/HeaderDinamic.module.css";
 
 export default function HeaderDinamic({horas}: {horas: number})
 {

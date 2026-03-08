@@ -9,7 +9,11 @@ export interface MembroInfo {
     nasc_date: string,
     ingresso_date: string,
     foto_url: string,
-    adm: boolean
+    adm: boolean,
+    matricula: string,
+    area: string,
+    curso: string,
+    telefone: string
 }
 
 export interface MembroProps {
@@ -22,6 +26,10 @@ export interface MembroProps {
     ingresso_date: string,
     foto_url: string,
     adm: boolean
+    matricula: string,
+    area: string,
+    curso: string,
+    telefone: string
 }
 
 async function query_user_id(id: number)
@@ -71,11 +79,25 @@ async function list_user()
     const { data, error } = await supabase
         .from("usuarios")
         .select("*")
-        .order("id", { ascending: true });
+        .order("nome_completo", { ascending: true });
 
     if (error) {
         return [];
     }
+    return data;
+}
+
+async function list_ids_user()
+{
+    const list = await list_user();
+
+    if (list.length === 0) {
+        return [];
+    }
+    const data = list.map((u) => {
+        return u.id;
+    });
+
     return data;
 }
 
@@ -156,6 +178,7 @@ const DB_user = {
     query_user_name,
     query_user_email,
     list_user,
+    list_ids_user,
     insert_user,
     delete_user,
     edit_user,

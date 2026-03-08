@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from "react";
-import styles from "../styles/FlipCard.module.css"; // CSS separado
+import styles from "../_styles/FlipCard.module.css"; // CSS separado
 import Image from "next/image";
 
 export default function FlipCard({txtFrente, txtAtras, txtImg}:{txtFrente: string, txtAtras:string, txtImg:string}) {

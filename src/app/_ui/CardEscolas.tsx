@@ -1,5 +1,5 @@
 import Image from "next/image";
-import styles from "../styles/CardEscolas.module.css";
+import styles from "../_styles/CardEscolas.module.css";
 
 export default function CardEscolas({ imageSrc, title }: {imageSrc: string, title: string}) {
   return (

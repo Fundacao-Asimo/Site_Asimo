@@ -1,9 +1,9 @@
 import Link from "next/link";
-import DB_user from "../lib/DB_user";
-import { isSessionValid } from "../lib/session";
-import styles from "../styles/padrao.module.css";
+import { isSessionValid } from "../_lib/session";
+import styles from "../_styles/padrao.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendarAlt, faClipboardCheck, faClock, faExchangeAlt } from "@fortawesome/free-solid-svg-icons";
+import { query_user_id } from "../_actions/user";
 
 export interface AniversarianteProps {
     id: number;
@@ -16,7 +16,7 @@ export default async function MainPage()
 {
     const session = await isSessionValid();
     const usuarioId = session as { userId: number };
-    const usuarioLogado = await DB_user.query_user_id(usuarioId.userId);
+    const usuarioLogado = await query_user_id(usuarioId.userId);
 
     return (
         <main>

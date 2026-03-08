@@ -2,11 +2,11 @@
 
 import Image from "next/image";
 import styles from "./page.module.css";
-import HeaderHome from "./ui/HeaderHome";
-import Footer from "./ui/Footer";
-import FlipCard from "./ui/FlipCard";
-import EventosRotativos from "./ui/EventosRotativos";
-import CardEscolas from "./ui/CardEscolas";
+import HeaderHome from "./_ui/HeaderHome";
+import Footer from "./_ui/Footer";
+import FlipCard from "./_ui/FlipCard";
+import EventosRotativos from "./_ui/EventosRotativos";
+import CardEscolas from "./_ui/CardEscolas";
 
 export default function Home() {
 

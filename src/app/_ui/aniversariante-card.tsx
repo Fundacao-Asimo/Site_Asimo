@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { AniversarianteProps } from "../main/page";
-import styles from "../styles/AniversarianteCard.module.css";
+import styles from "../_styles/AniversarianteCard.module.css";
 
 export default function AniversarianteCard(props: AniversarianteProps) {
   return (

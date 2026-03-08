@@ -2,11 +2,11 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import styles from "../styles/HeaderMain.module.css";
+import styles from "../_styles/HeaderMain.module.css";
 import { useState } from "react";
 import { redirect, usePathname } from "next/navigation";
 import LogoutButton from "./logout-btn";
-import { MembroProps } from "../lib/DB_user";
+import { MembroProps } from "../_lib/DB_user";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faHome,

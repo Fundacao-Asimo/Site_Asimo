@@ -1,12 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
-import DB_user, { MembroProps } from "../lib/DB_user";
+import { MembroProps } from "../_lib/DB_user";
+import { delete_user } from "../_actions/user";
 
 export default function MembroCard(props: MembroProps)
 {
     async function deleteMembro(form: FormData) {
         'use server';
-        await DB_user.delete_user(form.get('membro-id'));
+        await delete_user(form.get('membro-id'));
     }
 
     return(

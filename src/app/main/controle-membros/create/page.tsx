@@ -3,8 +3,9 @@
 import z from 'zod';
 import Link from "next/link";
 import toast from 'react-hot-toast';
-import { createUser } from '@/app/lib/credentials';
-import DB_user, { MembroInfo } from '@/app/lib/DB_user';
+import { createUser } from '@/app/_lib/credentials';
+import { MembroInfo } from '@/app/_lib/DB_user';
+import { upload_foto } from '@/app/_actions/user';
 
 const CreateUserSchema = z.object({
     email: z.string().trim().email('Email com formato incorreto'),
@@ -46,7 +47,7 @@ export default function CreateMembro()
             return;
         }
         
-        const url_nova_foto = await DB_user.upload_foto(createUserData.foto, createUserData.nome_completo);
+        const url_nova_foto = await upload_foto(createUserData.foto, createUserData.nome_completo);
 
         if(!url_nova_foto){
             toast.error('Não foi possível fazer upload do arquivo');

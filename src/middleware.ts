@@ -1,4 +1,4 @@
-import { isSessionValid } from "@/app/lib/session";
+import { isSessionValid } from "@/app/_lib/session";
 import {NextRequest, NextResponse} from "next/server";
 
 //regex retirada diretamente da documentação do NextJS
