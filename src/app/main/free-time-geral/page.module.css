@@ -1,0 +1,251 @@
+/* ===== INFO BOX ===== */
+
+.infoBox {
+    background: #e8f1ff;
+    border: 1px solid #b6d0ff;
+    color: #1e40af;
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    margin: 2rem;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+}
+
+.infoIcon {
+    background: #2563eb;
+    color: white;
+    font-weight: bold;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    flex-shrink: 0;
+}
+
+.infoContent {
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+}
+
+.infoTitle {
+    font-weight: 700;
+}
+
+.infoText {
+    font-size: 14px;
+    color: #1e3a8a;
+}
+
+/* ===== CARD PRINCIPAL ===== */
+
+.card {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+    overflow-x: auto;
+    margin: 2rem;
+}
+
+/* ===== TABELA ===== */
+
+.tableWrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    min-width: 900px;
+}
+
+.table th {
+    background: #f1f5f9;
+    font-weight: 700;
+    padding: 10px;
+    text-align: center;
+    color: #334155;
+    border-bottom: 1px solid #b7bec5;
+    border-right: 1px solid #b7bec5;
+}
+
+.table td {
+    height: 22px;
+    padding: 2px;
+    border-bottom: 1px solid #b7bec5;
+    border-right: 1px solid #b7bec5;
+    transition: 0.2s;
+}
+
+.table td:hover {
+    filter: brightness(0.95);
+}
+
+/* coluna horário */
+.hora {
+    font-weight: 600;
+    background: #fafafa;
+    color: #334155;
+    text-align: center;
+    font-size: 11px;
+}
+
+/* ===== CORES ===== */
+
+.livre {
+    background-color: #c7f0d2;
+}
+
+.ocupado {
+    background-color: #f5b5b5;
+}
+
+/* ===== FOOTER AREA ===== */
+
+.bottomGrid {
+    margin: 2rem;
+    display: grid;
+    gap: 20px;
+}
+
+/* ===== CARDS INFERIORES ===== */
+
+.infoCard {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background: white;
+    border-radius: 12px;
+    padding: 1.2rem;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+}
+
+.input {
+    padding: 12px 14px;
+    border-radius: 10px;
+    border: 1px solid #dcdcdc;
+    font-size: 14px;
+    transition: 0.3s ease;
+    outline: none;
+    background-color: #f9fafb;
+}
+
+.title {
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: #334155;
+}
+
+/* ===== LEGENDA ===== */
+
+.legendItem {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.colorBox {
+    width: 28px;
+    height: 28px;
+    border-radius: 4px;
+}
+
+.livreBox {
+    background: #c7f0d2;
+}
+
+.ocupadoBox {
+    background: #f5b5b5;
+}
+
+.subtitle {
+    font-size: 13px;
+    color: #64748b;
+}
+
+/* ===== BOTÕES ===== */
+
+.controls {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    width: 100%;
+    gap: 0.5rem;
+    justify-items: stretch;
+}
+
+.memberItem {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.memberItem:hover {
+    background: rgba(0,0,0,0.04);
+    border-radius: 6px;
+}
+
+.memberItem input {
+    cursor: pointer;
+}
+
+.button {
+    border: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btnLivre {
+    background: #c7f0d2;
+    color: #166534;
+}
+
+.btnOcupado {
+    background: #f5b5b5;
+    color: #7f1d1d;
+}
+
+.button:hover {
+    transform: scale(1.03);
+}
+
+/* ===== SALVAR ===== */
+
+.saveWrapper {
+    margin-top: 1.5rem;
+    text-align: right;
+}
+
+.saveBtn {
+    background: #2563eb;
+    color: white;
+    border: none;
+    padding: 12px 22px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.saveBtn:hover {
+    background: #1e40af;
+}
+
+/* ===== RESPONSIVO ===== */
+
+@media (max-width: 900px) {
+    .bottomGrid {
+        grid-template-columns: 1fr;
+    }
+}

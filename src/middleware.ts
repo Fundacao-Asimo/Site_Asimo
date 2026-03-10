@@ -1,4 +1,4 @@
-import { isSessionValid } from "@/app/lib/session";
+import { isSessionValid } from "@/app/_lib/session";
 import {NextRequest, NextResponse} from "next/server";
 
 //regex retirada diretamente da documentação do NextJS
@@ -9,11 +9,21 @@ export const config = {
 
 const publicRoutes = [
     '/',
-    //'/login'
+    '/login'
 ];
 
 const admRoutes = [
-    '/membros'
+    "/main/dashboard-principal",
+    "/main/free-time-geral",
+    "/main/escolas-parceiras",
+    "/main/agenda-reunioes",
+    "/main/controle-frequência",
+    "/main/eventos",
+    "/main/relatorios-horas",
+    "/main/controle-membros",
+    "/main/controle-atividades",
+    "/main/caixa",
+    "/main/advertencias",
 ]
 
 export async function middleware(req: NextRequest){

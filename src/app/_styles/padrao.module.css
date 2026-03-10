@@ -1,0 +1,155 @@
+.div_horizontal {
+    margin: 2rem;
+    width: auto;
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    min-height: 0;
+    align-items: stretch; /*talvez*/
+}
+
+.h1 {
+    text-align: left;
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin: 2rem;
+    color: black;
+}
+
+.h2 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 2.5rem 2rem 1rem 2rem;
+    color: black;
+}
+
+.quadro {
+    flex: 1;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: auto;
+    min-height: 0;
+    border: 0.1rem solid rgba(0, 0, 0, 0.12);
+    border-radius: 1rem;
+    padding: 1rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.quadro_titulo {
+    flex: 1;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: auto;
+    height: auto;
+    border: 0.1rem solid rgba(0, 0, 0, 0.12);
+    border-radius: 1rem;
+    padding: 0rem 0rem 1rem 0rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    overflow: hidden;
+    h3 {
+        margin: 0rem 0rem 1rem 0rem;
+        padding: 0.5rem 1rem;
+        width: 100%;
+        color: white;
+        background: radial-gradient(circle at 70% 50%, #1a50f1 0%, #2b4fc7 60%, #1e3fa8 100%);
+    }
+}
+
+.quadro:hover, .quadro_titulo:hover {
+    transform: translateY(-0.2rem);
+    box-shadow: 0.3rem 0.3rem 0.4rem rgba(0, 0, 0, 0.3);
+}
+
+.form_group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.2rem;
+    width: 100%;
+}
+
+
+.form_group label {
+    margin-bottom: 6px;
+    font-weight: 500;
+    color: #0b2c48;
+}
+
+.input {
+    padding: 12px 14px;
+    border-radius: 10px;
+    border: 1px solid #dcdcdc;
+    font-size: 14px;
+    transition: 0.3s ease;
+    outline: none;
+    background-color: #f9fafb;
+}
+
+.input:focus{
+    border-color: #ff7a00;
+    box-shadow: 0 0 0 3px rgba(255, 122, 0, 0.15);
+    background-color: #ffffff;
+}
+
+.form_button {
+    background-color: #ff7a00;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s ease;
+    width: fit-content;
+}
+
+.form_button:hover {
+    background-color: #e96d00;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(255, 122, 0, 0.25);
+}
+
+.memberCard {
+  background: #f8fafc;
+  padding: 15px;
+  border-radius: 12px;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  min-width: 15rem;
+}
+
+.memberCard span {
+  font-size: 13px;
+  color: #64748b;
+}
+
+.memberText {
+    display: flex;
+    flex-direction: column;
+}
+
+.memberActions {
+  display: flex;
+  gap: 10px;
+  color: #22a06b;
+  cursor: pointer;
+}
+
+.avatar {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  object-fit: cover;
+  aspect-ratio: 1/1;
+}

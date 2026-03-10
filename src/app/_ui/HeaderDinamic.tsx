@@ -1,0 +1,43 @@
+"use client";
+
+import { usePathname } from "next/navigation";
+import styles from "../_styles/HeaderDinamic.module.css";
+
+export default function HeaderDinamic({horas}: {horas: number})
+{
+    const pathname = usePathname();
+
+    const titles: Record<string, string> = {
+        "/main": "Visão Geral",
+        "/main/banco-de-horas": "Banco de Horas",
+        "/main/meu-free-time": "Meu Free Time",
+        "/main/minha-escola": "Minha Escola",
+        "/main/minhas-presencas": "Minhas Presenças",
+        "/main/requisicoes": "Requisições",
+        "/main/membros": "Diretório de Membros",
+        "/main/perfil": "Meu Perfil",
+        "/main/dashboard-principal": "Dashboard Principal",
+        "/main/free-time-geral": "Free-Time-Geral",
+        "/main/escolas-parceiras": "Escolas Parceiras",
+        "/main/agenda-reunioes": "Agenda de Reuniões",
+        "/main/controle-frequência": "Controle de Frequência",
+        "/main/eventos": "Eventos & Workshops",
+        "/main/relatorios-horas": "Relatórios de Horas",
+        "/main/controle-membros": "Gestão de Membros",
+        "/main/controle-atividades": "Atribuir Atividades",
+        "/main/caixa": "Caixa & Requisições",
+        "/main/advertencias": "Advertências",
+    };
+
+    const title = titles[pathname] || "Dashboard";
+
+    return (
+        <header className={styles.header}>
+            <h1>{title}</h1>
+            <div>
+                <p className={styles.texto}>HORAS ACUMULADAS</p>
+                <p className={styles.horas}>{horas}<span>h</span></p>
+            </div>
+        </header>
+    );
+}
