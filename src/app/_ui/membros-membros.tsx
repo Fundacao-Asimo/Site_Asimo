@@ -11,14 +11,22 @@ export default function MembrosMembros({dados}: {dados: MembroProps})
 
     return(
         <div className={styles.memberCard}>
-            <Image
+            {dados.foto_url && <Image
                 quality={100}
                 width={45}
                 height={45}
                 src={dados.foto_url}
                 alt="Foto do membro"
                 className={styles.avatar}
-            />
+            />}
+            {!dados.foto_url && <Image
+                quality={100}
+                width={45}
+                height={45}
+                src={"/docencia.png"}
+                alt="Foto do membro"
+                className={styles.avatar}
+            />}
             <div className={styles.memberText}>
                 <strong>{dados.apelido}</strong>
                 <span>{dados.area}</span>
