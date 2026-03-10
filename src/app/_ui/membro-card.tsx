@@ -8,7 +8,7 @@ export default function MembroCard(props: MembroProps)
 {
     async function deleteMembro(form: FormData) {
         'use server';
-        await delete_user(form.get('membro-id'));
+        await delete_user(props.id);
     }
 
     return(
