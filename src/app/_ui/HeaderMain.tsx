@@ -28,7 +28,7 @@ export default function HeaderMain({isAdm, userObject}: {isAdm: boolean, userObj
     return(
         <header className={styles.header}>
             <nav className={styles.navegationBar}>
-                {userObject?.foto_url && <Image quality={100} width={200} height={200} className={styles.img} src={userObject?.foto_url} alt="Foto do membro logado" style={{ objectFit: "cover", cursor: "pointer", borderRadius: "50%", width: "8rem", aspectRatio: "1/1" }} onClick={() => redirect("/main/perfil")}/>}
+                {userObject?.foto_url && <Image quality={100} width={200} height={200} className={styles.img} src={userObject?.foto_url || "/docencia.png"} alt="Foto do membro logado" style={{ objectFit: "cover", cursor: "pointer", borderRadius: "50%", width: "8rem", aspectRatio: "1/1" }} onClick={() => redirect("/main/perfil")}/>}
                 {!userObject?.foto_url && <Image quality={100} width={200} height={200} className={styles.img} src={"/docencia.png"} alt="Foto do membro logado" style={{ objectFit: "cover", cursor: "pointer", borderRadius: "50%", width: "8rem", aspectRatio: "1/1" }} onClick={() => redirect("/main/perfil")}/>}
                 <button
                     className={styles.menuButton}

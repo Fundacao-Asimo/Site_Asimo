@@ -16,7 +16,7 @@ export default function MembroCard(props: MembroProps)
             <h2 className={styles.name}>{props.nome_completo}</h2>
 
             {props.foto_url && <Image
-                src={props.foto_url}
+                src={props.foto_url || "/docencia.png"}
                 alt="Foto do membro"
                 width={140}
                 height={140}
