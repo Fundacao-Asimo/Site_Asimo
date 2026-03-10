@@ -6,17 +6,9 @@ import { useEffect, useState, useCallback } from "react";
 import toast from "react-hot-toast";
 import styles from "./page.module.css";
 import { edit_free, query_free_membro } from "@/app/_actions/free";
+import { FreeTimeProps } from "@/app/_lib/DB_free";
 
-const horarios2 = [
-  "07:00-07:30","07:30-08:00","08:00-08:30","08:30-09:00",
-  "09:00-09:30","09:30-10:00","10:00-10:30","10:30-11:00",
-  "11:00-11:30","11:30-12:00","12:00-12:30","12:30-13:00",
-  "13:00-13:30","13:30-14:00","14:00-14:30","14:30-15:00",
-  "15:00-15:30","15:30-16:00","16:00-16:30","16:30-17:00",
-  "17:00-17:30","17:30-18:00","18:00-18:30","18:30-19:00",
-  "19:00-19:30","19:30-20:00","20:00-20:30","20:30-21:00",
-  "21:00-21:30","21:30-22:00","22:00-22:30","22:30-23:00"
-];
+type DiaSemana = "seg" | "ter" | "qua" | "qui" | "sex" | "sab";
 
 const horarios = [
   "07:00 - 07:55","07:55 - 08:50","08:50 - 09:45","10:10 - 11:05",
@@ -26,11 +18,13 @@ const horarios = [
   "22:40 - 23:30"
 ];
 
-const dias = ["seg", "ter", "qua", "qui", "sex", "sab"];
+const dias: DiaSemana[] = ["seg", "ter", "qua", "qui", "sex", "sab"];
 
 export default function MeuFreeTimePage()
 {
-    const padrao = {
+    const padrao: FreeTimeProps = {
+        id: 0,
+        membro: 0,
         seg: "00000000000000000000000000000000",
         ter: "00000000000000000000000000000000",
         qua: "00000000000000000000000000000000",
@@ -38,7 +32,7 @@ export default function MeuFreeTimePage()
         sex: "00000000000000000000000000000000",
         sab: "00000000000000000000000000000000"
     };
-    const [data, setData] = useState<any>(padrao);
+    const [data, setData] = useState<FreeTimeProps>(padrao);
     
     // Estados para o controle de arrasto (Drag)
     const [isDragging, setIsDragging] = useState(false);
@@ -77,18 +71,22 @@ export default function MeuFreeTimePage()
     }
 
     // Função centralizada para atualizar o estado de uma célula
-    const applyToggle = useCallback((day: string, index: number, value: string) => {
-        setData((prev: any) => {
-            if (!prev) return prev;
-            const chars = prev[day].split("");
-            if (chars[index] === value) return prev; // Evita re-render se o valor já for o desejado
+    const applyToggle = useCallback(
+        (day: DiaSemana, index: number, value: string) => {
+            setData((prev) => {
+                const chars = prev[day].split("");
 
-            chars[index] = value;
-            return { ...prev, [day]: chars.join("") };
-        });
-    }, []);
+                if (chars[index] === value) return prev;
 
-    function handleMouseDown(day: string, index: number) {
+                chars[index] = value;
+
+                return { ...prev, [day]: chars.join("") };
+            });
+        },
+        []
+    );
+
+    function handleMouseDown(day: DiaSemana, index: number) {
         setIsDragging(true);
         const currentValue = data[day][index];
         // Se clicar em livre (0), vira ocupado (1) e vice-versa
@@ -97,7 +95,7 @@ export default function MeuFreeTimePage()
         applyToggle(day, index, newValue);
     }
 
-    function handleMouseEnter(day: string, index: number) {
+    function handleMouseEnter(day: DiaSemana, index: number) {
         if (isDragging && dragType !== null) {
             applyToggle(day, index, dragType);
         }

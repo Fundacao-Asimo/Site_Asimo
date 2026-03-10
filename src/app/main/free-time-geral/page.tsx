@@ -10,6 +10,15 @@ import ModalMembros from "./modal";
 import { list_free } from "@/app/_actions/free";
 import { list_user } from "@/app/_actions/user";
 
+type FreeGrid = {
+    seg: number[][];
+    ter: number[][];
+    qua: number[][];
+    qui: number[][];
+    sex: number[][];
+    sab: number[][];
+};
+
 const horarios = [
   "07:00 - 07:55","07:55 - 08:50","08:50 - 09:45","10:10 - 11:05",
   "11:05 - 12:00"," - ","13:30 - 14:25","14:25 - 15:20",
@@ -18,7 +27,7 @@ const horarios = [
   "22:40 - 23:30"
 ];
 
-const padrao = {
+const padrao: FreeGrid = {
     seg: Array.from({ length: 17 }, () => []),
     ter: Array.from({ length: 17 }, () => []),
     qua: Array.from({ length: 17 }, () => []),
@@ -27,16 +36,16 @@ const padrao = {
     sab: Array.from({ length: 17 }, () => [])
 };
 
-const dias = ["seg", "ter", "qua", "qui", "sex", "sab"];
+const dias: (keyof FreeGrid)[] = ["seg", "ter", "qua", "qui", "sex", "sab"];
 
 export default function MeuFreeTimePage()
 {
     const [open, setOpenModel] = useState(false);
     const [tituloModel, setTituloModel] = useState("");
-    const [membrosModel, setMembrosModel] = useState([]);
-    const [todasFree, setTodasFree] = useState<any>(null);
-    const [todosUser, setTodosUser] = useState<any>(null);
-    const [data, setData] = useState<any>(padrao);
+    const [membrosModel, setMembrosModel] = useState<MembroProps[]>([]);
+    const [todasFree, setTodasFree] = useState<FreeTimeProps[]>([]);
+    const [todosUser, setTodosUser] = useState<MembroProps[]>([]);
+    const [data, setData] = useState<FreeGrid>(padrao);
     const [area, setArea] = useState<string>("Todas");
     const [selectedMembers, setSelectedMembers] = useState<number[]>([]);
     const [loading, setLoading] = useState(true);
@@ -72,7 +81,7 @@ export default function MeuFreeTimePage()
     {
         const membrosIds = new Set(listaMembros.map(m => m.id));
 
-        const temp = {
+        const temp:FreeGrid = {
             seg: Array.from({ length: 17 }, () => [] as number[]),
             ter: Array.from({ length: 17 }, () => [] as number[]),
             qua: Array.from({ length: 17 }, () => [] as number[]),
