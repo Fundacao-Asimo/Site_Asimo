@@ -26,12 +26,14 @@ export interface MembroProps {
     senha: string,
     nasc_date: string,
     ingresso_date: string,
-    foto_url: string,
-    adm: boolean
+    foto_url: string | null,
+    adm: boolean,
     matricula: string,
     area: string,
     curso: string,
-    telefone: string
+    telefone: string,
+    endereco: string,
+    cpf: string
 }
 
 async function query_user_id(id: number)
