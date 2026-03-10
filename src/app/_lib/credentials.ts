@@ -8,15 +8,19 @@ import { createSessionToken } from "./session";
 import { LoginCredentials } from "../login/page";
 import { insert_user, query_user_email } from "../_actions/user";
 
-const PEPPER = process.env.PASSWORD_PEPPER!;
+const PEPPER_SENHA = process.env.PASSWORD_PEPPER!;
+const PEPPER_CPF = process.env.CPF_PEPPER!;
 const ROUNDS = Number(process.env.BCRYPT_ROUNDS);
 
 export async function createUser(data: MembroInfo)
 {
-    const password = data.senha + PEPPER;
+    const password = data.senha + PEPPER_SENHA;
+    const cpf = data.cpf + PEPPER_CPF;
     const passwordCrypt = await bcrypt.hash(password, ROUNDS);
+    const cpfCrypt = await bcrypt.hash(cpf, ROUNDS);
 
     data.senha = passwordCrypt;
+    data.cpf = cpfCrypt;
 
     const retorno = await insert_user(data);
 
@@ -30,7 +34,7 @@ export async function createUser(data: MembroInfo)
 export async function validateCredentials(data: LoginCredentials)
 {
     const email = data.email;
-    const password = data.password + PEPPER;
+    const password = data.password + PEPPER_SENHA;
 
     const user = await query_user_email(email);
 

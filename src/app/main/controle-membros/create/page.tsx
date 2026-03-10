@@ -6,6 +6,8 @@ import toast from 'react-hot-toast';
 import { createUser } from '@/app/_lib/credentials';
 import { MembroInfo } from '@/app/_lib/DB_user';
 import { upload_foto } from '@/app/_actions/user';
+import { useRef, useState } from 'react';
+import styles from "./create_page.module.css"
 
 const CreateUserSchema = z.object({
     email: z.string().trim().email('Email com formato incorreto'),
@@ -13,11 +15,53 @@ const CreateUserSchema = z.object({
     confSenha: z.string({message: 'Insira uma confirmação de senha'}).trim().min(1, {message: 'Confirmar Senha não pode ser vazia'}),
 }).refine((data) => data.senha === data.confSenha, {
     message: "Senhas não conferem",
-    path: ["confPassword"]
+    path: ["confSenha"]
 });
 
 export default function CreateMembro()
 {
+    const [cpf, setCpf] = useState("");
+    const [tel, setTel] = useState("");
+    const formRef = useRef<HTMLFormElement>(null);
+
+    function handleChangeCpf(e: React.ChangeEvent<HTMLInputElement>) {
+        const formatted = formatCPF(e.target.value);
+        setCpf(formatted);
+    }
+
+    function formatCPF(value: string) {
+        value = value.replace(/\D/g, "");
+        value = value.slice(0, 11);
+
+        value = value.replace(/(\d{3})(\d)/, "$1.$2");
+        value = value.replace(/(\d{3})(\d)/, "$1.$2");
+        value = value.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
+
+        return value;
+    }
+
+    function handleChangeTel(e: React.ChangeEvent<HTMLInputElement>) {
+        const formatted = formatTel(e.target.value);
+        setTel(formatted);
+    }
+
+    function formatTel(value: string) {
+        value = value.replace(/\D/g, "");
+        value = value.slice(0, 11);
+
+        if (value.length <= 10) {
+            // Telefone sem o 9 (fixo ou celular antigo)
+            value = value.replace(/(\d{2})(\d)/, "($1) $2");
+            value = value.replace(/(\d{4})(\d)/, "$1-$2");
+        } else {
+            // Celular com 9 dígitos
+            value = value.replace(/(\d{2})(\d)/, "($1) $2");
+            value = value.replace(/(\d{5})(\d)/, "$1-$2");
+        }
+
+        return value;
+    }
+
     const addMembro = async (formData: FormData) => {
 
         const createUserData = {
@@ -29,8 +73,18 @@ export default function CreateMembro()
             nasc_date: formData.get('nasc_date') as string,
             ingresso_date: new Date().toISOString().split('T')[0] as string,
             adm: formData.get('adm') !== null,
-            foto: formData.get('foto') as File
+            foto: formData.get('foto') as File | null,
+            matricula: formData.get('matricula') as string,
+            area: formData.get('area') as string,
+            curso: formData.get('curso') as string,
+            telefone: formData.get('telefone') as string,
+            endereco: formData.get('endereco') as string,
+            cpf: formData.get('cpf') as string
         }
+
+        createUserData.curso = createUserData.curso.toUpperCase();
+        if(!createUserData.apelido || createUserData.apelido.trim() === "")
+            createUserData.apelido = createUserData.nome_completo.split(' ')[0];
 
         const result = CreateUserSchema.safeParse(createUserData);
 
@@ -47,11 +101,15 @@ export default function CreateMembro()
             return;
         }
         
-        const url_nova_foto = await upload_foto(createUserData.foto, createUserData.nome_completo);
+        let url_nova_foto = null;
+        if(createUserData.foto && createUserData.foto.size > 0)
+        {
+            url_nova_foto = await upload_foto(createUserData.foto, createUserData.nome_completo);
 
-        if(!url_nova_foto){
-            toast.error('Não foi possível fazer upload do arquivo');
-            return;
+            if(!url_nova_foto){
+                toast.error('Não foi possível fazer upload do arquivo');
+                return;
+            }
         }
 
         const {confSenha, foto, ...rest} = createUserData;
@@ -68,105 +126,208 @@ export default function CreateMembro()
             return;
         }else if(retorno.success){
             toast.success(retorno.success);
-            // formData.set('nome_completo', "");
-            // formData.set('apelido', "");
-            // formData.set('email', "");
-            // formData.set('senha', "");
-            // formData.set('conf-senha', "");
-            // formData.set('nasc_date', "");
-            // formData.set('adm', "");
-            // formData.set('foto', "");
+            formRef.current?.reset();
+            setCpf("");
+            setTel("");
         }
     }
+
     return(
-        <main className="create-membro-container">
-            <h1>Inserir Membro</h1>
-            <form
-                onSubmit={async (e) => {
-                    e.preventDefault();
-                    const formData = new FormData(e.currentTarget);
-                    await addMembro(formData);
-                }}
-                encType="multipart/form-data"
-                className="create-membro-form"
-            >
-                <section className="membro-input">
-                </section>
-                <section className="membro-input">
-                    <input
-                        type="text"
-                        id="nome_completo"
-                        name="nome_completo"
-                        placeholder="Nome do Membro"
-                        aria-label="Nome do Membro"
-                        required
-                    />
-                </section>
-                <section className="membro-input">
-                    <input
-                        type="text"
-                        id="apelido"
-                        name="apelido"
-                        placeholder="Apelido do Membro"
-                        aria-label="Apelido do Membro"
-                    />
-                </section>
-                <section className="membro-input">
-                    <input
-                        type="text"
-                        id="email"
-                        name="email"
-                        placeholder="Email do Membro"
-                        aria-label="Email do Membro"
-                        required
-                    />
-                </section>
-                <section className="membro-input">
-                    <input
-                        type="date"
-                        id="nasc_date"
-                        name="nasc_date"
-                        required
-                    />
-                </section>
-                <section className="membro-input">
-                    <input
-                        type="file"
-                        id="foto"
-                        name="foto"
-                        required
-                    />
-                </section>
-                <section className="membro-input">
-                    <input
-                        type="password"
-                        id="senha"
-                        name="senha"
-                        placeholder="Senha do Membro"
-                        aria-label="Senha do Membro"
-                        required
-                    />
-                </section>
-                <section className="membro-input">
-                    <input
-                        type="password"
-                        id="conf-senha"
-                        name="conf-senha"
-                        placeholder="Confirme Senha do Membro"
-                        aria-label="Confirme Senha do Membro"
-                        required
-                    />
-                </section>
-                <section className="membro-input">
-                    <input
-                        type="checkbox"
-                        id="adm"
-                        name="adm"
-                    />
-                </section>
-                <button>Adicionar Membro</button>
-            </form>
-            <Link href={'/main/membros'}>Voltar para lista</Link>
+        <main>
+            <div className={styles.container}>
+                <h1 className={styles.title}>Inserir Membro</h1>
+
+                <form
+                    ref={formRef}
+                    className={styles.form}
+                    onSubmit={async (e) => {
+                        e.preventDefault();
+                        const formData = new FormData(e.currentTarget);
+                        await addMembro(formData);
+                    }}
+                    encType="multipart/form-data"
+                >
+                    <section className={styles.inputGroup}>
+                        <label className={styles.label} htmlFor="nome_completo">Nome Completo</label>
+                        <input
+                            className={styles.input}
+                            type="text"
+                            id="nome_completo"
+                            name="nome_completo"
+                            placeholder="Nome do Membro"
+                            required
+                        />
+                    </section>
+
+                    <section className={styles.inputGroup}>
+                        <label className={styles.label} htmlFor="apelido">Apelido</label>
+                        <input
+                            className={styles.input}
+                            type="text"
+                            id="apelido"
+                            name="apelido"
+                            placeholder="Apelido do Membro"
+                        />
+                    </section>
+
+                    <section className={styles.inputGroup}>
+                        <label className={styles.label} htmlFor="cpf">CPF</label>
+                        <input
+                            className={styles.input}
+                            type="text"
+                            value={cpf}
+                            id="cpf"
+                            name="cpf"
+                            onChange={handleChangeCpf}
+                            placeholder="000.000.000-00"
+                            maxLength={14}
+                            required
+                        />
+                    </section>
+
+                    <section className={styles.inputGroup}>
+                        <label className={styles.label} htmlFor="telefone">Telefone</label>
+                        <input
+                            className={styles.input}
+                            type="text"
+                            value={tel}
+                            id="telefone"
+                            name="telefone"
+                            onChange={handleChangeTel}
+                            placeholder="(00) 00000-0000"
+                            maxLength={15}
+                            required
+                        />
+                    </section>
+
+                    <section className={styles.inputGroup}>
+                        <label className={styles.label} htmlFor="endereco">Endereço</label>
+                        <input
+                            className={styles.input}
+                            type="text"
+                            id="endereco"
+                            name="endereco"
+                            placeholder="Endereço"
+                        />
+                    </section>
+
+                    <section className={styles.inputGroup}>
+                        <label className={styles.label} htmlFor="matricula">Matrícula</label>
+                        <input
+                            className={styles.input}
+                            type="number"
+                            id="matricula"
+                            name="matricula"
+                            placeholder="Matrícula do Membro"
+                            required
+                        />
+                    </section>
+
+                    <section className={styles.inputGroup}>
+                        <label className={styles.label} htmlFor="curso">Sigla do Curso</label>
+                        <input
+                            className={styles.input}
+                            type="text"
+                            id="curso"
+                            name="curso"
+                            placeholder="Sigla do Curso"
+                            required
+                        />
+                    </section>
+
+                    <section className={styles.inputGroup}>
+                        <label className={styles.label} htmlFor="area">Área</label>
+                        <select
+                            className={styles.select}
+                            name="area"
+                            id="area"
+                            required
+                            defaultValue=""
+                        >
+                            <option value="" disabled>Selecione uma área</option>
+                            <option value="Docência">Docência</option>
+                            <option value="Projetos">Projetos</option>
+                            <option value="Marketing">Marketing</option>
+                            <option value="Gestão">Gestão</option>
+                            <option value="AudioVisual">AudioVisual</option>
+                        </select>
+                    </section>
+
+                    <section className={styles.inputGroup}>
+                        <label className={styles.label} htmlFor="email">E-mail</label>
+                        <input
+                            className={styles.input}
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="Email do Membro"
+                            required
+                        />
+                    </section>
+
+                    <section className={styles.inputGroup}>
+                        <label className={styles.label} htmlFor="nasc_date">Data de Nascimento</label>
+                        <input
+                            className={styles.input}
+                            type="date"
+                            id="nasc_date"
+                            name="nasc_date"
+                            required
+                        />
+                    </section>
+
+                    <section className={styles.inputGroup}>
+                        <label className={styles.label} htmlFor="senha">Senha</label>
+                        <input
+                            className={styles.input}
+                            type="password"
+                            id="senha"
+                            name="senha"
+                            placeholder="Senha do Membro"
+                            required
+                        />
+                    </section>
+
+                    <section className={styles.inputGroup}>
+                        <label className={styles.label} htmlFor="foto">Foto</label>
+                        <input
+                            className={styles.fileInput}
+                            type="file"
+                            id="foto"
+                            name="foto"
+                            accept="image/*"
+                        />
+                    </section>
+
+                    <section className={styles.inputGroup}>
+                        <label className={styles.label} htmlFor="conf-senha">Confirme a Senha</label>
+                        <input
+                            className={styles.input}
+                            type="password"
+                            id="conf-senha"
+                            name="conf-senha"
+                            placeholder="Confirme a senha"
+                            required
+                        />
+                    </section>
+
+                    <section className={styles.inputGroup}>
+                        <label className={styles.label} htmlFor="adm">Diretor</label>
+                        <input
+                            className={styles.checkbox}
+                            type="checkbox"
+                            id="adm"
+                            name="adm"
+                        />
+                    </section>
+
+                    <button className={styles.button}>Adicionar Membro</button>
+                </form>
+
+                <Link href="/main/controle-membros" className={styles.backLink}>
+                    Voltar para lista
+                </Link>
+            </div>
         </main>
     );
 }

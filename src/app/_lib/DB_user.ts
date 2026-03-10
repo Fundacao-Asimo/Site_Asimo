@@ -8,12 +8,14 @@ export interface MembroInfo {
     senha: string,
     nasc_date: string,
     ingresso_date: string,
-    foto_url: string,
+    foto_url: string | null,
     adm: boolean,
     matricula: string,
     area: string,
     curso: string,
-    telefone: string
+    telefone: string,
+    endereco: string,
+    cpf: string
 }
 
 export interface MembroProps {
@@ -109,15 +111,14 @@ async function insert_user(dados: MembroInfo)
         .select()
         .single();
 
-    if(error) {
+    if(error || !data) {
         return null;
     }
 
     const retorno = await DB_free.insert_free_vazia(data.id);
 
-    if(!retorno) {
-        return null;
-    }
+    console.log("data_free:", retorno.data);
+    console.log("erro_free:", retorno.error);
 
     return data;
 }

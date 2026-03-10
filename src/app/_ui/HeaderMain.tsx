@@ -16,7 +16,8 @@ import {
   faClipboardCheck,
   faExchangeAlt,
   faAddressBook,
-  faUserCircle,
+  faUserGear,
+  faCalendarWeek,
 } from "@fortawesome/free-solid-svg-icons";
 
 export default function HeaderMain({isAdm, userObject}: {isAdm: boolean, userObject: MembroProps | null})
@@ -27,7 +28,8 @@ export default function HeaderMain({isAdm, userObject}: {isAdm: boolean, userObj
     return(
         <header className={styles.header}>
             <nav className={styles.navegationBar}>
-                <Image quality={100} width={200} height={200} className={styles.img} src={userObject?.foto_url} alt="Foto do membro logado" style={{ objectFit: "cover", cursor: "pointer", borderRadius: "50%", width: "8rem", aspectRatio: "1/1" }} onClick={() => redirect("/main/perfil")}/>
+                {userObject?.foto_url && <Image quality={100} width={200} height={200} className={styles.img} src={userObject?.foto_url || "/docencia.png"} alt="Foto do membro logado" style={{ objectFit: "cover", cursor: "pointer", borderRadius: "50%", width: "8rem", aspectRatio: "1/1" }} onClick={() => redirect("/main/perfil")}/>}
+                {!userObject?.foto_url && <Image quality={100} width={200} height={200} className={styles.img} src={"/docencia.png"} alt="Foto do membro logado" style={{ objectFit: "cover", cursor: "pointer", borderRadius: "50%", width: "8rem", aspectRatio: "1/1" }} onClick={() => redirect("/main/perfil")}/>}
                 <button
                     className={styles.menuButton}
                     onClick={() => setMenuOpen(!menuOpen)}
@@ -44,17 +46,17 @@ export default function HeaderMain({isAdm, userObject}: {isAdm: boolean, userObj
                     <li className={`${styles.item} ${pathname === "/main/requisicoes" ? styles.active : ""}`} ><Link href="/main/requisicoes"><FontAwesomeIcon style={{marginRight: "0.5rem"}} icon={faExchangeAlt} />Requisições</Link></li>
                     <li className={`${styles.item} ${pathname === "/main/membros" ? styles.active : ""}`} ><Link href="/main/membros"><FontAwesomeIcon style={{marginRight: "0.5rem"}} icon={faAddressBook} />Membros</Link></li>
                     {isAdm && <li className={styles.separacao}>DIRETORIA</li>}
-                    {isAdm && <li className={`${styles.item} ${pathname === "/main/dashboard-principal" ? styles.active : ""}`} ><Link href="/main/dashboard-principal">Dashboard Principal</Link></li>}
-                    {isAdm && <li className={`${styles.item} ${pathname === "/main/free-time-geral" ? styles.active : ""}`} ><Link href="/main/free-time-geral">Free Time Geral</Link></li>}
-                    {isAdm && <li className={`${styles.item} ${pathname === "/main/escolas-parceiras" ? styles.active : ""}`} ><Link href="/main/escolas-parceiras">Escolas Parceiras</Link></li>}
-                    {isAdm && <li className={`${styles.item} ${pathname === "/main/agenda-reunioes" ? styles.active : ""}`} ><Link href="/main/agenda-reunioes">Agenda de Reuniões</Link></li>}
-                    {isAdm && <li className={`${styles.item} ${pathname === "/main/controle-frequência" ? styles.active : ""}`} ><Link href="/main/controle-frequência">Controle de Frequência</Link></li>}
-                    {isAdm && <li className={`${styles.item} ${pathname === "/main/eventos" ? styles.active : ""}`} ><Link href="/main/eventos">Eventos & Workshops</Link></li>}
-                    {isAdm && <li className={`${styles.item} ${pathname === "/main/relatorios-horas" ? styles.active : ""}`} ><Link href="/main/relatorios-horas">Relatórios de Horas</Link></li>}
-                    {isAdm && <li className={`${styles.item} ${pathname === "/main/controle-membros" ? styles.active : ""}`} ><Link href="/main/controle-membros">Gestão de Membros</Link></li>}
-                    {isAdm && <li className={`${styles.item} ${pathname === "/main/controle-atividades" ? styles.active : ""}`} ><Link href="/main/controle-atividades">Atribuir Atividades</Link></li>}
-                    {isAdm && <li className={`${styles.item} ${pathname === "/main/caixa" ? styles.active : ""}`} ><Link href="/main/caixa">Caixa & Requisições</Link></li>}
-                    {isAdm && <li className={`${styles.item} ${pathname === "/main/advertencias" ? styles.active : ""}`} ><Link href="/main/advertencias">Advertências</Link></li>}
+                    {isAdm && <li className={`${styles.item} ${pathname.includes("/main/dashboard-principal") ? styles.active : ""}`} ><Link href="/main/dashboard-principal">Dashboard Principal</Link></li>}
+                    {isAdm && <li className={`${styles.item} ${pathname.includes("/main/free-time-geral") ? styles.active : ""}`} ><Link href="/main/free-time-geral"><FontAwesomeIcon style={{marginRight: "0.5rem"}} icon={faCalendarWeek} />Free Time Geral</Link></li>}
+                    {isAdm && <li className={`${styles.item} ${pathname.includes("/main/escolas-parceiras") ? styles.active : ""}`} ><Link href="/main/escolas-parceiras">Escolas Parceiras</Link></li>}
+                    {isAdm && <li className={`${styles.item} ${pathname.includes("/main/agenda-reunioes") ? styles.active : ""}`} ><Link href="/main/agenda-reunioes">Agenda de Reuniões</Link></li>}
+                    {isAdm && <li className={`${styles.item} ${pathname.includes("/main/controle-frequência") ? styles.active : ""}`} ><Link href="/main/controle-frequência">Controle de Frequência</Link></li>}
+                    {isAdm && <li className={`${styles.item} ${pathname.includes("/main/eventos") ? styles.active : ""}`} ><Link href="/main/eventos">Eventos & Workshops</Link></li>}
+                    {isAdm && <li className={`${styles.item} ${pathname.includes("/main/relatorios-horas") ? styles.active : ""}`} ><Link href="/main/relatorios-horas">Relatórios de Horas</Link></li>}
+                    {isAdm && <li className={`${styles.item} ${pathname.includes("/main/controle-membros") ? styles.active : ""}`} ><Link href="/main/controle-membros"><FontAwesomeIcon style={{marginRight: "0.5rem"}} icon={faUserGear} />Gestão de Membros</Link></li>}
+                    {isAdm && <li className={`${styles.item} ${pathname.includes("/main/controle-atividades") ? styles.active : ""}`} ><Link href="/main/controle-atividades">Atribuir Atividades</Link></li>}
+                    {isAdm && <li className={`${styles.item} ${pathname.includes("/main/caixa") ? styles.active : ""}`} ><Link href="/main/caixa">Caixa & Requisições</Link></li>}
+                    {isAdm && <li className={`${styles.item} ${pathname.includes("/main/advertencias") ? styles.active : ""}`} ><Link href="/main/advertencias">Advertências</Link></li>}
                 </ul>
                 <LogoutButton/> 
             </nav>

@@ -70,11 +70,7 @@ async function insert_free_vazia(id: number)
         .select()
         .single();
 
-    if(error) {
-        return null;
-    }
-
-    return data;
+    return { data, error };
 }
 
 async function insert_free(dados: FreeTimeInfo)
