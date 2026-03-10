@@ -39,6 +39,7 @@ export default function MeuFreeTimePage()
     const [data, setData] = useState<any>(padrao);
     const [area, setArea] = useState<string>("Todas");
     const [selectedMembers, setSelectedMembers] = useState<number[]>([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         load();
@@ -60,6 +61,7 @@ export default function MeuFreeTimePage()
             setTodosUser(resUser);
             preencherData(resFree, resUser);
             setSelectedMembers(resUser.map((m: MembroProps) => m.id));
+            setLoading(false);
 
         } catch (err) {
             toast.error("Erro ao carregar dados");
@@ -169,6 +171,7 @@ export default function MeuFreeTimePage()
     return (
         <>
             {open && <ModalMembros titulo={tituloModel} membros={membrosModel} onClose={() => setOpenModel(false)}/>}
+            {loading && <div className={styles.spinner}></div>}
             <main style={{ userSelect: 'none' }}>
                 
                 <div className={styles.bottomGrid}>
@@ -233,7 +236,7 @@ export default function MeuFreeTimePage()
                                                         setOpenModel(true);
                                                     }}
                                                     className={styles.livre}
-                                                    style={{ cursor: "pointer", fontSize: "11px", textAlign: "center", backgroundColor: getColor(data[d][i].length, todasFree?.length || 1) }}
+                                                    style={{ cursor: "pointer", fontSize: "11px", textAlign: "center", backgroundColor: getColor(data[d][i].length, selectedMembers?.length || 1) }}
                                                 >
                                                     {data[d][i].length}
                                                 </td>

@@ -24,6 +24,8 @@ export default function HeaderDinamic({horas}: {horas: number})
         "/main/eventos": "Eventos & Workshops",
         "/main/relatorios-horas": "Relatórios de Horas",
         "/main/controle-membros": "Gestão de Membros",
+        "/main/controle-membros/create": "Adicionar Membros",
+        "/main/controle-membros/edit": "Editar Dados do Membro",
         "/main/controle-atividades": "Atribuir Atividades",
         "/main/caixa": "Caixa & Requisições",
         "/main/advertencias": "Advertências",

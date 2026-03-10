@@ -3,6 +3,7 @@
 import { list_user } from "@/app/_actions/user";
 import MembroCard from "@/app/_ui/membro-card";
 import Link from "next/link";
+import styles from "./page.module.css"
 
 export default async function ListMembrosPage()
 {
@@ -13,10 +14,22 @@ export default async function ListMembrosPage()
     });
 
     return(
-        <main className="list-container">
-            <Link href={'/main/controle-membros/create'} className="link-add-membro">Adicionar</Link>
-            <div className="list-membros-container">
-                {membrosMap}
+        <main>
+            <div className={styles.container}>
+                <div className={styles.header}>
+                    <h1 className={styles.title}>Membros</h1>
+
+                    <Link
+                        href={'/main/controle-membros/create'}
+                        className={styles.addButton}
+                    >
+                        + Adicionar
+                    </Link>
+                </div>
+
+                <div className={styles.grid}>
+                    {membrosMap}
+                </div>
             </div>
         </main>
     );
