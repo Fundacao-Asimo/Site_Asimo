@@ -15,48 +15,50 @@ export default function MembroCard(props: MembroProps)
         <div className={styles.card}>
             <h2 className={styles.name}>{props.nome_completo}</h2>
 
-            {props.foto_url && <Image
-                src={props.foto_url || "/docencia.png"}
-                alt="Foto do membro"
-                width={140}
-                height={140}
-                className={styles.image}
-            />}
-            {!props.foto_url && <Image
-                src={"/docencia.png"}
-                alt="Foto do membro"
-                width={140}
-                height={140}
-                className={styles.image}
-            />}
+            <div>
+                {props.foto_url && <Image
+                    src={props.foto_url || "/docencia.png"}
+                    alt="Foto do membro"
+                    width={140}
+                    height={140}
+                    className={styles.image}
+                />}
+                {!props.foto_url && <Image
+                    src={"/docencia.png"}
+                    alt="Foto do membro"
+                    width={140}
+                    height={140}
+                    className={styles.image}
+                />}
 
-            <section className={styles.actions}>
-                <Link
-                    href={`/main/membros/edit/${props.id}`}
-                    className={styles.link}
-                >
-                    Editar
-                </Link>
+                <section className={styles.actions}>
+                    <Link
+                        href={`/main/controle-membros/edit/${props.id}`}
+                        className={styles.link}
+                    >
+                        Editar
+                    </Link>
 
-                <Link
-                    href={`/main/membros/advertencia/${props.id}`}
-                    className={styles.link}
-                >
-                    Advertência
-                </Link>
+                    <Link
+                        href={`/main/controle-membros/advertencia/${props.id}`}
+                        className={styles.link}
+                    >
+                        Advertência
+                    </Link>
 
-                <form action={deleteMembro}>
-                    <button className={styles.deleteButton}>
-                        Remover
-                    </button>
+                    <form action={deleteMembro}>
+                        <button className={styles.deleteButton}>
+                            Remover
+                        </button>
 
-                    <input
-                        defaultValue={props.id}
-                        name="membro-id"
-                        hidden
-                    />
-                </form>
-            </section>
+                        <input
+                            defaultValue={props.id}
+                            name="membro-id"
+                            hidden
+                        />
+                    </form>
+                </section>
+            </div>
         </div>
     );
 }
