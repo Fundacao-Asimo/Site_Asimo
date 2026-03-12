@@ -47,6 +47,12 @@ a {
   width: 100%;
 }
 
+@media (max-width: 700px) {
+  .conteudo {
+    padding-left: 0rem;
+  }
+}
+
 article {
   width: 100%;
   min-height: 80vh;

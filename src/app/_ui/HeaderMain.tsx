@@ -28,8 +28,8 @@ export default function HeaderMain({isAdm, userObject}: {isAdm: boolean, userObj
     return(
         <header className={styles.header}>
             <nav className={styles.navegationBar}>
-                {userObject?.foto_url && <Image quality={100} width={200} height={200} className={styles.img} src={userObject?.foto_url || "/docencia.png"} alt="Foto do membro logado" style={{ objectFit: "cover", cursor: "pointer", borderRadius: "50%", width: "8rem", aspectRatio: "1/1" }} onClick={() => redirect("/main/perfil")}/>}
-                {!userObject?.foto_url && <Image quality={100} width={200} height={200} className={styles.img} src={"/docencia.png"} alt="Foto do membro logado" style={{ objectFit: "cover", cursor: "pointer", borderRadius: "50%", width: "8rem", aspectRatio: "1/1" }} onClick={() => redirect("/main/perfil")}/>}
+                {userObject?.foto_url && <Image quality={100} width={140} height={140} className={styles.img} src={userObject?.foto_url || "/docencia.png"} alt="Foto do membro logado" onClick={() => redirect("/main/perfil")}/>}
+                {!userObject?.foto_url && <Image quality={100} width={140} height={140} className={styles.img} src={"/docencia.png"} alt="Foto do membro logado" onClick={() => redirect("/main/perfil")}/>}
                 <button
                     className={styles.menuButton}
                     onClick={() => setMenuOpen(!menuOpen)}
@@ -57,8 +57,9 @@ export default function HeaderMain({isAdm, userObject}: {isAdm: boolean, userObj
                     {isAdm && <li className={`${styles.item} ${pathname.includes("/main/controle-atividades") ? styles.active : ""}`} ><Link href="/main/controle-atividades">Atribuir Atividades</Link></li>}
                     {isAdm && <li className={`${styles.item} ${pathname.includes("/main/caixa") ? styles.active : ""}`} ><Link href="/main/caixa">Caixa & Requisições</Link></li>}
                     {isAdm && <li className={`${styles.item} ${pathname.includes("/main/advertencias") ? styles.active : ""}`} ><Link href="/main/advertencias">Advertências</Link></li>}
+                    <LogoutButton bool={false}/>
                 </ul>
-                <LogoutButton/> 
+                <LogoutButton bool={true}/>
             </nav>
         </header>
     );

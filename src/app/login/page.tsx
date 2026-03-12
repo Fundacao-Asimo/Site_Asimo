@@ -96,6 +96,7 @@ export default function LoginPage(){
                             <input type="password" name="password" id="password" placeholder="••••••••" />
                         </div>
                         <button className={styles.loginButton}>Entrar</button>
+                        <Link className={styles.voltar2} href={"/"}>← Voltar para página principal</Link>
                     </form>
                 </div>
             </div>

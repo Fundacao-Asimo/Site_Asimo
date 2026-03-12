@@ -280,7 +280,7 @@ export default function MeuFreeTimePage()
                                 </button>
                                 <button className={`${styles.button} ${styles.btnOcupado}`} onClick={() => {
                                     setSelectedMembers([]);
-                                    preencherData(todasFree, todosUser);
+                                    preencherData([], todosUser);
                                 }}>Limpar</button>
                             </div>
                         </div>

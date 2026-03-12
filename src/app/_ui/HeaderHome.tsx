@@ -4,12 +4,9 @@ import Image from "next/image";
 import Link from "next/link";
 import styles from "../_styles/HeaderHome.module.css";
 import { useCallback, useState } from "react";
-import { useRouter } from "next/navigation";
 
 export default function HeaderHome()
 {
-    const router = useRouter();
-
     const [menuOpen, setMenuOpen] = useState(false);
 
     const roll = useCallback((destino: string) => {
