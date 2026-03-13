@@ -272,7 +272,6 @@ export default function CreateMembro()
                             type="date"
                             id="nasc_date"
                             name="nasc_date"
-                            required
                         />
                     </section>
 
