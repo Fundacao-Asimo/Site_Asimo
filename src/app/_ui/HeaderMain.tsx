@@ -18,6 +18,7 @@ import {
   faAddressBook,
   faUserGear,
   faCalendarWeek,
+  faWallet,
 } from "@fortawesome/free-solid-svg-icons";
 
 export default function HeaderMain({isAdm, userObject}: {isAdm: boolean, userObject: MembroProps | null})
@@ -55,7 +56,7 @@ export default function HeaderMain({isAdm, userObject}: {isAdm: boolean, userObj
                     {isAdm && <li className={`${styles.item} ${pathname.includes("/main/relatorios-horas") ? styles.active : ""}`} ><Link href="/main/relatorios-horas">Relatórios de Horas</Link></li>}
                     {isAdm && <li className={`${styles.item} ${pathname.includes("/main/controle-membros") ? styles.active : ""}`} ><Link href="/main/controle-membros"><FontAwesomeIcon style={{marginRight: "0.5rem"}} icon={faUserGear} />Gestão de Membros</Link></li>}
                     {isAdm && <li className={`${styles.item} ${pathname.includes("/main/controle-atividades") ? styles.active : ""}`} ><Link href="/main/controle-atividades">Atribuir Atividades</Link></li>}
-                    {isAdm && <li className={`${styles.item} ${pathname.includes("/main/caixa") ? styles.active : ""}`} ><Link href="/main/caixa">Caixa & Requisições</Link></li>}
+                    {isAdm && <li className={`${styles.item} ${pathname.includes("/main/caixa") ? styles.active : ""}`} ><Link href="/main/caixa"><FontAwesomeIcon style={{marginRight: "0.5rem"}} icon={faWallet} />Caixa & Requisições</Link></li>}
                     {isAdm && <li className={`${styles.item} ${pathname.includes("/main/advertencias") ? styles.active : ""}`} ><Link href="/main/advertencias">Advertências</Link></li>}
                     <LogoutButton bool={false}/>
                 </ul>

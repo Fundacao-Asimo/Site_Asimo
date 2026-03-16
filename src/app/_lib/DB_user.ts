@@ -119,9 +119,6 @@ async function insert_user(dados: MembroInfo)
 
     const retorno = await DB_free.insert_free_vazia(data.id);
 
-    console.log("data_free:", retorno.data);
-    console.log("erro_free:", retorno.error);
-
     return data;
 }
 

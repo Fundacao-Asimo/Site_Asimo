@@ -1,0 +1,197 @@
+.container {
+    min-height: 100vh;
+    margin: 10px auto;
+    padding: 20px;
+}
+
+/* SALDO */
+
+.saldoCard {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    border: 0.1rem solid rgba(0, 0, 0, 0.12);
+    border-radius: 1rem;
+    padding: 2rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    margin-bottom: 25px;
+}
+
+.label {
+    font-size: 12px;
+    font-weight: 700;
+    color: #6b7a90;
+    letter-spacing: 1px;
+}
+
+.saldo {
+    font-size: 36px;
+    color: #1f8f4e;
+    margin: 5px 0;
+}
+
+.update {
+    font-size: 13px;
+    color: #6b7a90;
+}
+
+.actions {
+    display: flex;
+    gap: 12px;
+}
+
+.button {
+    border: none;
+    padding: 10px 18px;
+    border-radius: 6px;
+    font-weight: 600;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.entrada {
+    background: #1f9d55;
+}
+
+.saida {
+    background: #e03a3a;
+}
+
+.relatorio {
+    background: #2f66d0;
+}
+
+/* CARDS */
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin-bottom: 25px;
+}
+
+.card {
+    background-color: white;
+    border: 0.1rem solid rgba(0, 0, 0, 0.12);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.cardTitle {
+    font-size: 12px;
+    font-weight: 700;
+    color: #6b7a90;
+    margin-bottom: 10px;
+}
+
+.entradaValor {
+    color: #1f9d55;
+    font-weight: bold;
+}
+
+.saidaValor {
+    color: #e03a3a;
+    font-weight: bold;
+}
+
+.previstoValor {
+    color: #2f66d0;
+    font-weight: bold;
+}
+
+/* HISTÓRICO */
+
+.historico {
+    background-color: white;
+    border: 0.1rem solid rgba(0, 0, 0, 0.12);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.historicoHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 18px;
+}
+
+.historicoHeader h3 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.historicoHeader select {
+    margin-left: 8px;
+    padding: 5px;
+}
+
+/* TABELA */
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table th {
+    text-align: left;
+    font-size: 12px;
+    color: #6b7a90;
+    padding-bottom: 10px;
+}
+
+.table td {
+    padding: 12px 0;
+    border-top: 1px solid #eee;
+    font-size: 14px;
+}
+
+.bold {
+    font-weight: 600;
+}
+
+/* TAGS */
+
+.tagEntrada {
+    background: #d4f4dd;
+    color: #1f9d55;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.tagSaida {
+    background: #f8d6d6;
+    color: #e03a3a;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+/* STATUS */
+
+.statusConfirmado {
+    background: #d4f4dd;
+    color: #1f9d55;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.statusPendente {
+    background: #f8e9b9;
+    color: #a87900;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+}
