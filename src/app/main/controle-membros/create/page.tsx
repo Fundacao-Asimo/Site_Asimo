@@ -67,39 +67,40 @@ export default function CreateMembro()
         const createUserData = {
             nome_completo: formData.get('nome_completo') as string,
             apelido: formData.get('apelido') as string,
-            email: formData.get('email') as string,
-            senha: formData.get('senha') as string,
-            confSenha: formData.get('conf-senha') as string,
-            nasc_date: formData.get('nasc_date') as string,
+            email: (formData.get('email') as string) || "",
+            senha: (formData.get('senha') as string) || "",
+            confSenha: (formData.get('conf-senha') as string) || "",
+            //nasc_date: (formData.get('nasc_date') as string) || "",
+            nasc_date: new Date().toISOString().split('T')[0] as string,
             ingresso_date: new Date().toISOString().split('T')[0] as string,
             adm: formData.get('adm') !== null,
             foto: formData.get('foto') as File | null,
-            matricula: formData.get('matricula') as string,
-            area: formData.get('area') as string,
-            curso: formData.get('curso') as string,
-            telefone: formData.get('telefone') as string,
-            endereco: formData.get('endereco') as string,
-            cpf: formData.get('cpf') as string
+            matricula: (formData.get('matricula') as string) || "",
+            area: (formData.get('area') as string) || "",
+            curso: (formData.get('curso') as string) || "",
+            telefone: (formData.get('telefone') as string) || "",
+            endereco: (formData.get('endereco') as string) || "",
+            cpf: (formData.get('cpf') as string) || ""
         }
 
         createUserData.curso = createUserData.curso.toUpperCase();
         if(!createUserData.apelido || createUserData.apelido.trim() === "")
             createUserData.apelido = createUserData.nome_completo.split(' ')[0];
 
-        const result = CreateUserSchema.safeParse(createUserData);
+        // const result = CreateUserSchema.safeParse(createUserData);
 
-        if(!result.success)
-        {
-            let errorMsg = '';
+        // if(!result.success)
+        // {
+        //     let errorMsg = '';
 
-            result.error.issues.forEach((issue) => {
-                errorMsg = errorMsg + issue.message + '. ';
-            });
+        //     result.error.issues.forEach((issue) => {
+        //         errorMsg = errorMsg + issue.message + '. ';
+        //     });
 
-            toast.error(errorMsg);
+        //     toast.error(errorMsg);
 
-            return;
-        }
+        //     return;
+        // }
         
         let url_nova_foto = null;
         if(createUserData.foto && createUserData.foto.size > 0)
@@ -181,7 +182,7 @@ export default function CreateMembro()
                             onChange={handleChangeCpf}
                             placeholder="000.000.000-00"
                             maxLength={14}
-                            required
+                            // required
                         />
                     </section>
 
@@ -196,7 +197,7 @@ export default function CreateMembro()
                             onChange={handleChangeTel}
                             placeholder="(00) 00000-0000"
                             maxLength={15}
-                            required
+                            // required
                         />
                     </section>
 
@@ -219,7 +220,7 @@ export default function CreateMembro()
                             id="matricula"
                             name="matricula"
                             placeholder="Matrícula do Membro"
-                            required
+                            // required
                         />
                     </section>
 
@@ -231,7 +232,7 @@ export default function CreateMembro()
                             id="curso"
                             name="curso"
                             placeholder="Sigla do Curso"
-                            required
+                            // required
                         />
                     </section>
 
@@ -241,7 +242,7 @@ export default function CreateMembro()
                             className={styles.select}
                             name="area"
                             id="area"
-                            required
+                            // required
                             defaultValue=""
                         >
                             <option value="" disabled>Selecione uma área</option>
@@ -261,7 +262,7 @@ export default function CreateMembro()
                             id="email"
                             name="email"
                             placeholder="Email do Membro"
-                            required
+                            // required
                         />
                     </section>
 
@@ -283,7 +284,7 @@ export default function CreateMembro()
                             id="senha"
                             name="senha"
                             placeholder="Senha do Membro"
-                            required
+                            // required
                         />
                     </section>
 
@@ -306,7 +307,7 @@ export default function CreateMembro()
                             id="conf-senha"
                             name="conf-senha"
                             placeholder="Confirme a senha"
-                            required
+                            // required
                         />
                     </section>
 

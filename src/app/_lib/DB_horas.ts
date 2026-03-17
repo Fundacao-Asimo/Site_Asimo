@@ -69,7 +69,6 @@ async function list_horas_membro(id: number, aprovado: boolean | null = null)
     const { data, error } = await query;
 
     if (error) {
-        console.error(error);
         return [];
     }
 
