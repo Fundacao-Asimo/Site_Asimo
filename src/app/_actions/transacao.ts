@@ -8,8 +8,8 @@ export async function query_trans_id(id: number) {
     return await DB_transacoes.query_trans_id(id);
 }
 
-export async function list_trans() {
-    return await DB_transacoes.list_trans();
+export async function list_trans(all: boolean, status: boolean | null = null) {
+    return await DB_transacoes.list_trans(all, status);
 }
 
 export async function insert_trans(dados: TransacaoInfo) {

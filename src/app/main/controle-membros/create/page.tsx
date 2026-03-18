@@ -85,7 +85,7 @@ export default function CreateMembro()
 
         createUserData.curso = createUserData.curso.toUpperCase();
         if(!createUserData.apelido || createUserData.apelido.trim() === "")
-            createUserData.apelido = createUserData.nome_completo.split(' ')[0];
+            createUserData.apelido = `${createUserData.nome_completo.split(' ')[0]} ${createUserData.area}`;
 
         // const result = CreateUserSchema.safeParse(createUserData);
 

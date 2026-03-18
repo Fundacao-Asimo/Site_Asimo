@@ -4,9 +4,9 @@ import { useRef, useState } from "react";
 import styles from "./modal.module.css";
 import { insert_trans, upload_anexo_trans } from "@/app/_actions/transacao";
 import toast from "react-hot-toast";
-import { TransacaoInfo } from "@/app/_lib/DB_transacoes";
+import { TransacaoInfo, TransacaoProps } from "@/app/_lib/DB_transacoes";
 
-export default function ModalCaixa({ entrada, onClose }: {entrada: boolean, onClose: () => void})
+export default function ModalCaixa({ entrada, onClose, onSuccess, addLista }: {entrada: boolean, onClose: () => void, onSuccess: (v: number) => void, addLista: (t: TransacaoProps) => void})
 {
     const [valor, setValor] = useState<string>("R$ 0,00");
     const formRef = useRef<HTMLFormElement>(null);
@@ -48,7 +48,7 @@ export default function ModalCaixa({ entrada, onClose }: {entrada: boolean, onCl
         if(newT.anexo && newT.anexo.size > 0)
         {
             const ext = newT.anexo.name.split(".").pop();
-            url_anexo = await upload_anexo_trans(newT.anexo, `${newT.categoria}_${Date.now()}.${ext}`);
+            url_anexo = await upload_anexo_trans(newT.anexo, `${newT.categoria.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/ç/g, "c").replace(/Ç/g, "C")}_${Date.now()}.${ext}`);
         }
 
         if(!url_anexo)
@@ -71,6 +71,8 @@ export default function ModalCaixa({ entrada, onClose }: {entrada: boolean, onCl
             return;
         }else{
             toast.success("Movimentação registrada com sucesso!");
+            onSuccess(entrada ? newT.valor : -newT.valor);
+            addLista(retorno);
             formRef.current?.reset();
         }
     }

@@ -1,3 +1,4 @@
+import { add_caixa } from "../_actions/caixa";
 import { supabase } from "./supabase";
 
 export interface TransacaoInfo {
@@ -37,16 +38,24 @@ async function query_trans_id(id: number)
     return data;
 }
 
-async function list_trans()
+async function list_trans(all: boolean, status: boolean | null = null)
 {
-    const { data, error } = await supabase
+    let query = supabase
         .from("transacoes")
         .select("*")
         .order("data", { ascending: false });
 
+    if (!all) {
+        query = query.eq("status", status);
+    }
+
+    const { data, error } = await query;
+
     if (error) {
+        console.error(error);
         return [];
     }
+
     return data;
 }
 
@@ -59,6 +68,12 @@ async function insert_trans(dados: TransacaoInfo)
         .single();
 
     if(error || !data) {
+        return null;
+    }
+
+    const retorno = add_caixa(dados.valor, dados.entrada);
+
+    if(!retorno) {
         return null;
     }
 
@@ -97,7 +112,7 @@ async function edit_trans(dadosAtualizados: TransacaoProps)
 
 async function upload_anexo_trans(foto: File, nome:string)
 {
-    const fileName = `${nome.replace(/\s+/g, '_')}-${Date.now()}`;
+    const fileName = `${nome.replace(/\s+/g, '_')}`;
 
     const { error: uploadError } = await supabase.storage
         .from('Anexos_Caixa')

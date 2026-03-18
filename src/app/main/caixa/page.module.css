@@ -1,5 +1,5 @@
 .container {
-    min-height: 100vh;
+    min-height: 80vh;
     margin: 10px auto;
     padding: 20px;
 }
@@ -113,6 +113,7 @@
     padding: 1.5rem;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    margin-bottom: 25px;
 }
 
 .historicoHeader {
@@ -139,11 +140,20 @@
     border-collapse: collapse;
 }
 
+.tableWrapper { 
+    max-height: 30rem; /* altura do scroll */
+    overflow-y: auto;
+}
+
 .table th {
     text-align: left;
     font-size: 12px;
     color: #6b7a90;
     padding-bottom: 10px;
+    position: sticky;
+    top: 0;
+    background: white;
+    z-index: 1;
 }
 
 .table td {
@@ -154,6 +164,77 @@
 
 .bold {
     font-weight: 600;
+}
+
+.filtroContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-top: 10px;
+    padding: 12px;
+    background: #f8fafc;
+    border-radius: 12px;
+    border: 1px solid #e5e7eb;
+}
+
+.filtroItem {
+    display: flex;
+    flex-direction: column;
+    font-size: 13px;
+    color: #6b7280;
+}
+
+.filtroItem label {
+    margin-bottom: 4px;
+    font-weight: 500;
+}
+
+.filtroItem select,
+.filtroItem input {
+    padding: 8px 10px;
+    border-radius: 8px;
+    border: 1px solid #d1d5db;
+    outline: none;
+    transition: all 0.2s ease;
+    background: white;
+}
+
+.filtroItem select:focus,
+.filtroItem input:focus {
+    border-color: #6366f1;
+    box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+}
+
+.clearButton {
+    margin-top: auto;
+    padding: 8px 14px;
+    border-radius: 8px;
+    border: 1px solid #e5e7eb;
+    background: #ffffff;
+    color: #6b7280;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.clearButton:hover {
+    background: #f3f4f6;
+    border-color: #d1d5db;
+    color: #111827;
+}
+
+.clearButton:active {
+    transform: scale(0.96);
+}
+
+.clearButton:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(107, 114, 128, 0.2);
+}
+
+.clearButton:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
 }
 
 /* TAGS */
@@ -179,8 +260,17 @@
 /* STATUS */
 
 .statusConfirmado {
-    background: #d4f4dd;
-    color: #1f9d55;
+    background: #DCFCE7;
+    color: #16A34A;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.statusRejeitado {
+    background: #FEE2E2;
+    color: #DC2626;
     padding: 4px 10px;
     border-radius: 6px;
     font-size: 12px;
@@ -188,10 +278,110 @@
 }
 
 .statusPendente {
-    background: #f8e9b9;
-    color: #a87900;
+    background: #FEF3C7;
+    color: #B45309;
     padding: 4px 10px;
     border-radius: 6px;
     font-size: 12px;
     font-weight: 600;
+}
+
+.requisicoes {
+    background-color: white;
+    border: 0.1rem solid rgba(0, 0, 0, 0.12);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+/* TABELA REQUISIÇÕES */
+
+.tableRequisicoes {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed; /* 👈 resolve o espaço */
+}
+
+.tableRequisicoes th,
+.tableRequisicoes td {
+    padding: 12px 8px;
+    font-size: 14px;
+}
+
+.tableRequisicoes td {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.tableRequisicoes th {
+    text-align: left;
+    font-size: 12px;
+    color: #6b7a90;
+    position: sticky;
+    top: 0;
+    background: white;
+    z-index: 1;
+}
+
+/* LARGURAS CONTROLADAS */
+.tableRequisicoes th:nth-child(1) { width: 90px; } /* DATA */
+.tableRequisicoes th:nth-child(2) { width: 20%; } /* DESCRIÇÃO */
+.tableRequisicoes th:nth-child(3) { width: 10%; } /* MEMBRO */
+.tableRequisicoes th:nth-child(4) { width: 15%; } /* CATEGORIA */
+.tableRequisicoes th:nth-child(5) { width: 15%; } /* VALOR */
+.tableRequisicoes th:nth-child(6) { width: 60px; }  /* ANEXO fixa */
+.tableRequisicoes th:nth-child(7) { width: 160px; } /* AÇÃO */
+
+.actionsCell {
+    display: flex;
+    gap: 8px;
+    white-space: nowrap;
+}
+
+/* BOTÃO APROVAR */
+.btnAprovar {
+    padding: 6px 12px;
+    border-radius: 8px;
+    border: 1px solid #16a34a;
+    background: #22c55e;
+    color: white;
+    font-size: 13px;
+    font-weight: 500;
+    /* width: 6rem; */
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btnAprovar:hover {
+    background: #16a34a;
+    box-shadow: 0 4px 10px rgba(34, 197, 94, 0.25);
+}
+
+.btnAprovar:active {
+    transform: scale(0.96);
+}
+
+/* BOTÃO REJEITAR */
+.btnRejeitar {
+    padding: 6px 12px;
+    border-radius: 8px;
+    border: 1px solid #dc2626;
+    background: #ef4444;
+    color: white;
+    font-size: 13px;
+    font-weight: 500;
+    /* width: 6rem; */
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btnRejeitar:hover {
+    background: #dc2626;
+    box-shadow: 0 4px 10px rgba(239, 68, 68, 0.25);
+}
+
+.btnRejeitar:active {
+    transform: scale(0.96);
 }
