@@ -255,7 +255,7 @@ export default function CaixaPage()
                                 </div>
 
                                 <div className={styles.filtroItem}>
-                                    <button className={styles.clearButton} disabled={!dataInicio && !dataFim && tipoFiltro === "todos"} onClick={() => {
+                                    <button className={styles.clearButton} disabled={!dataInicioReq && !dataFimReq} onClick={() => {
                                         setDataInicioReq("");
                                         setDataFimReq("");
                                     }}>Limpar</button>
