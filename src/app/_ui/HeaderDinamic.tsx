@@ -31,7 +31,13 @@ export default function HeaderDinamic({horas}: {horas: number})
         "/main/advertencias": "Advertências",
     };
 
-    const title = titles[pathname] || "Dashboard";
+    let title = "Dashboard";
+
+    if (pathname.startsWith("/main/controle-membros/edit")) {
+        title = "Editar Dados do Membro";
+    } else {
+        title = titles[pathname] || "Dashboard";
+    }
 
     return (
         <header className={styles.header}>

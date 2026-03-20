@@ -22,6 +22,7 @@ export default function CaixaPage()
     const [listTodasTransacoes, setlistTodasTransacoes] = useState<TransacaoProps[]>([]);
     const [listTransacoesEntrada, setlistTransacoesEntrada] = useState<TransacaoProps[]>([]);
     const [listTransacoesSaida, setlistTransacoesSaida] = useState<TransacaoProps[]>([]);
+    const [listTransacoesNPendent, setlistTransacoesNPendent] = useState<TransacaoProps[]>([]);
     const [listTransacoesPendent, setlistTransacoesPendent] = useState<TransacaoProps[]>([]);
     const [filtroTrans, setFiltroTrans] = useState<TransacaoProps[]>([]);
     const [tipoFiltro, setTipoFiltro] = useState("todos");
@@ -57,7 +58,8 @@ export default function CaixaPage()
 
         setTotalCaixa(caixa.valor);
         setlistTodasTransacoes(transacoes);
-        setFiltroTrans(transacoes);
+        setlistTransacoesNPendent(transacoes.filter(t => t.status === true));
+        setFiltroTrans(listTransacoesNPendent);
         if(transacoes.length > 0)
         {
             const hoje = new Date();
@@ -74,7 +76,7 @@ export default function CaixaPage()
     }
 
     useEffect(() => {
-        let lista = [...listTodasTransacoes];
+        let lista = [...listTransacoesNPendent];
 
         if(tipoFiltro === "entradas")
             lista = lista.filter(t => t.entrada === true);
@@ -90,7 +92,7 @@ export default function CaixaPage()
 
         setFiltroTrans(lista);
 
-    }, [listTodasTransacoes, tipoFiltro, dataInicio, dataFim]);
+    }, [listTransacoesNPendent, tipoFiltro, dataInicio, dataFim]);
 
     useEffect(() => {
         let lista = [...listTransacoesPendent];
@@ -113,6 +115,7 @@ export default function CaixaPage()
                         onSuccess={(v: number) => setTotalCaixa(prev => prev + v)} 
                         addLista={(t: TransacaoProps) => {
                             setlistTodasTransacoes(prev => [t, ...prev]);
+                            setlistTransacoesNPendent(prev => [t, ...prev]);
                         }}
                     />
             }

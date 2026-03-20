@@ -1,219 +1,371 @@
 'use client';
 
-import { redirect } from "next/navigation";
-import { useEffect, useState, useCallback } from "react";
-import toast from "react-hot-toast";
-import styles from "./page.module.css";
-import { edit_free, query_free_membro } from "@/app/_actions/free";
-import { FreeTimeProps } from "@/app/_lib/DB_free";
+import z from 'zod';
+import Link from "next/link";
+import toast from 'react-hot-toast';
+import { createUser } from '@/app/_lib/credentials';
+import { MembroInfo, MembroProps } from '@/app/_lib/DB_user';
+import { query_user_id, upload_foto } from '@/app/_actions/user';
+import { useEffect, useRef, useState } from 'react';
+import styles from "./create_page.module.css"
+import { redirect } from 'next/navigation';
 
-type DiaSemana = "seg" | "ter" | "qua" | "qui" | "sex" | "sab";
+const CreateUserSchema = z.object({
+    email: z.string().trim().email('Email com formato incorreto'),
+    senha: z.string({message: 'Insira uma senha'}).trim().min(8, {message: 'Senha precisa no mínimo 8 caracteres'}),
+    confSenha: z.string({message: 'Insira uma confirmação de senha'}).trim().min(1, {message: 'Confirmar Senha não pode ser vazia'}),
+}).refine((data) => data.senha === data.confSenha, {
+    message: "Senhas não conferem",
+    path: ["confSenha"]
+});
 
-const horarios = [
-  "07:00 - 07:55","07:55 - 08:50","08:50 - 09:45","10:10 - 11:05",
-  "11:05 - 12:00"," - ","13:30 - 14:25","14:25 - 15:20",
-  "15:45 - 16:40","16:40 - 17:35","17:35 - 18:30","-",
-  "19:00 - 19:50","19:50 - 20:40","21:00 - 21:50","21:50 - 22:40",
-  "22:40 - 23:30"
-];
-
-const dias: DiaSemana[] = ["seg", "ter", "qua", "qui", "sex", "sab"];
-
-export default function EditFreeTimePage({params}: {params: Promise<{id: string}>})
+export default function EditMembro({params}: {params: Promise<{id: string}>})
 {
-    const padrao: FreeTimeProps = {
-        id: 0,
-        membro: 0,
-        seg: "00000000000000000000000000000000",
-        ter: "00000000000000000000000000000000",
-        qua: "00000000000000000000000000000000",
-        qui: "00000000000000000000000000000000",
-        sex: "00000000000000000000000000000000",
-        sab: "00000000000000000000000000000000"
-    };
-    const [data, setData] = useState<FreeTimeProps>(padrao);
-    
-    // Estados para o controle de arrasto (Drag)
-    const [isDragging, setIsDragging] = useState(false);
-    const [dragType, setDragType] = useState<string | null>(null);
+    const [cpf, setCpf] = useState("");
+    const [tel, setTel] = useState("");
+    const [area, setArea] = useState("");
+    const [adm, setAdm] = useState(false);
+    const [membro, setMembro] = useState<MembroProps | null>(null);
+    const formRef = useRef<HTMLFormElement>(null);
 
     useEffect(() => {
         load();
     }, []);
 
-    // Listener global para parar o arrasto quando soltar o mouse
-    useEffect(() => {
-        const handleGlobalMouseUp = () => {
-            setIsDragging(false);
-            setDragType(null);
-        };
-        window.addEventListener("mouseup", handleGlobalMouseUp);
-        return () => window.removeEventListener("mouseup", handleGlobalMouseUp);
-    }, []);
+    async function load() {
+        const {id} = await params;
+        const membroTemp = await query_user_id(Number(id));
 
-    async function load()
-    {
-        try {
-            const {id} = await params;
-            const res = await query_free_membro(Number(id));
+        if(!membroTemp)
+        {
+            toast.error("Erro ao carregar dados do membro!");
+            redirect("/main");
+        }
+        else
+        {
+            setMembro(membroTemp);
+            setArea(membroTemp.area);
+            setAdm(membroTemp.adm);
+            setCpf(formatCPF(membroTemp.cpf));
+            setTel(formatTel(membroTemp.telefone));
+        }
+    }
 
-            if (!res) {
-                toast.error("Não foi possível acessar seus dados!");
-                redirect("/main");
+    function handleChangeCpf(e: React.ChangeEvent<HTMLInputElement>) {
+        const formatted = formatCPF(e.target.value);
+        setCpf(formatted);
+    }
+
+    function formatCPF(value: string) {
+        value = value.replace(/\D/g, "");
+        value = value.slice(0, 11);
+
+        value = value.replace(/(\d{3})(\d)/, "$1.$2");
+        value = value.replace(/(\d{3})(\d)/, "$1.$2");
+        value = value.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
+
+        return value;
+    }
+
+    function handleChangeTel(e: React.ChangeEvent<HTMLInputElement>) {
+        const formatted = formatTel(e.target.value);
+        setTel(formatted);
+    }
+
+    function formatTel(value: string) {
+        value = value.replace(/\D/g, "");
+        value = value.slice(0, 11);
+
+        if (value.length <= 10) {
+            // Telefone sem o 9 (fixo ou celular antigo)
+            value = value.replace(/(\d{2})(\d)/, "($1) $2");
+            value = value.replace(/(\d{4})(\d)/, "$1-$2");
+        } else {
+            // Celular com 9 dígitos
+            value = value.replace(/(\d{2})(\d)/, "($1) $2");
+            value = value.replace(/(\d{5})(\d)/, "$1-$2");
+        }
+
+        return value;
+    }
+
+    const addMembro = async (formData: FormData) => {
+
+        const createUserData = {
+            nome_completo: formData.get('nome_completo') as string,
+            apelido: formData.get('apelido') as string,
+            email: (formData.get('email') as string) || "",
+            senha: (formData.get('senha') as string) || "",
+            confSenha: (formData.get('conf-senha') as string) || "",
+            //nasc_date: (formData.get('nasc_date') as string) || "",
+            nasc_date: new Date().toISOString().split('T')[0] as string,
+            ingresso_date: new Date().toISOString().split('T')[0] as string,
+            adm: formData.get('adm') !== null,
+            foto: formData.get('foto') as File | null,
+            matricula: (formData.get('matricula') as string) || "",
+            area: (formData.get('area') as string) || "",
+            curso: (formData.get('curso') as string) || "",
+            telefone: (formData.get('telefone') as string) || "",
+            endereco: (formData.get('endereco') as string) || "",
+            cpf: (formData.get('cpf') as string) || ""
+        }
+
+        createUserData.curso = createUserData.curso.toUpperCase();
+        if(!createUserData.apelido || createUserData.apelido.trim() === "")
+            createUserData.apelido = `${createUserData.nome_completo.split(' ')[0]} ${createUserData.area}`;
+
+        // const result = CreateUserSchema.safeParse(createUserData);
+
+        // if(!result.success)
+        // {
+        //     let errorMsg = '';
+
+        //     result.error.issues.forEach((issue) => {
+        //         errorMsg = errorMsg + issue.message + '. ';
+        //     });
+
+        //     toast.error(errorMsg);
+
+        //     return;
+        // }
+        
+        let url_nova_foto = null;
+        if(createUserData.foto && createUserData.foto.size > 0)
+        {
+            url_nova_foto = await upload_foto(createUserData.foto, createUserData.nome_completo);
+
+            if(!url_nova_foto){
+                toast.error('Não foi possível fazer upload do arquivo');
+                return;
             }
-
-            setData(res);
-        } catch (err) {
-            toast.error("Erro ao carregar dados");
         }
-    }
 
-    // Função centralizada para atualizar o estado de uma célula
-    const applyToggle = useCallback(
-        (day: DiaSemana, index: number, value: string) => {
-            setData((prev) => {
-                const chars = prev[day].split("");
+        const {confSenha, foto, ...rest} = createUserData;
 
-                if (chars[index] === value) return prev;
-
-                chars[index] = value;
-
-                return { ...prev, [day]: chars.join("") };
-            });
-        },
-        []
-    );
-
-    function handleMouseDown(day: DiaSemana, index: number) {
-        setIsDragging(true);
-        const currentValue = data[day][index];
-        // Se clicar em livre (0), vira ocupado (1) e vice-versa
-        const newValue = currentValue === "1" ? "0" : "1";
-        setDragType(newValue);
-        applyToggle(day, index, newValue);
-    }
-
-    function handleMouseEnter(day: DiaSemana, index: number) {
-        if (isDragging && dragType !== null) {
-            applyToggle(day, index, dragType);
+        const newUser: MembroInfo = {
+            ...rest,
+            foto_url: url_nova_foto
         }
-    }
 
-    function tudoLivre() {
-        const updated = { ...data };
-        dias.forEach((d) => {
-            updated[d] = "0".repeat(horarios.length);
-        });
-        setData(updated);
-    }
+        const retorno = await createUser(newUser);
 
-    function tudoOcupado() {
-        const updated = { ...data };
-        dias.forEach((d) => {
-            updated[d] = "1".repeat(horarios.length);
-        });
-        setData(updated);
-    }
-
-    async function salvar() {
-        const retorno = await edit_free(data);
-        if (retorno) {
-            toast.success("Salvo com sucesso!");
+        if(retorno.error){
+            toast.error(retorno.error);
             return;
+        }else if(retorno.success){
+            toast.success(retorno.success);
+            formRef.current?.reset();
+            setCpf("");
+            setTel("");
         }
-        toast.error("Não foi possível atualizar sua free time!");
     }
 
-    //if (loading) return <main><p style={{ color: "black", fontSize: "3rem" }}>Carregando...</p></main>;
+    return(
+        <main>
+            <div className={styles.container}>
+                <h1 className={styles.title}>{membro ? membro.nome_completo : "Carregando..."}</h1>
 
-    return (
-        <main style={{ userSelect: 'none' }}> {/* Evita seleção de texto ao arrastar */}
-            
-            <div className={styles.infoBox}>
-                <div className={styles.infoIcon}>i</div>
-                <div className={styles.infoContent}>
-                    <div className={styles.infoTitle}>Como usar o Free Time</div>
-                    <div className={styles.infoText}>
-                        Clique e <strong>arraste</strong> nas células para marcar horários como <strong>ocupados</strong> ou <strong>livres</strong>.
-                    </div>
-                    <div className={styles.infoText}>
-                        Esta informação será usada pela diretoria para agendar reuniões e eventos.
-                    </div>
-                </div>
-            </div>
+                <form
+                    ref={formRef}
+                    className={styles.form}
+                    onSubmit={async (e) => {
+                        e.preventDefault();
+                        const formData = new FormData(e.currentTarget);
+                        await addMembro(formData);
+                    }}
+                    encType="multipart/form-data"
+                >
+                    <section className={styles.inputGroup}>
+                        <label className={styles.label} htmlFor="nome_completo">Nome Completo</label>
+                        <input
+                            className={styles.input}
+                            type="text"
+                            id="nome_completo"
+                            name="nome_completo"
+                            placeholder="Nome do Membro"
+                            defaultValue={membro?.nome_completo}
+                            required
+                        />
+                    </section>
 
-            <div className={styles.card}>
-                <div className={styles.tableWrapper}>
-                    <table className={styles.table}>
-                        <thead>
-                            <tr>
-                                <th>Horário</th>
-                                {dias.map(d => (
-                                    <th key={d}>{d.toUpperCase()}</th>
-                                ))}
-                            </tr>
-                        </thead>
+                    <section className={styles.inputGroup}>
+                        <label className={styles.label} htmlFor="apelido">Apelido</label>
+                        <input
+                            className={styles.input}
+                            type="text"
+                            id="apelido"
+                            name="apelido"
+                            placeholder="Apelido do Membro"
+                            defaultValue={membro?.apelido}
+                        />
+                    </section>
 
-                        <tbody>
-                            {horarios.map((hora, i) => (
-                                <tr key={hora}>
-                                    <td className={styles.hora}>{hora}</td>
-                                    {dias.map(d => {
-                                        const ocupado = data[d][i] === "1";
+                    <section className={styles.inputGroup}>
+                        <label className={styles.label} htmlFor="cpf">CPF</label>
+                        <input
+                            className={styles.input}
+                            type="text"
+                            value={cpf}
+                            id="cpf"
+                            name="cpf"
+                            onChange={handleChangeCpf}
+                            placeholder="000.000.000-00"
+                            maxLength={14}
+                            // required
+                        />
+                    </section>
 
-                                        return (
-                                            <td
-                                                key={d}
-                                                onMouseDown={() => handleMouseDown(d, i)}
-                                                onMouseEnter={() => handleMouseEnter(d, i)}
-                                                className={ocupado ? styles.ocupado : styles.livre}
-                                                style={{ cursor: "pointer" }}
-                                            />
-                                        );
-                                    })}
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </div>
+                    <section className={styles.inputGroup}>
+                        <label className={styles.label} htmlFor="telefone">Telefone</label>
+                        <input
+                            className={styles.input}
+                            type="text"
+                            value={tel}
+                            id="telefone"
+                            name="telefone"
+                            onChange={handleChangeTel}
+                            placeholder="(00) 00000-0000"
+                            maxLength={15}
+                            // required
+                        />
+                    </section>
 
-                <div className={styles.saveWrapper}>
-                    <button onClick={salvar} className={styles.saveBtn}>
-                        Salvar alterações
-                    </button>
-                </div>
-            </div>
+                    <section className={styles.inputGroup}>
+                        <label className={styles.label} htmlFor="endereco">Endereço</label>
+                        <input
+                            className={styles.input}
+                            type="text"
+                            id="endereco"
+                            name="endereco"
+                            placeholder="Endereço"
+                            defaultValue={membro?.endereco}
+                        />
+                    </section>
 
-            <div className={styles.bottomGrid}>
-                <div className={styles.infoCard}>
-                    <div className={styles.title}>Legenda</div>
-                    <div className={styles.legendItem}>
-                        <div className={`${styles.colorBox} ${styles.livreBox}`} />
-                        <div>
-                            <strong>Livre</strong>
-                            <div className={styles.subtitle}>Disponível para atividades</div>
-                        </div>
-                    </div>
-                    <div className={styles.legendItem}>
-                        <div className={`${styles.colorBox} ${styles.ocupadoBox}`} />
-                        <div>
-                            <strong>Ocupado</strong>
-                            <div className={styles.subtitle}>Não disponível</div>
-                        </div>
-                    </div>
-                </div>
+                    <section className={styles.inputGroup}>
+                        <label className={styles.label} htmlFor="matricula">Matrícula</label>
+                        <input
+                            className={styles.input}
+                            type="number"
+                            id="matricula"
+                            name="matricula"
+                            placeholder="Matrícula do Membro"
+                            defaultValue={membro?.matricula}
+                            // required
+                        />
+                    </section>
 
-                <div className={styles.infoCard}>
-                    <div className={styles.title}>Controles Rápidos</div>
-                    <div className={styles.controls}>
-                        <button className={`${styles.button} ${styles.btnLivre}`} onClick={tudoLivre}>
-                            ✔ Tudo Livre
-                        </button>
-                        <button className={`${styles.button} ${styles.btnOcupado}`} onClick={tudoOcupado}>
-                            ✖ Tudo Ocupado
-                        </button>
-                    </div>
-                </div>
+                    <section className={styles.inputGroup}>
+                        <label className={styles.label} htmlFor="curso">Sigla do Curso</label>
+                        <input
+                            className={styles.input}
+                            type="text"
+                            id="curso"
+                            name="curso"
+                            placeholder="Sigla do Curso"
+                            defaultValue={membro?.curso}
+                            // required
+                        />
+                    </section>
+
+                    <section className={styles.inputGroup}>
+                        <label className={styles.label} htmlFor="area">Área</label>
+                        <select
+                            className={styles.select}
+                            name="area"
+                            id="area"
+                            value={area}
+                            onChange={(e) => setArea(e.target.value)}
+                            // required
+                        >
+                            <option value="" disabled>Selecione uma área</option>
+                            <option value="Docência">Docência</option>
+                            <option value="Projetos">Projetos</option>
+                            <option value="Marketing">Marketing</option>
+                            <option value="Gestão">Gestão</option>
+                            <option value="AudioVisual">AudioVisual</option>
+                        </select>
+                    </section>
+
+                    <section className={styles.inputGroup}>
+                        <label className={styles.label} htmlFor="email">E-mail</label>
+                        <input
+                            className={styles.input}
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="Email do Membro"
+                            defaultValue={membro?.email}
+                            // required
+                        />
+                    </section>
+
+                    <section className={styles.inputGroup}>
+                        <label className={styles.label} htmlFor="nasc_date">Data de Nascimento</label>
+                        <input
+                            className={styles.input}
+                            type="date"
+                            id="nasc_date"
+                            name="nasc_date"
+                            defaultValue={membro?.nasc_date}
+                        />
+                    </section>
+
+                    <section className={styles.inputGroup}>
+                        <label className={styles.label} htmlFor="senha">Senha</label>
+                        <input
+                            className={styles.input}
+                            type="password"
+                            id="senha"
+                            name="senha"
+                            placeholder="Senha do Membro"
+                            defaultValue={membro?.senha}
+                            // required
+                        />
+                    </section>
+
+                    <section className={styles.inputGroup}>
+                        <label className={styles.label} htmlFor="foto">Foto</label>
+                        <input
+                            className={styles.fileInput}
+                            type="file"
+                            id="foto"
+                            name="foto"
+                            accept="image/*"
+                        />
+                    </section>
+
+                    <section className={styles.inputGroup}>
+                        <label className={styles.label} htmlFor="conf-senha">Confirme a Senha</label>
+                        <input
+                            className={styles.input}
+                            type="password"
+                            id="conf-senha"
+                            name="conf-senha"
+                            placeholder="Confirme a senha"
+                            defaultValue={membro?.senha}
+                            // required
+                        />
+                    </section>
+
+                    <section className={styles.inputGroup}>
+                        <label className={styles.label} htmlFor="adm">Diretor</label>
+                        <input
+                            className={styles.checkbox}
+                            type="checkbox"
+                            id="adm"
+                            name="adm"
+                            checked={adm}
+                            onChange={(e) => setAdm(e.target.checked)}
+                        />
+                    </section>
+
+                    <button className={styles.button}>Editar Membro</button>
+                </form>
+
+                <Link href="/main/controle-membros" className={styles.backLink}>
+                    Voltar para lista
+                </Link>
             </div>
         </main>
     );
