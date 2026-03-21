@@ -3,24 +3,15 @@
 import { redirect } from "next/navigation";
 import { MembroInfo } from "./DB_user";
 
-import bcrypt from "bcrypt";
 import { createSessionToken } from "./session";
 import { LoginCredentials } from "../login/page";
 import { insert_user, query_user_email } from "../_actions/user";
-
-const PEPPER_SENHA = process.env.PASSWORD_PEPPER!;
-const PEPPER_CPF = process.env.CPF_PEPPER!;
-const ROUNDS = Number(process.env.BCRYPT_ROUNDS);
+import { criptografar_cpf, criptografar_senha, descriptografar_senha } from "../_actions/cripto";
 
 export async function createUser(data: MembroInfo)
 {
-    const password = data.senha + PEPPER_SENHA;
-    const cpf = data.cpf + PEPPER_CPF;
-    const passwordCrypt = await bcrypt.hash(password, ROUNDS);
-    const cpfCrypt = await bcrypt.hash(cpf, ROUNDS);
-
-    data.senha = passwordCrypt;
-    data.cpf = cpfCrypt;
+    data.senha = await criptografar_senha(data.senha);
+    data.cpf = await criptografar_cpf(data.cpf);
 
     const retorno = await insert_user(data);
 
@@ -34,13 +25,13 @@ export async function createUser(data: MembroInfo)
 export async function validateCredentials(data: LoginCredentials)
 {
     const email = data.email;
-    const password = data.password + PEPPER_SENHA;
 
     const user = await query_user_email(email);
 
     if(!user)
         return {error: 'Usuário não encontrado'};
-    const isMatch = await bcrypt.compare(password, user.senha);
+
+    const isMatch = await descriptografar_senha(data.password, user.senha);
 
     if(isMatch)
     {
@@ -50,4 +41,4 @@ export async function validateCredentials(data: LoginCredentials)
     else{
         return {error: 'Usuario ou senhas incorretos'};
     }
-} 
+}

@@ -101,3 +101,37 @@
         grid-column: span 1;
     }
 }
+
+
+/* previw imagem */
+.imageWrapper {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.imageContainer {
+    position: relative;
+    width: 140px;
+    height: 140px;
+    cursor: pointer;
+    margin: 0 auto 20px auto;
+}
+
+.profileImage {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.imageOverlay {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background: #00000080;
+    color: white;
+    border-radius: 50%;
+    padding: 6px;
+    font-size: 14px;
+}

@@ -1,3 +1,4 @@
+import { criptografar_cpf, criptografar_senha, descriptografar_cpf } from "../_actions/cripto";
 import DB_free from "./DB_free";
 import { supabase } from "./supabase";
 
@@ -47,6 +48,9 @@ async function query_user_id(id: number)
     if (error) {
         return null;
     }
+
+    usuario.cpf = await descriptografar_cpf(usuario.cpf);
+
     return usuario;
 }
 
@@ -61,6 +65,9 @@ async function query_user_name(nome: string)
     if (error) {
         return null;
     }
+
+    usuario.cpf = await descriptografar_cpf(usuario.cpf);
+
     return usuario;
 }
 
@@ -75,6 +82,9 @@ async function query_user_email(email: string)
     if (error) {
         return null;
     }
+
+    usuario.cpf = await descriptografar_cpf(usuario.cpf);
+
     return usuario;
 }
 
@@ -134,10 +144,17 @@ async function delete_user(id: number)
     }
 }
 
-async function edit_user(dadosAtualizados: MembroProps)
+async function edit_user(dadosAtualizados: any)
 {
+    if (dadosAtualizados.senha && dadosAtualizados.senha.trim() !== "") {
+    dadosAtualizados.senha = await criptografar_senha(dadosAtualizados.senha);
+    } else {
+        delete dadosAtualizados.senha; // mantém a antiga no banco
+    }
+    dadosAtualizados.cpf = await criptografar_cpf(dadosAtualizados.cpf);
+
     const {id, ...rest} = dadosAtualizados
-    const dadosNovos: MembroInfo = {...rest}
+    const dadosNovos = {...rest}
     const { data, error } = await supabase
         .from("usuarios")
         .update(dadosNovos)
