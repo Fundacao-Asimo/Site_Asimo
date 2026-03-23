@@ -8,7 +8,7 @@ export default async function MinhaEscola()
     const userId = isLogged as { userId: number };
     const data = await list_escolas_membro(userId.userId);
 
-    if(data.length === 0) return(<main><p>Não tem escola</p></main>);
+    if(data.length === 0) return(<main><h1 style={{margin: "2rem"}}>Você ainda não está vinculado a nenhuma escola!</h1></main>);
 
     const listComponents = data.map((e) => {
         return <EscolaMembro key={e.id} dados={e}/>

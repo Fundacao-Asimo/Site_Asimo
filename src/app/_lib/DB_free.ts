@@ -44,9 +44,20 @@ async function query_free_membro(id: number)
         .single();
 
     if (error) {
-        return null;
+        const padrao: FreeTimeProps = {
+            id: 0,
+            membro: 0,
+            seg: "00000000000000000000000000000000",
+            ter: "00000000000000000000000000000000",
+            qua: "00000000000000000000000000000000",
+            qui: "00000000000000000000000000000000",
+            sex: "00000000000000000000000000000000",
+            sab: "00000000000000000000000000000000"
+        };
+        return padrao;
     }
-    return free_time;
+    const free: FreeTimeProps = free_time;
+    return free;
 }
 
 async function list_free()

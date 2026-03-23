@@ -169,9 +169,18 @@ async function edit_user(dadosAtualizados: any)
     return data;
 }
 
+function normalizeFileName(nome: string) {
+    return nome
+        .normalize("NFD") // separa acento da letra
+        .replace(/[\u0300-\u036f]/g, "") // remove acentos
+        .replace(/\s+/g, "_") // espaços → _
+        .replace(/[^\w\-]/g, ""); // remove caracteres especiais
+}
+
 async function upload_foto(foto: File, nome:string)
 {
-    const fileName = `${nome.replace(/\s+/g, '_')}-${Date.now()}`;
+    const ext = foto.name.split('.').pop();
+    const fileName = `${normalizeFileName(nome)}-${Date.now()}.${ext}`;
 
     const { error: uploadError } = await supabase.storage
         .from('Fotos_Membros')
