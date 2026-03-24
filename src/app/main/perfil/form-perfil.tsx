@@ -4,7 +4,7 @@ import z from 'zod';
 import { MembroProps } from "@/app/_lib/DB_user";
 import toast from 'react-hot-toast';
 import Link from "next/link";
-import styles from "./edit_page.module.css"
+import styles from "./perfil_page.module.css"
 import { edit_user, upload_foto } from '@/app/_actions/user';
 import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
@@ -19,7 +19,7 @@ const CreateUserSchema = z.object({
     path: ["confSenha"]
 });
 
-export default function FormEditMembro({membro}: {membro: MembroProps | null})
+export default function FormPerfil({membro}: {membro: MembroProps | null})
 {
     const router = useRouter();
     useEffect(() => {
@@ -30,10 +30,8 @@ export default function FormEditMembro({membro}: {membro: MembroProps | null})
         }
     }, [membro, router]);
 
-    const [cpf, setCpf] = useState(formatCPF(membro?.cpf ? membro.cpf : ""));
+    const [isEditing, setIsEditing] = useState(false);
     const [tel, setTel] = useState(formatTel(membro?.telefone ? membro.telefone : ""));
-    const [area, setArea] = useState(membro?.area ? membro.area : "");
-    const [adm, setAdm] = useState(membro?.adm ? membro.adm : false);
 
     // 🆕 preview da imagem
     const [preview, setPreview] = useState<string | null>(null);
@@ -55,18 +53,6 @@ export default function FormEditMembro({membro}: {membro: MembroProps | null})
 
         const url = URL.createObjectURL(file);
         setPreview(url);
-    }
-
-    function handleChangeCpf(e: React.ChangeEvent<HTMLInputElement>) {
-        setCpf(formatCPF(e.target.value));
-    }
-
-    function formatCPF(value: string) {
-        value = value.replace(/\D/g, "").slice(0, 11);
-        value = value.replace(/(\d{3})(\d)/, "$1.$2");
-        value = value.replace(/(\d{3})(\d)/, "$1.$2");
-        value = value.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
-        return value;
     }
 
     function handleChangeTel(e: React.ChangeEvent<HTMLInputElement>) {
@@ -98,14 +84,14 @@ export default function FormEditMembro({membro}: {membro: MembroProps | null})
             confSenha: formData.get('conf-senha') as string,
             nasc_date: formData.get('nasc_date') as string,
             ingresso_date: new Date().toISOString().split('T')[0],
-            adm: formData.get('adm') !== null,
+            adm: membro?.adm ? membro.adm : false,
             foto: fileInputRef.current?.files?.[0] || null,
             matricula: formData.get('matricula') as string,
-            area: formData.get('area') as string,
+            area: membro?.area ? membro.area : "",
             curso: formData.get('curso') as string,
             telefone: formData.get('telefone') as string,
             endereco: formData.get('endereco') as string,
-            cpf: formData.get('cpf') as string
+            cpf: membro?.cpf ? membro.cpf : ""
         }
 
         editUserData.curso = editUserData.curso.toUpperCase();
@@ -143,6 +129,7 @@ export default function FormEditMembro({membro}: {membro: MembroProps | null})
             toast.error("Erro ao editar");
         } else {
             toast.success("Editado com sucesso!");
+            setIsEditing(false);
         }
     }
 
@@ -155,11 +142,11 @@ export default function FormEditMembro({membro}: {membro: MembroProps | null})
                 <div className={styles.imageContainer}>
                     <img
                         src={preview || membro?.foto_url || "/docencia.png"}
-                        onClick={() => fileInputRef.current?.click()}
+                        onClick={() => isEditing && fileInputRef.current?.click()}
                         className={styles.profileImage}
                     />
 
-                    <div className={styles.imageOverlay} onClick={() => fileInputRef.current?.click()}>
+                    <div className={styles.imageOverlay} onClick={() => isEditing && fileInputRef.current?.click()}>
                         ✏️
                     </div>
                 </div>
@@ -172,6 +159,7 @@ export default function FormEditMembro({membro}: {membro: MembroProps | null})
                     ref={fileInputRef}
                     style={{ display: "none" }}
                     onChange={handleImageChange}
+                    disabled={!isEditing}
                 />
             </div>
 
@@ -179,6 +167,11 @@ export default function FormEditMembro({membro}: {membro: MembroProps | null})
                 ref={formRef}
                 className={styles.form}
                 onSubmit={async (e) => {
+                    if (!isEditing) {
+                        e.preventDefault();
+                        setIsEditing(true); // 👈 BLOQUEIA submit
+                        return;
+                    }
                     e.preventDefault();
                     const formData = new FormData(e.currentTarget);
                     await editMembro(formData);
@@ -194,6 +187,7 @@ export default function FormEditMembro({membro}: {membro: MembroProps | null})
                         placeholder="Nome do Membro"
                         defaultValue={membro?.nome_completo}
                         required
+                        disabled={!isEditing}
                     />
                 </section>
 
@@ -206,21 +200,7 @@ export default function FormEditMembro({membro}: {membro: MembroProps | null})
                         name="apelido"
                         placeholder="Apelido do Membro"
                         defaultValue={membro?.apelido}
-                    />
-                </section>
-
-                <section className={styles.inputGroup}>
-                    <label className={styles.label} htmlFor="cpf">CPF</label>
-                    <input
-                        className={styles.input}
-                        type="text"
-                        value={cpf}
-                        id="cpf"
-                        name="cpf"
-                        onChange={handleChangeCpf}
-                        placeholder="000.000.000-00"
-                        maxLength={14}
-                        // required
+                        disabled={!isEditing}
                     />
                 </section>
 
@@ -236,6 +216,7 @@ export default function FormEditMembro({membro}: {membro: MembroProps | null})
                         placeholder="(00) 00000-0000"
                         maxLength={15}
                         // required
+                        disabled={!isEditing}
                     />
                 </section>
 
@@ -248,6 +229,7 @@ export default function FormEditMembro({membro}: {membro: MembroProps | null})
                         name="endereco"
                         placeholder="Endereço"
                         defaultValue={membro?.endereco}
+                        disabled={!isEditing}
                     />
                 </section>
 
@@ -261,6 +243,7 @@ export default function FormEditMembro({membro}: {membro: MembroProps | null})
                         placeholder="Matrícula do Membro"
                         defaultValue={membro?.matricula}
                         // required
+                        disabled={!isEditing}
                     />
                 </section>
 
@@ -274,26 +257,8 @@ export default function FormEditMembro({membro}: {membro: MembroProps | null})
                         placeholder="Sigla do Curso"
                         defaultValue={membro?.curso}
                         // required
+                        disabled={!isEditing}
                     />
-                </section>
-
-                <section className={styles.inputGroup}>
-                    <label className={styles.label} htmlFor="area">Área</label>
-                    <select
-                        className={styles.select}
-                        name="area"
-                        id="area"
-                        value={area}
-                        onChange={(e) => setArea(e.target.value)}
-                        // required
-                    >
-                        <option value="" disabled>Selecione uma área</option>
-                        <option value="Docência">Docência</option>
-                        <option value="Projetos">Projetos</option>
-                        <option value="Marketing">Marketing</option>
-                        <option value="Gestão">Gestão</option>
-                        <option value="AudioVisual">AudioVisual</option>
-                    </select>
                 </section>
 
                 <section className={styles.inputGroup}>
@@ -306,6 +271,7 @@ export default function FormEditMembro({membro}: {membro: MembroProps | null})
                         placeholder="Email do Membro"
                         defaultValue={membro?.email}
                         // required
+                        disabled={!isEditing}
                     />
                 </section>
 
@@ -317,6 +283,7 @@ export default function FormEditMembro({membro}: {membro: MembroProps | null})
                         id="nasc_date"
                         name="nasc_date"
                         defaultValue={membro?.nasc_date}
+                        disabled={!isEditing}
                     />
                 </section>
 
@@ -329,6 +296,7 @@ export default function FormEditMembro({membro}: {membro: MembroProps | null})
                         name="senha"
                         placeholder="Senha do Membro"
                         // required
+                        disabled={!isEditing}
                     />
                 </section>
 
@@ -341,27 +309,14 @@ export default function FormEditMembro({membro}: {membro: MembroProps | null})
                         name="conf-senha"
                         placeholder="Confirme a senha"
                         // required
+                        disabled={!isEditing}
                     />
                 </section>
 
-                <section className={styles.inputGroup}>
-                    <label className={styles.label} htmlFor="adm">Diretor</label>
-                    <input
-                        className={styles.checkbox}
-                        type="checkbox"
-                        id="adm"
-                        name="adm"
-                        checked={adm}
-                        onChange={(e) => setAdm(e.target.checked)}
-                    />
-                </section>
-
-                <button className={styles.button}>Salvar Alterações</button>
+                <button className={`${styles.button} ${isEditing ? styles.verde : styles.azu}`}>
+                    {isEditing ? "Salvar Alterações" : "Editar Perfil"}
+                </button>
             </form>
-
-            <Link href="/main/controle-membros" className={styles.backLink}>
-                Voltar para lista
-            </Link>
         </div>
     );
 }
