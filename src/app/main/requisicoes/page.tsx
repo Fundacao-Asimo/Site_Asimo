@@ -12,7 +12,7 @@ export default async function RequisicoesPage()
 
     return(
         <main>
-            <ConteudoRequisicoes listReq={listRequisicoes}/>
+            <ConteudoRequisicoes idMembro={userId} listReq={listRequisicoes}/>
         </main>
     );
 }

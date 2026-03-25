@@ -5,7 +5,7 @@ export interface RequiInfo {
     data: string,
     descricao: string,
     area: string,
-    anexo_url: string,
+    anexo_url: string | null,
     status: boolean | null
 }
 
@@ -15,7 +15,7 @@ export interface RequiProps {
     data: string,
     descricao: string,
     area: string,
-    anexo_url: string,
+    anexo_url: string | null,
     status: boolean | null
 }
 
@@ -39,7 +39,7 @@ async function list_req(idMembro: number = 0)
     let query = supabase
         .from("requisicoes")
         .select("*")
-        .order("id", { ascending: false });
+        .order("data", { ascending: false });
 
     if (idMembro !== 0) {
         query = query.eq("membro", idMembro);
@@ -99,9 +99,17 @@ async function edit_req(dadosAtualizados: RequiProps)
     return data;
 }
 
+function normalizeFileName(nome: string) {
+    return nome
+        .normalize("NFD") // separa acento da letra
+        .replace(/[\u0300-\u036f]/g, "") // remove acentos
+        .replace(/\s+/g, "_") // espaços → _
+        .replace(/[^\w\-]/g, ""); // remove caracteres especiais
+}
+
 async function upload_anexo_req(foto: File, nome: string)
 {
-    const fileName = `${nome.replace(/\s+/g, '_')}`;
+    const fileName = normalizeFileName(nome);
 
     const { error: uploadError } = await supabase.storage
         .from('Anexos_Requisicoes')

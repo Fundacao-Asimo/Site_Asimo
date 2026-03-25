@@ -110,6 +110,14 @@ async function edit_trans(dadosAtualizados: TransacaoProps)
     return data;
 }
 
+function normalizeFileName(nome: string) {
+    return nome
+        .normalize("NFD") // separa acento da letra
+        .replace(/[\u0300-\u036f]/g, "") // remove acentos
+        .replace(/\s+/g, "_") // espaços → _
+        .replace(/[^\w\-]/g, ""); // remove caracteres especiais
+}
+
 async function upload_anexo_trans(foto: File, nome: string)
 {
     const fileName = `${nome.replace(/\s+/g, '_')}`;
