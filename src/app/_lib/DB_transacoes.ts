@@ -110,7 +110,7 @@ async function edit_trans(dadosAtualizados: TransacaoProps)
     return data;
 }
 
-async function upload_anexo_trans(foto: File, nome:string)
+async function upload_anexo_trans(foto: File, nome: string)
 {
     const fileName = `${nome.replace(/\s+/g, '_')}`;
 
