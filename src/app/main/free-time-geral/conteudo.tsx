@@ -35,6 +35,7 @@ const padrao: FreeGrid = {
 };
 
 const dias: (keyof FreeGrid)[] = ["seg", "ter", "qua", "qui", "sex", "sab"];
+const areas = ["Docência", "Projetos", "Marketing", "Gestão", "AudioVisual"];
 
 export default function ConteudoFreeTimeGeral({listFree, listMembros}: {listFree: FreeTimeProps[], listMembros: MembroProps[]})
 {
@@ -157,6 +158,11 @@ export default function ConteudoFreeTimeGeral({listFree, listMembros}: {listFree
         preencherData(listFree, membrosSelecionados);
     }
 
+    const membrosPorArea = areas.reduce((acc, area) => {
+        acc[area] = listMembros.filter((m) => m.area === area);
+        return acc;
+    }, {} as Record<string, MembroProps[]>);
+
     return(
         <>
             {open && <ModalMembros titulo={tituloModel} membros={membrosModel} onClose={() => setOpenModel(false)}/>}
@@ -237,18 +243,26 @@ export default function ConteudoFreeTimeGeral({listFree, listMembros}: {listFree
 
             <div className={styles.bottomGrid}>
                 <div className={styles.infoCard}>
-                    <div style={{width: "100%"}}>
+                    <div style={{width: "100%", flexWrap: "wrap"}}>
                         <div className={styles.title}>Seleção de Membros</div>
                         <div className={styles.controls}>
-                            {listMembros?.map((m: MembroProps) => (
-                                <label key={m.id} className={styles.memberItem}>
-                                    <input
-                                        type="checkbox"
-                                        checked={selectedMembers.includes(m.id)}
-                                        onChange={() => toggleMember(m.id)}
-                                    />
-                                    <span>{m.nome_completo}</span>
-                                </label>
+                            {areas.map((area) => (
+                                <div className={styles.area} key={area}>
+                                    <div className={styles.title} style={{ fontSize: "14px", marginBottom: "0.5rem" }}>
+                                        {area}
+                                    </div>
+
+                                    {membrosPorArea[area].map((m: MembroProps) => (
+                                        <label key={m.id} className={styles.memberItem}>
+                                            <input
+                                                type="checkbox"
+                                                checked={selectedMembers.includes(m.id)}
+                                                onChange={() => toggleMember(m.id)}
+                                            />
+                                            <span>{m.apelido}</span>
+                                        </label>
+                                    ))}
+                                </div>
                             ))}
                         </div>
                         <div style={{width: "100%", gap: "1rem", display: "flex", justifyContent: "flex-end", marginTop: "1.5rem"}}>

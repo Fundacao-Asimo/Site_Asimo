@@ -17,7 +17,7 @@ const admRoutes = [
     "/main/free-time-geral",
     "/main/escolas-parceiras",
     "/main/agenda-reunioes",
-    "/main/controle-frequência",
+    "/main/controle-frequencia",
     "/main/eventos",
     "/main/relatorios-horas",
     "/main/controle-membros",

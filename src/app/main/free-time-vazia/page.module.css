@@ -41,21 +41,6 @@
     color: #1e3a8a;
 }
 
-.spinner {
-  width: 40px;
-  height: 40px;
-  border: 4px solid #e5e7eb;
-  border-top: 4px solid #2563eb;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
 /* ===== CARD PRINCIPAL ===== */
 
 .card {
@@ -127,29 +112,17 @@
 .bottomGrid {
     margin: 2rem;
     display: grid;
+    grid-template-columns: 1fr 1fr;
     gap: 20px;
 }
 
 /* ===== CARDS INFERIORES ===== */
 
 .infoCard {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
     background: white;
     border-radius: 12px;
     padding: 1.2rem;
     box-shadow: 0 4px 14px rgba(0,0,0,0.08);
-}
-
-.input {
-    padding: 12px 14px;
-    border-radius: 10px;
-    border: 1px solid #dcdcdc;
-    font-size: 14px;
-    transition: 0.3s ease;
-    outline: none;
-    background-color: #f9fafb;
 }
 
 .title {
@@ -190,31 +163,7 @@
 
 .controls {
     display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    width: 100%;
-    flex-wrap: wrap;
-}
-
-.area {
-    min-width: 8rem;
-}
-
-.memberItem {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    cursor: pointer;
-    font-size: 14px;
-}
-
-.memberItem:hover {
-    background: rgba(0,0,0,0.04);
-    border-radius: 6px;
-}
-
-.memberItem input {
-    cursor: pointer;
+    gap: 12px;
 }
 
 .button {
