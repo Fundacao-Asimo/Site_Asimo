@@ -6,7 +6,7 @@ export interface EscolaInfo {
     endereco: string,
     endereco_url: string,
     horario: string,
-    membros: Array<number>,
+    membros: number[],
     nome_responsavel: string,
     telefone_responsavel: string
 }

@@ -320,19 +320,16 @@
     font-size: 12px;
     text-align: center;
     white-space: nowrap;
+    cursor: pointer;
+    border: transparent;
 }
 
-.aprovado {
+.lancar {
     background: #DCFCE7;
     color: #16A34A;
 }
 
-.pendente {
-    background: #FEF3C7;
-    color: #B45309;
-}
-
-.rejeitado {
+.cancelar {
     background: #FEE2E2;
     color: #DC2626;
 }
