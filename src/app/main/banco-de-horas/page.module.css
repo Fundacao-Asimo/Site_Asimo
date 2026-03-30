@@ -1,0 +1,260 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    gap: 2rem;
+}
+
+/* FORM */
+.form {
+    background: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    margin-bottom: 30px;
+    flex: 1;
+}
+
+.titulo {
+    margin-bottom: 15px;
+    font-size: 1.4rem;
+}
+
+/* ROW */
+.row {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+/* FIELD */
+.field {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    margin-bottom: 15px;
+}
+
+.field label {
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+    color: #555;
+}
+
+.field input,
+.field select {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 0.95rem;
+    transition: 0.2s;
+}
+
+.field input:focus,
+.field select:focus {
+    border-color: #0070f3;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0,112,243,0.15);
+}
+
+/* BUTTON */
+.button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    background: #0070f3;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.button:hover {
+    background: #0059c1;
+}
+
+.historico {
+    background-color: white;
+    border: 0.1rem solid rgba(0, 0, 0, 0.12);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    margin-bottom: 25px;
+    flex: 2;
+}
+
+.historicoHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 18px;
+}
+
+.historicoHeader h3 {
+    margin: 0;
+    font-size: 1.4rem;
+}
+
+.historicoHeader select {
+    margin-left: 8px;
+    padding: 5px;
+}
+
+/* TABELA */
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tableWrapper { 
+    max-height: 30rem; /* altura do scroll */
+    overflow-y: auto;
+}
+
+.table th {
+    text-align: left;
+    font-size: 12px;
+    color: #6b7a90;
+    padding-bottom: 10px;
+    position: sticky;
+    top: 0;
+    background: white;
+    z-index: 1;
+}
+
+.table td {
+    padding: 12px 0;
+    border-top: 1px solid #eee;
+    font-size: 14px;
+}
+
+.bold {
+    font-weight: 600;
+}
+
+.filtroContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-top: 10px;
+    padding: 12px;
+    background: #f8fafc;
+    border-radius: 12px;
+    border: 1px solid #e5e7eb;
+}
+
+.filtroItem {
+    display: flex;
+    flex-direction: column;
+    font-size: 13px;
+    color: #6b7280;
+}
+
+.filtroItem label {
+    margin-bottom: 4px;
+    font-weight: 500;
+}
+
+.filtroItem select,
+.filtroItem input {
+    padding: 8px 10px;
+    border-radius: 8px;
+    border: 1px solid #d1d5db;
+    outline: none;
+    transition: all 0.2s ease;
+    background: white;
+}
+
+.filtroItem select:focus,
+.filtroItem input:focus {
+    border-color: #6366f1;
+    box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+}
+
+.clearButton {
+    margin-top: auto;
+    padding: 8px 14px;
+    border-radius: 8px;
+    border: 1px solid #e5e7eb;
+    background: #ffffff;
+    color: #6b7280;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.clearButton:hover {
+    background: #f3f4f6;
+    border-color: #d1d5db;
+    color: #111827;
+}
+
+.clearButton:active {
+    transform: scale(0.96);
+}
+
+.clearButton:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(107, 114, 128, 0.2);
+}
+
+.clearButton:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.listaHoras {
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+/* 🔥 RESPONSIVIDADE */
+@media (max-width: 900px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .form,
+    .historico {
+        flex: none;
+        width: 100%;
+    }
+}
+
+/* MOBILE */
+@media (max-width: 700px) {
+    .row {
+        flex-direction: column;
+    }
+
+    .historicoHeader {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .filtroContainer {
+        width: 100%;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .filtroItem {
+        width: 100%;
+    }
+
+    .filtroItem input,
+    .filtroItem select {
+        width: 100%;
+    }
+
+    .button {
+        padding: 14px;
+        font-size: 1rem;
+    }
+}

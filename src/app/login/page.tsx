@@ -1,10 +1,11 @@
 'use client'
 
-import styles from '@/app/styles/login.module.css';
+import styles from './login.module.css';
 import z from 'zod';
 import toast from 'react-hot-toast';
-import { validateCredentials } from '@/app/lib/credentials';
-import HeaderLogin from '../ui/Header-login';
+import { validateCredentials } from '@/app/_lib/credentials';
+import Image from 'next/image';
+import Link from 'next/link';
 
 const LoginSchema = z.object({
     email: z.string().trim().email('Email com formato incorreto'),
@@ -50,35 +51,55 @@ export default function LoginPage(){
     }
 
     return (
-        <>
-            <HeaderLogin />
-            <main className={styles['login-container']}>
-                <form className={styles['login-form']} action={loginAction}>
-                    <div className={styles['logo-container']}>
-                        <h1 className={styles['login-title']}>Fundação Asimo</h1>
+        <div className={styles.container}>
+
+            {/* LADO ESQUERDO */}
+            <div className={styles.leftSide}>
+                <div className={styles.brandBox}>
+                    <Image src={"/Robo.png"} alt="Robo da Fundação Asimo" width={200} height={200} className={styles.logo}/>
+
+                    <h1 className={styles.title}>
+                        FUNDAÇÃO ASIMO
+                    </h1>
+
+                    <p className={styles.subtitle}>
+                        Portal do Membro
+                    </p>
+
+                    <div className={styles.features}>
+                        <p>✔ Banco de Horas</p>
+                        <p>✔ Free Time</p>
+                        <p>✔ Presenças</p>
+                        <p>✔ Gestão Integrada</p>
                     </div>
-                    
-                    <div className={styles['inputs-container']}>
-                        <section className={styles['user-input']}>
-                            <div className={styles['input-icon']}>
-                                <span className={styles.icon}>👤</span>
-                            </div>
-                            <input type="email" name="email" id="email" placeholder="Email" className={styles['form-input']}/>
-                        </section>
-                        
-                        <section className={styles['user-input']}>
-                            <div className={styles['input-icon']}>
-                                <span className={styles.icon}>🔒</span>
-                            </div>
-                            <input type="password" name="password" id="password" placeholder="Senha" className={styles['form-input']}/>
-                        </section>
-                    </div>
-                    
-                    <button className={styles['login-button']} type="submit">
-                        <span className={styles['button-text']}>Entrar</span>
-                    </button>
-                </form>
-            </main>
-        </>
+
+                    <Link className={styles.voltar} href={"/"}>← Voltar para página principal</Link>
+                </div>
+            </div>
+
+            {/* LOGIN */}
+            <div className={styles.rightSide}>
+                <div className={styles.card}>
+
+                <h2 className={styles.loginTitle}>Entrar</h2>
+                <p className={styles.loginSubtitle}>
+                    Acesse sua conta
+                </p>
+
+                    <form className={styles.form} action={loginAction}>
+                        <div className={styles.inputGroup}>
+                            <label>Email</label>
+                            <input type="email" name="email" id="email" placeholder="seu@email.com" />
+                        </div>
+                        <div className={styles.inputGroup}>
+                            <label>Senha</label>
+                            <input type="password" name="password" id="password" placeholder="••••••••" />
+                        </div>
+                        <button className={styles.loginButton}>Entrar</button>
+                        <Link className={styles.voltar2} href={"/"}>← Voltar para página principal</Link>
+                    </form>
+                </div>
+            </div>
+        </div>
     );
 }

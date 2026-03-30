@@ -1,0 +1,188 @@
+.h1 {
+    text-align: left;
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin: 2rem;
+    color: black;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 30px;
+    margin: 2rem;
+}
+
+/* CARD PRINCIPAL */
+
+.mainCard {
+    background: white;
+    border-radius: 14px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+}
+
+.banner {
+    background: radial-gradient(circle at 70% 50%, #1a50f1 0%, #2b4fc7 60%, #1e3fa8 100%);
+    padding: 30px;
+    color: white;
+}
+
+.banner h2 {
+    font-size: 22px;
+    margin-bottom: 6px;
+}
+
+.location {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    opacity: 0.9;
+    font-size: 14px;
+}
+
+.content {
+    padding: 30px;
+}
+
+.infoRow {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 25px;
+}
+
+.label {
+    font-size: 12px;
+    color: #94a3b8;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.actions {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.primaryBtn {
+  background: #2f5bd3;
+  color: white;
+  border: none;
+  padding: 12px 18px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.secondaryBtn {
+  background: #eef1f8;
+  border: none;
+  padding: 12px 18px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.primaryBtn:hover,
+.secondaryBtn:hover,
+.whatsappBtn:hover {
+  transform: translateY(-2px);
+}
+
+.divider {
+  height: 1px;
+  background: #e2e8f0;
+  margin: 25px 0;
+}
+
+/* EQUIPE */
+
+.sectionTitle {
+  font-size: 13px;
+  text-transform: uppercase;
+  color: #64748b;
+  margin-bottom: 8px;
+}
+
+.sectionSubtitle {
+  color: #64748b;
+  margin-bottom: 15px;
+  font-size: 14px;
+}
+
+.teamGrid {
+  display: grid;
+  align-items: stretch;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+/* CARD LATERAL */
+
+.sideCard {
+  background: white;
+  border-radius: 14px;
+  padding: 25px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+  height: fit-content;
+}
+
+.sideTitle {
+  font-size: 13px;
+  text-transform: uppercase;
+  color: #94a3b8;
+  margin-bottom: 20px;
+}
+
+.director {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.director span {
+  display: block;
+  font-size: 13px;
+  color: #64748b;
+}
+
+.whatsappBtn {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 8px;
+  background: #e7f9f0;
+  border: 1px solid #b6f0d2;
+  color: #0f9d58;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.routeBtn {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  background: #eef2ff;
+  border: 1px solid #c7d2fe;
+  color: #4338ca;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+}

@@ -1,24 +1,13 @@
-import ConexaoBD from "@/app/lib/ConexaoBD";
-import MembroCard, { MembroProps } from "@/app/ui/membro-card";
-import Link from "next/link";
+import { list_user } from "@/app/_actions/user";
+import ListaMambros from "./lista-mambros";
 
-const arquivo = 'usuarios-db.json';
-
-export default async function ListMembrosPage() {
-
-    const membros = await ConexaoBD.retornaBD(arquivo);
-
-    const membrosMap = membros.filter(membro => membro.id !== 0)
-        .map((membro: MembroProps) => {
-        return <MembroCard key={membro.id} {...membro}/>
-    });
+export default async function DiretorioMembrosPage()
+{
+    const list = await list_user();
 
     return(
-        <main className="list-container">
-            <Link href={'/main/membros/create'} className="link-add-membro">Adicionar</Link>
-            <div className="list-membros-container">
-                {membrosMap}
-            </div>
+        <main>
+            <ListaMambros list={list}/>
         </main>
     );
 }

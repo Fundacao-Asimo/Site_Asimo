@@ -1,0 +1,208 @@
+.container {
+    display: flex;
+    min-height: 100vh;
+    background: #f8fafc;
+}
+
+/* ======================
+   LADO ESQUERDO
+====================== */
+
+.leftSide {
+    flex: 1;
+    background: #00294c; /* asimo */
+    color: #cbd5f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 3rem;
+}
+
+@media (max-width: 700px) {
+    .leftSide {
+        display: none;
+    }
+}
+
+.brandBox {
+    text-align: center;
+    max-width: 400px;
+}
+
+.logo {
+    width: 80px;
+    height: 80px;
+    font-size: 2rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem auto;
+    object-fit: contain;
+}
+
+.title {
+    color: white;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.subtitle {
+    margin-top: .5rem;
+    font-size: .9rem;
+    text-transform: uppercase;
+    color: #94a3b8;
+}
+
+.features {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    font-size: .9rem;
+}
+
+.voltar {
+    margin-top: 2rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 10px 16px;
+
+    border-radius: 8px;
+    border: 1px solid #334155;
+
+    color: #cbd5f5;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+
+    transition: all 0.2s ease;
+}
+
+.voltar2 {
+    margin-top: 0rem;
+    display: none;
+    align-items: center;
+    justify-content: center;
+
+    padding: 10px 16px;
+
+    border-radius: 8px;
+    border: 1px solid #2563eb;
+
+    background: #FFFFFF;
+    color: #2563eb;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+
+    transition: all 0.2s ease;
+}
+
+.voltar2:hover {
+    background: #2563eb;
+    color: #FFFFFF;
+}
+
+@media (max-width: 700px) {
+    .voltar2 {
+        display: inline-flex;
+    }
+}
+
+/* hover elegante */
+.voltar:hover {
+    background-color: #1e293b;
+    color: white;
+    transform: translateY(-1px);
+}
+
+/* ======================
+   LADO DIREITO
+====================== */
+
+.rightSide {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    background: whitesmoke;
+}
+
+.card {
+    width: 100%;
+    max-width: 420px;
+    background: white;
+    padding: 3rem;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.loginTitle {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #00294c;
+}
+
+.loginSubtitle {
+    color: #64748b;
+    margin-bottom: 2rem;
+}
+
+/* ======================
+   FORM
+====================== */
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.inputGroup {
+    display: flex;
+    flex-direction: column;
+    gap: .4rem;
+}
+
+.inputGroup label {
+    font-size: .85rem;
+    font-weight: 600;
+    color: #475569;
+}
+
+.inputGroup input {
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #cbd5e1;
+    font-size: .9rem;
+}
+
+.inputGroup input:focus {
+    outline: none;
+    border-color: #2563eb;
+}
+
+/* ======================
+   BOTÃO
+====================== */
+
+.loginButton {
+    margin-top: 1rem;
+    background: #2563eb;
+    color: white;
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.loginButton:hover {
+    background: #1d4ed8;
+}

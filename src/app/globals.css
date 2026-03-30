@@ -2,26 +2,28 @@ html {
   scroll-behavior: smooth;
   overflow-y: auto;
   scrollbar-gutter: stable;
+  background-color: whitesmoke;
 }
 
 /* Chrome, Safari, Edge */
-::-webkit-scrollbar {
+/* ::-webkit-scrollbar {
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: black;
+  background: whitesmoke;
+  border-radius: 1rem;
 }
 ::-webkit-scrollbar-thumb {
-  background: #FF7A00;
-  border-radius: 4px;
-}
+  background: gray;
+  border-radius: 1rem;
+} */
 
 body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #00294c;
   line-height: 1.6;
-  color: white;
+  color: black;
 }
 
 * {
@@ -35,9 +37,33 @@ a {
   text-decoration: none;
 }
 
-main {
+.layout {
+  min-height: 100vh;
+  width: 100%;
+}
+
+.conteudo {
+  padding-left: 20vw;
+  width: 100%;
+}
+
+@media (max-width: 700px) {
+  .conteudo {
+    padding-left: 0rem;
+  }
+}
+
+article {
+  width: 100%;
   min-height: 80vh;
   padding-top: 6rem;
+}
+
+main {
+  width: 100%;
+  min-height: 100vh;
+  padding-top: 6rem;
+  background-color: whitesmoke;
 }
 
 a, button, span, div {

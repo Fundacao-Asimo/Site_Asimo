@@ -1,0 +1,41 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { HoraProps } from "../_lib/DB_horas";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import styles from "../_styles/hora-detalhe.module.css";
+import { delete_hora } from "../_actions/hora";
+
+export default function HoraDetalhe({
+    dados,
+    onDelete
+}: {
+    dados: HoraProps,
+    onDelete: (id: number) => void
+})
+{
+    let status = "";
+    if(dados.aprovado === true)
+        status = "Aprovado";
+    else if(dados.aprovado === false)
+        status = "Rejeitado";
+    else
+        status = "Pendente";
+
+    async function excluir() {
+        await delete_hora(dados.id);
+        onDelete(dados.id); // 🔥 avisa o pai
+    }
+
+    return(
+        <div className={styles.box}>
+            <p className={styles.data}>{dados.data}</p>
+            <p className={styles.descricao}>{dados.descricao}</p>
+            <p className={`${styles.badge} ${styles[dados.tipo]}`}>{dados.tipo}</p>
+            <p className={styles.horas}>{dados.horas}h</p>
+            <span className={`${styles.status} ${styles[status.toLowerCase()]}`}>{status}</span>
+
+            <button className={styles.excluir} onClick={excluir}>
+                <FontAwesomeIcon icon={faTrash}/> Excluir
+            </button>
+        </div>
+    );
+}
