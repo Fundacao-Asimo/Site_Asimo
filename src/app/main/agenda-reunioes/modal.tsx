@@ -5,9 +5,7 @@ import styles from "./modal.module.css";
 export default function ModalReunioes({ onClose }: {onClose: () => void}) {
 
     async function criar(form: FormData) {
-        const new = {
-            
-        }
+        console.log("calma");
     }
 
     return (
