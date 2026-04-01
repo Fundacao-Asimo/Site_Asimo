@@ -78,6 +78,7 @@ Acreditamos que, ao unir conhecimento e empatia, podemos formar jovens protagoni
                             <li><FlipCard txtFrente="Projetos" txtAtras="Desenvolve protótipos e soluções eletrônicas para as aulas e eventos" txtImg="/projetos.png"/></li>
                             <li><FlipCard txtFrente="Marketing" txtAtras="Divulga o projeto e fortalece sua imagem em redes e eventos" txtImg="/marketing.png"/></li>
                             <li><FlipCard txtFrente="Gestão" txtAtras="Cuida do bem-estar dos membros e dos processos internos" txtImg="/gestao.png"/></li>
+                            <li><FlipCard txtFrente="AudioVisual" txtAtras="Grava vídeos educacionais para postagem no YouTube" txtImg="/audiovisual.png"/></li>
                         </ul>
                     </div>
                 </div>

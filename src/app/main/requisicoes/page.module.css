@@ -52,6 +52,12 @@
   border-radius: 0.625rem; /* 10px */
 }
 
+@media (max-width: 700px) {
+    .form {
+        padding: 0rem;
+    }
+}
+
 /* Título */
 .title {
   font-size: 1.25rem; /* 20px */
@@ -173,11 +179,6 @@
 .historicoHeader h3 {
     margin: 0;
     font-size: 18px;
-}
-
-.historicoHeader select {
-    margin-left: 8px;
-    padding: 5px;
 }
 
 /* TABELA */
@@ -363,4 +364,36 @@
 
 .AudioVisual{
     background: #FEE2E2;
+}
+
+@media (max-width: 700px) {
+    .row {
+        flex-direction: column;
+    }
+
+    .historicoHeader {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .filtroContainer {
+        width: 100%;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .filtroItem {
+        width: 100%;
+    }
+
+    .filtroItem input,
+    .filtroItem select {
+        width: 100%;
+    }
+
+    .button {
+        padding: 14px;
+        font-size: 1rem;
+    }
 }

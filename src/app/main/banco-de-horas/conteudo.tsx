@@ -37,6 +37,7 @@ export default function ConteudoBancoHoras({listHorasInit, userId}: {listHorasIn
             toast.error("Não foi possível cadastrar suas horas!");
         else {
             toast.success("Horas cadastradas com sucesso!");
+            retorno.data = new Date(retorno.data + "T00:00:00").toLocaleDateString("pt-BR");
             setListHoras(prev => [retorno, ...prev]);
         }
     }
@@ -115,6 +116,7 @@ export default function ConteudoBancoHoras({listHorasInit, userId}: {listHorasIn
                                 <option value="todos">Todos</option>
                                 <option value="aprovado">Aprovados</option>
                                 <option value="rejeitado">Rejeitados</option>
+                                <option value="pendente">Pendente</option>
                             </select>   
                         </div>
 

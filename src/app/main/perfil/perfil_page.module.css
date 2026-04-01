@@ -7,6 +7,12 @@
     box-shadow: 0 10px 35px rgba(0,0,0,0.08);
 }
 
+@media (max-width: 700px) {
+    .container {
+        margin: 2rem;
+    }
+}
+
 .title {
     text-align: center;
     margin-bottom: 28px;
