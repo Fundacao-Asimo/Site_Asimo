@@ -77,7 +77,7 @@ export default async function EscolaMembro({dados}: {dados: EscolaProps})
             </div>
 
             {/* CARD LATERAL */}
-            <div className={styles.sideCard}>
+            {/* <div className={styles.sideCard}>
                 <h4 className={styles.sideTitle}>CONTATO ESCOLA</h4>
 
                 <div className={styles.director}>
@@ -95,7 +95,7 @@ export default async function EscolaMembro({dados}: {dados: EscolaProps})
                     <FontAwesomeIcon icon={faWhatsapp} />
                     Whatsapp da Escola
                 </Link>
-            </div>
+            </div> */}
         </div>
     );
 }

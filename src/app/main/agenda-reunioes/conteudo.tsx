@@ -56,7 +56,7 @@ export default function ConteudoAgendaReuniao({listReunioes}: {listReunioes: Eve
         <>
             {openM && <ModalReunioes onClose={() => setOpenM(false)}/>}
             <div className={styles.container}>
-                <button onClick={() => {setOpenM(true)}}><FontAwesomeIcon icon={faPlusCircle}/> Marcar Reunião</button>
+                <button className={styles.buttonAgendar} onClick={() => {setOpenM(true)}}><FontAwesomeIcon icon={faPlusCircle}/> Marcar Reunião</button>
                 {/* HISTÓRICO */}
                 <section className={styles.historico}>
                     <div className={styles.historicoHeader}>
@@ -113,7 +113,7 @@ function HistoricoRow({dados}: {dados: EventoProps})
     async function cancelarReuniao() {
         await delete_evento(dados.id);
         toast.success("Reunião cancelada!");
-        router.push("main/agenda-reunioes");
+        router.push("/main/agenda-reunioes");
     }
     console.log(dados.id + ":" + new Date(dados.data + "T00:00:00").toLocaleDateString("pt-BR") + " - " + new Date().toLocaleDateString("pt-BR"));
 

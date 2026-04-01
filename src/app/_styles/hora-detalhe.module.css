@@ -1,5 +1,12 @@
-.box {
+.desktop {
     display: flex;
+}
+
+.mobile {
+    display: none;
+}
+
+.box {
     align-items: center;
     width: 100%;
     gap: 1.2rem;
@@ -148,4 +155,71 @@
 .excluir:hover {
     background: #fee2e2;
     color: #991b1b;
+}
+
+@media (max-width: 700px) {
+    .desktop {
+        display: none;
+    }
+
+    .mobile {
+        display: flex;
+    }
+
+    .box {
+        flex-direction: column;
+        align-items: stretch; /* 👈 importante */
+        gap: 12px;
+        padding: 16px;
+    }
+
+    .top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .data {
+        font-size: 13px;
+        color: #64748b;
+        font-weight: 500;
+    }
+
+    .descricao {
+        font-size: 15px;
+        font-weight: 500;
+        color: #1e293b;
+        line-height: 1.4;
+    }
+
+    .bottom {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .badge {
+        align-self: flex-start;
+    }
+
+    .horas {
+        font-size: 15px;
+        font-weight: 700;
+        color: #2563eb;
+    }
+
+    .status {
+        font-size: 11px;
+        padding: 4px 8px;
+    }
+
+    .excluir {
+        width: 100%;
+        justify-content: center;
+        margin-top: 6px;
+        padding: 12px;
+        border-radius: 10px;
+        background: #fee2e2;
+        font-size: 14px;
+    }
 }

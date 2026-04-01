@@ -20,7 +20,7 @@ export default function HeaderDinamic({horas}: {horas: number})
         "/main/free-time-geral": "Free-Time-Geral",
         "/main/escolas-parceiras": "Escolas Parceiras",
         "/main/agenda-reunioes": "Agenda de Reuniões",
-        "/main/controle-frequência": "Controle de Frequência",
+        "/main/controle-frequencia": "Controle de Frequência",
         "/main/eventos": "Eventos & Workshops",
         "/main/relatorios-horas": "Relatórios de Horas",
         "/main/controle-membros": "Gestão de Membros",
@@ -33,9 +33,13 @@ export default function HeaderDinamic({horas}: {horas: number})
 
     let title = "Dashboard";
 
-    if (pathname.startsWith("/main/controle-membros/edit")) {
+    if(pathname.startsWith("/main/controle-membros/edit")) {
         title = "Editar Dados do Membro";
-    } else {
+    }
+    else if(pathname.startsWith("/main/controle-frequencia")) {
+        title = "Controle de Frequência";
+    }
+    else {
         title = titles[pathname] || "Dashboard";
     }
 

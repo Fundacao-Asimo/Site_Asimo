@@ -1,11 +1,36 @@
 'use client';
 
+import { insert_evento } from "@/app/_actions/reunioes-eventos";
 import styles from "./modal.module.css";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 export default function ModalReunioes({ onClose }: {onClose: () => void}) {
 
-    async function criar(form: FormData) {
-        console.log("calma");
+    const router = useRouter();
+
+    async function criar(form: FormData)
+    {
+        const newR = {
+            data: form.get("data") as string,
+            area: form.get("area") as string,
+            tipo: "Reunião",
+            descricao: form.get("descricao") as string | null,
+            aberta: true
+        }
+
+        if(newR.descricao === "" || newR.descricao === null)
+            newR.descricao = null;
+
+        const retorno = await insert_evento(newR);
+
+        if(retorno)
+            toast.success("Reunião cadastrada com sucesso!");
+        else
+            toast.error("Erro ao cadastrar reunião!");
+
+        router.push("/main/agenda-reunioes");
+        onClose();
     }
 
     return (
@@ -29,6 +54,7 @@ export default function ModalReunioes({ onClose }: {onClose: () => void}) {
                         <select name="area" id="area" defaultValue="" className={styles.select} required>
                             <option value="" disabled>Selecione uma área</option>
                             <option value="Geral">Geral</option>
+                            <option value="Diretoria">Diretoria</option>
                             <option value="Docência">Docência</option>
                             <option value="Projetos">Projetos</option>
                             <option value="Marketing">Marketing</option>
