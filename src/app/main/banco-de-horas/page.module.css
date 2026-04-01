@@ -99,11 +99,6 @@
     font-size: 1.4rem;
 }
 
-.historicoHeader select {
-    margin-left: 8px;
-    padding: 5px;
-}
-
 /* TABELA */
 
 .table {
@@ -217,6 +212,7 @@
 @media (max-width: 900px) {
     .container {
         flex-direction: column;
+        gap: 0;
     }
 
     .form,
@@ -256,5 +252,9 @@
     .button {
         padding: 14px;
         font-size: 1rem;
+    }
+
+    .listaHoras {
+        max-height: 80vh;
     }
 }

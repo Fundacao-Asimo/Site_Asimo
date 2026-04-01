@@ -2,8 +2,9 @@ import Link from "next/link";
 import { isSessionValid } from "../_lib/session";
 import styles from "../_styles/padrao.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCalendarAlt, faClipboardCheck, faClock, faExchangeAlt } from "@fortawesome/free-solid-svg-icons";
+import { faCalendarAlt, faClock, faExchangeAlt, faSchool } from "@fortawesome/free-solid-svg-icons";
 import { query_user_id } from "../_actions/user";
+import { list_escolas_membro } from "../_actions/escola";
 
 export interface AniversarianteProps {
     id: number;
@@ -17,13 +18,14 @@ export default async function MainPage()
     const session = await isSessionValid();
     const usuarioId = session as { userId: number };
     const usuarioLogado = await query_user_id(usuarioId.userId);
+    // const escola = await list_escolas_membro(usuarioId.userId);
 
     return (
         <main>
             <h1 className={styles.h1}>
                 Bem Vindo {usuarioLogado?.apelido ?? "usuário"}!
             </h1>
-            <div className={styles.div_horizontal}>
+            {/* <div className={styles.div_horizontal}>
                 <div className={styles.quadro}>
                     <h3>Minha Presença</h3>
                     <p>"numero"</p>
@@ -42,7 +44,7 @@ export default async function MainPage()
                     <p>"item"</p>
                     <p>"item"</p>
                 </div>
-            </div>
+            </div> */}
             <h2 className={styles.h2}>Acesso Rápido</h2>
             <div className={styles.div_horizontal}>
                 <Link href="/main/banco-de-horas" className={styles.quadro}>
@@ -55,10 +57,10 @@ export default async function MainPage()
                     <h3>Free Time</h3>
                     <p style={{fontSize: "0.8rem"}}>Minha agenda</p>
                 </Link>
-                <Link href="/main/minhas-presencas" className={styles.quadro}>
-                    <FontAwesomeIcon icon={faClipboardCheck} style={{fontSize:"1.4rem", padding: "0.9rem", color: "#FF7A00", backgroundColor: "#FFE8D6", borderRadius: "0.5rem", marginBottom: "0.5rem"}}/>
-                    <h3>Minha Frequência</h3>
-                    <p style={{fontSize: "0.8rem"}}>Presenças</p>
+                <Link href="/main/minha-escola" className={styles.quadro}>
+                    <FontAwesomeIcon icon={faSchool} style={{fontSize:"1.4rem", padding: "0.9rem", color: "#FF7A00", backgroundColor: "#FFE8D6", borderRadius: "0.5rem", marginBottom: "0.5rem"}}/>
+                    <h3>Minha Escola</h3>
+                    <p style={{fontSize: "0.8rem"}}>Escola</p>
                 </Link>
                 <Link href="/main/requisicoes" className={styles.quadro}>
                     <FontAwesomeIcon icon={faExchangeAlt} style={{fontSize:"1.4rem", padding: "0.9rem", color: "#9333EA", backgroundColor: "#E9D5FF", borderRadius: "0.5rem", marginBottom: "0.5rem"}}/>
@@ -66,16 +68,35 @@ export default async function MainPage()
                     <p style={{fontSize: "0.8rem"}}>Requisições</p>
                 </Link>
             </div>
-            <div className={styles.div_horizontal}>
-                <div className={styles.quadro_titulo} style={{flex: "2"}}>
-                    <h3>Minha Escola - E.E. Major João Pereira</h3>
+            {/* {escola.length > 0 && <div className={styles.div_horizontal}>
+                <div className={styles.quadro_titulo} style={{ flex: "2" }}>
+                    <h3>{escola[0].nome}</h3>
+
+                    <div style={{ display: "flex", alignItems: "center", gap: "0.4rem", marginBottom: "0.5rem" }}>
+                        <FontAwesomeIcon icon={faMapLocationDot} />
+                        <span style={{ fontSize: "0.85rem" }}>Itajubá - MG</span>
+                    </div>
+
+                    <p style={{ fontSize: "0.85rem" }}>
+                        <strong>Turma:</strong> {escola[0].turma}
+                    </p>
+
+                    <Link
+                        href={`/main/minha-escola`}
+                        style={{
+                            marginTop: "0.7rem",
+                            display: "inline-flex",
+                            alignItems: "center",
+                            gap: "0.4rem",
+                            fontSize: "0.85rem",
+                            color: "#2563EB",
+                            fontWeight: 500
+                        }}
+                    >
+                        Ver detalhes <FontAwesomeIcon icon={faArrowRight} />
+                    </Link>
                 </div>
-                <div className={styles.quadro}>
-                    <h3>Tarefas Atribuídas</h3>
-                    <p>"item"</p>
-                    <p>"item"</p>
-                </div>
-            </div>
+            </div>} */}
         </main>
     );
 }

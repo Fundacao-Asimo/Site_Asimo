@@ -1,7 +1,7 @@
 html {
   scroll-behavior: smooth;
   overflow-y: auto;
-  scrollbar-gutter: stable;
+  scrollbar-gutter: auto;
   background-color: whitesmoke;
 }
 
@@ -24,6 +24,7 @@ body {
   background-color: #00294c;
   line-height: 1.6;
   color: black;
+  width: 100%;
 }
 
 * {
