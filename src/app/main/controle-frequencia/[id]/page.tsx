@@ -27,7 +27,7 @@ export default async function ControleFrequenciaPage({params}: {params: Promise<
 
     return(
         <main>
-            <ConteudoControleFrequencia/>
+            <ConteudoControleFrequencia dadosReuniao={dadosReuniao} listaMembros={listaMembros}/>
         </main>
     );
 }
