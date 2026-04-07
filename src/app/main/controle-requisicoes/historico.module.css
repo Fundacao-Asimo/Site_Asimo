@@ -19,6 +19,11 @@
     max-width: 70%;
 }
 
+.bold {
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
 .badge {
     flex: 1.3;
     padding: 4px 10px;
@@ -70,4 +75,57 @@
 
 .AudioVisual{
     background: #FEE2E2;
+}
+
+.actionsCell {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+}
+
+/* BOTÃO APROVAR */
+.btnAprovar {
+    padding: 6px 12px;
+    border-radius: 8px;
+    border: 1px solid #16a34a;
+    background: #22c55e;
+    color: white;
+    font-size: 13px;
+    font-weight: 500;
+    /* width: 6rem; */
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btnAprovar:hover {
+    background: #16a34a;
+    box-shadow: 0 4px 10px rgba(34, 197, 94, 0.25);
+}
+
+.btnAprovar:active {
+    transform: scale(0.96);
+}
+
+/* BOTÃO REJEITAR */
+.btnRejeitar {
+    padding: 6px 12px;
+    border-radius: 8px;
+    border: 1px solid #dc2626;
+    background: #ef4444;
+    color: white;
+    font-size: 13px;
+    font-weight: 500;
+    /* width: 6rem; */
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btnRejeitar:hover {
+    background: #dc2626;
+    box-shadow: 0 4px 10px rgba(239, 68, 68, 0.25);
+}
+
+.btnRejeitar:active {
+    transform: scale(0.96);
 }
