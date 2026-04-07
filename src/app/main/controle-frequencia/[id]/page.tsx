@@ -1,3 +1,5 @@
+"use server";
+
 import { query_evento_id } from "@/app/_actions/reunioes-eventos";
 import { list_user } from "@/app/_actions/user";
 import ConteudoControleFrequencia from "./conteudo";
@@ -7,16 +9,8 @@ export default async function ControleFrequenciaPage({params}: {params: Promise<
     const {id} = await params;
     const dadosReuniao = await query_evento_id(Number(id));
     const listaMembrosTemp = await list_user();
-    let listaMembros = [];
+    let listaMembros = listaMembrosTemp;
 
-    if(!dadosReuniao || listaMembrosTemp.length === 0)
-    {
-        return(
-            <main>
-                <h1 style={{margin: "2rem"}}>Algo deu errado. Não foi possível carregar os dados!</h1>
-            </main>
-        );
-    }
     if(dadosReuniao.area !== "Geral")
     {
         if(dadosReuniao.area === "Diretoria")
@@ -24,6 +18,8 @@ export default async function ControleFrequenciaPage({params}: {params: Promise<
         else
             listaMembros = listaMembrosTemp.filter(m => m.area === dadosReuniao.area);
     }
+
+    listaMembros = listaMembros.filter(m => m.id !== 1);
 
     return(
         <main>

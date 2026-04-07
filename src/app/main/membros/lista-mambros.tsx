@@ -31,7 +31,7 @@ export default function ListaMambros({list}: {list: MembroProps[]})
             return;
         }
 
-        setFiltro(list.filter((m: MembroProps) => normalizeText(m.nome_completo).includes(normalizeText(palavra))));
+        setFiltro(list.filter((m: MembroProps) => normalizeText(m.nome_completo).includes(normalizeText(palavra)) || normalizeText(m.area).includes(normalizeText(palavra))));
     }
 
     function normalizeText(text: string) {

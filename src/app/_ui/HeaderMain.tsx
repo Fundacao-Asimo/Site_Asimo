@@ -20,6 +20,8 @@ import {
   faWallet,
   faCalendarPlus,
   faUser,
+  faCheckCircle,
+  faClipboardList,
 } from "@fortawesome/free-solid-svg-icons";
 
 export default function HeaderMain({isAdm, userObject}: {isAdm: boolean, userObject: MembroProps | null})
@@ -66,12 +68,13 @@ export default function HeaderMain({isAdm, userObject}: {isAdm: boolean, userObj
                     {isAdm && <li className={`${styles.item} ${pathname.includes("/main/free-time-geral") ? styles.active : ""}`} ><Link href="/main/free-time-geral"><FontAwesomeIcon style={{marginRight: "0.5rem"}} icon={faCalendarWeek} />Free Time Geral</Link></li>}
                     {isAdm && <li className={`${styles.item} ${pathname.includes("/main/escolas-parceiras") ? styles.active : ""}`} ><Link href="/main/escolas-parceiras">Escolas Parceiras</Link></li>}
                     {isAdm && <li className={`${styles.item} ${pathname.includes("/main/agenda-reunioes") ? styles.active : ""}`} ><Link href="/main/agenda-reunioes"><FontAwesomeIcon style={{marginRight: "0.5rem"}} icon={faCalendarPlus} />Agenda de Reuniões</Link></li>}
-                    {isAdm && <li className={`${styles.item} ${pathname.includes("/main/controle-frequencia") ? styles.active : ""}`} ><Link href="/main/controle-frequencia">Controle de Frequência</Link></li>}
+                    {isAdm && <li className={`${styles.item} ${pathname.includes("/main/controle-frequencia") ? styles.active : ""}`} ><Link href="/main/controle-frequencia"><FontAwesomeIcon style={{marginRight: "0.5rem"}} icon={faClipboardList} />Controle de Frequência</Link></li>}
                     {isAdm && <li className={`${styles.item} ${pathname.includes("/main/eventos") ? styles.active : ""}`} ><Link href="/main/eventos">Eventos & Workshops</Link></li>}
                     {isAdm && <li className={`${styles.item} ${pathname.includes("/main/relatorios-horas") ? styles.active : ""}`} ><Link href="/main/relatorios-horas">Relatórios de Horas</Link></li>}
                     {isAdm && <li className={`${styles.item} ${pathname.includes("/main/controle-membros") ? styles.active : ""}`} ><Link href="/main/controle-membros"><FontAwesomeIcon style={{marginRight: "0.5rem"}} icon={faUserGear} />Gestão de Membros</Link></li>}
+                    {isAdm && <li className={`${styles.item} ${pathname.includes("/main/controle-requisicoes") ? styles.active : ""}`} ><Link href="/main/controle-requisicoes"><FontAwesomeIcon style={{marginRight: "0.5rem"}} icon={faExchangeAlt} />Requisições</Link></li>}
                     {isAdm && <li className={`${styles.item} ${pathname.includes("/main/controle-atividades") ? styles.active : ""}`} ><Link href="/main/controle-atividades">Atribuir Atividades</Link></li>}
-                    {isAdm && <li className={`${styles.item} ${pathname.includes("/main/caixa") ? styles.active : ""}`} ><Link href="/main/caixa"><FontAwesomeIcon style={{marginRight: "0.5rem"}} icon={faWallet} />Caixa & Requisições</Link></li>}
+                    {isAdm && <li className={`${styles.item} ${pathname.includes("/main/caixa") ? styles.active : ""}`} ><Link href="/main/caixa"><FontAwesomeIcon style={{marginRight: "0.5rem"}} icon={faWallet} />Caixa</Link></li>}
                     {isAdm && <li className={`${styles.item} ${pathname.includes("/main/advertencias") ? styles.active : ""}`} ><Link href="/main/advertencias">Advertências</Link></li>}
                     <LogoutButton bool={false}/>
                 </ul>

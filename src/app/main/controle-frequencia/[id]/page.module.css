@@ -1,0 +1,90 @@
+.container {
+  padding: 24px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.titulo {
+  font-size: 26px;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+
+.info {
+  margin-bottom: 24px;
+  line-height: 1.6;
+}
+
+.lista {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.card {
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 16px;
+  background: #fff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.nome {
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.botoes {
+  display: flex;
+  gap: 10px;
+}
+
+.botao {
+  padding: 6px 14px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  background: #eee;
+  transition: 0.2s;
+}
+
+.botao:hover {
+  opacity: 0.8;
+}
+
+.presente {
+  background: #22c55e;
+  color: white;
+}
+
+.ausente {
+  background: #ef4444;
+  color: white;
+}
+
+.textarea {
+  margin-top: 10px;
+  width: 100%;
+  min-height: 70px;
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  resize: vertical;
+}
+
+.salvar {
+  margin-top: 24px;
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  border: none;
+  background: #2563eb;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.salvar:hover {
+  background: #1d4ed8;
+}

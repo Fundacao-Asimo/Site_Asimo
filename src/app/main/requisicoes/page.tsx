@@ -7,7 +7,7 @@ import { isSessionValid } from "@/app/_lib/session";
 export default async function RequisicoesPage()
 {
     const session = await isSessionValid();
-    const {userId} = session as {userId: number}
+    const {userId} = session as {userId: number};
     const listRequisicoes = await list_req(userId);
 
     return(

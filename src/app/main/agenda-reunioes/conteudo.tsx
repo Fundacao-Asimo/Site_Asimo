@@ -115,7 +115,6 @@ function HistoricoRow({dados}: {dados: EventoProps})
         toast.success("Reunião cancelada!");
         router.push("/main/agenda-reunioes");
     }
-    console.log(dados.id + ":" + new Date(dados.data + "T00:00:00").toLocaleDateString("pt-BR") + " - " + new Date().toLocaleDateString("pt-BR"));
 
     return (
         <div className={`${styles.card} ${styles[dados.area]}`}>

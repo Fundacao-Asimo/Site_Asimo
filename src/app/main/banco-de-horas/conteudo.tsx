@@ -15,9 +15,17 @@ export default function ConteudoBancoHoras({listHorasInit, userId}: {listHorasIn
     const [tipoFiltro, setTipoFiltro] = useState("Todas");
     const [dataInicio, setDataInicio] = useState<string>("");
     const [dataFim, setDataFim] = useState<string>("");
+    const [horaInput, setHoraInput] = useState<string>("");
 
     function handleDelete(id: number) {
         setListHoras((prev) => prev.filter((hora) => hora.id !== id));
+    }
+
+    function handleChangeHora(e: React.ChangeEvent<HTMLInputElement>) {
+        let value = e.target.value;
+        value = value.replace(/\D/g, "");
+
+        setHoraInput(value);
     }
 
     async function registrar(formData: FormData)
@@ -77,7 +85,7 @@ export default function ConteudoBancoHoras({listHorasInit, userId}: {listHorasIn
 
                     <div className={styles.field}>
                         <label htmlFor="horas">Horas</label>
-                        <input type="number" id="horas" name="horas" required placeholder="Ex: 2"/>
+                        <input type="text" id="horas" name="horas" value={horaInput} onChange={handleChangeHora} required placeholder="Ex: 2"/>
                     </div>
                 </div>
 
