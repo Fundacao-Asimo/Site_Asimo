@@ -11,7 +11,7 @@ export default async function EscolaMembro({dados}: {dados: EscolaProps})
 {
     const lista = await Promise.all(
         dados.membros.map(async (id) => {
-            let temp = await query_user_id(id);
+            const temp = await query_user_id(id);
             return temp;
         })
     );
@@ -20,7 +20,8 @@ export default async function EscolaMembro({dados}: {dados: EscolaProps})
         if(m !== null) return <MembrosMembros key={m.id} dados={m}/>
     });
 
-    dados.telefone_responsavel = dados.telefone_responsavel.replace(/\D/g, '');
+    if(dados.telefone_responsavel)
+        dados.telefone_responsavel = dados.telefone_responsavel.replace(/\D/g, '');
 
     return(
         <div className={styles.grid}>
@@ -55,10 +56,10 @@ export default async function EscolaMembro({dados}: {dados: EscolaProps})
                             Preencher Diário
                         </button>
 
-                        <Link target="_blank" href={dados.endereco_url} className={styles.secondaryBtn}>
+                        {dados.endereco_url && <Link target="_blank" href={dados.endereco_url} className={styles.secondaryBtn}>
                             <FontAwesomeIcon icon={faMapLocationDot} />
                             Ver Rota
-                        </Link>
+                        </Link>}
                     </div>
 
                     <div className={styles.divider} />
