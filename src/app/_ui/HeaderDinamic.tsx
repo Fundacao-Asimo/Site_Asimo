@@ -37,6 +37,12 @@ export default function HeaderDinamic({horas}: {horas: number})
     if(pathname.startsWith("/main/controle-membros/edit")) {
         title = "Editar Dados do Membro";
     }
+    else if(pathname.startsWith("/main/escolas-parceiras/edit")) {
+        title = "Editar Dados da Escola";
+    }
+    else if(pathname.startsWith("/main/escolas-parceiras/membros")) {
+        title = "Gerenciar Equipe da Escola";
+    }
     else if(pathname.startsWith("/main/controle-frequencia")) {
         title = "Controle de Frequência";
     }
