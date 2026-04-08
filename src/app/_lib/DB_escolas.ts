@@ -2,25 +2,25 @@ import { supabase } from "./supabase";
 
 export interface EscolaInfo {
     nome: string,
-    turma: string,
+    turma: string | null,
     endereco: string,
-    endereco_url: string,
+    endereco_url: string | null,
     horario: string,
     membros: number[],
     nome_responsavel: string,
-    telefone_responsavel: string
+    telefone_responsavel: string | null
 }
 
 export interface EscolaProps {
     id: number,
     nome: string,
-    turma: string,
+    turma: string | null,
     endereco: string,
-    endereco_url: string,
+    endereco_url: string | null,
     horario: string,
     membros: number[],
     nome_responsavel: string,
-    telefone_responsavel: string
+    telefone_responsavel: string | null
 }
 
 async function query_escola_id(id: number)

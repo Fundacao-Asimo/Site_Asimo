@@ -1,0 +1,124 @@
+.card {
+    background: #fafafa;
+    border-radius: 16px;
+    overflow: hidden;
+
+    cursor: pointer;
+
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    transition: 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+}
+
+.header {
+    color: white;
+    padding: clamp(16px, 4vw, 20px);
+    position: relative;
+}
+
+.cor0 {
+    background: radial-gradient(circle at 70% 50%, #fb923c 0%, #ec6d13 60%, #bc3d0b 100%);
+}
+
+.cor1 {
+    background: radial-gradient(circle at 70% 50%, #14b8a6 0%, #0f766e 60%, #115e59 100%);
+}
+
+.cor2 {
+    background: radial-gradient(circle at 70% 50%, #3764ea 0%, #2145bd 60%, #14308f 100%);
+}
+
+.cor3 {
+    background: radial-gradient(circle at 70% 50%, #22c55e 0%, #16a34a 60%, #166534 100%);
+}
+
+.cor4 {
+    background: radial-gradient(circle at 70% 50%, #ef3d3d 0%, #dc2626 60%, #961a1a 100%);
+}
+
+.cor5 {
+    background: radial-gradient(circle at 70% 50%, #b05efc 0%, #8730d9 60%, #6c1eb1 100%);
+}
+
+.cor6 {
+    background: radial-gradient(circle at 70% 50%, #f2d441 0%, #eab308 60%, #a16207 100%);
+}
+
+.cor7 {
+    background: radial-gradient(circle at 70% 50%, #f472b6 0%, #ec4899 60%, #be185d 100%);
+}
+
+.cor8 {
+    background: radial-gradient(circle at 70% 50%, #9ca3af 0%, #6b7280 60%, #374151 100%);
+}
+
+.cor9 {
+    background: radial-gradient(circle at 70% 50%, #22d3ee 0%, #06b6d4 60%, #0e7490 100%);
+}
+
+.titulo {
+    margin: 0;
+    font-size: clamp(16px, 4vw, 20px);
+    font-weight: 700;
+}
+
+.subtitulo {
+    margin: 4px 0 0;
+    font-size: clamp(12px, 3vw, 14px);
+    opacity: 0.9;
+}
+
+.content {
+    padding: clamp(16px, 4vw, 20px);
+}
+
+.info {
+    display: flex;
+    justify-content: space-between;
+    margin-right: 1rem;
+}
+
+.group {
+    display: inline-flex;
+    flex-direction: column;
+    margin-bottom: 16px;
+}
+
+.label {
+    font-size: 12px;
+    color: #9ca3af;
+    font-weight: 600;
+}
+
+.valor {
+    font-size: clamp(14px, 3.5vw, 16px);
+    font-weight: 700;
+    color: #111827;
+}
+
+.footer {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.avatars {
+    display: flex;
+}
+
+.avatar {
+    width: clamp(26px, 6vw, 32px);
+    height: clamp(26px, 6vw, 32px);
+    border-radius: 50%;
+    margin-left: -8px;
+    border: 2px solid #f3f4f6;
+}
+
+.membros {
+    font-size: clamp(12px, 3vw, 14px);
+    color: #4b5563;
+}
