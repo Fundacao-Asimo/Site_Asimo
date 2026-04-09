@@ -22,20 +22,10 @@ export async function list_horas_membro(id: number, aprovado: boolean | null = n
 }
 
 export async function insert_hora(dados: HoraInfo) {
-    const session = await isSessionValid()
-
-    if(!session || !session.isAdm)
-        throw new Error("Sem permissão")
-
     return await DB_horas.insert_hora(dados);
 }
 
 export async function delete_hora(id: number) {
-    const session = await isSessionValid()
-
-    if(!session || !session.isAdm)
-        throw new Error("Sem permissão")
-
     return await DB_horas.delete_hora(id);
 }
 
