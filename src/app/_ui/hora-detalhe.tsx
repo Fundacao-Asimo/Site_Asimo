@@ -28,7 +28,7 @@ export default function HoraDetalhe({
     return(
         <>
             <div className={`${styles.box} ${styles.desktop}`}>
-                <p className={styles.data}>{dados.data}</p>
+                <p className={styles.data}>{new Date(dados.data + "T00:00:00").toLocaleDateString("pt-BR")}</p>
                 <p className={styles.descricao}>{dados.descricao}</p>
                 <p className={`${styles.badge} ${styles[dados.tipo]}`}>{dados.tipo}</p>
                 <p className={styles.horas}>{dados.horas}h</p>
@@ -40,7 +40,7 @@ export default function HoraDetalhe({
             </div>
             <div className={`${styles.box} ${styles.mobile}`}>
                 <div className={styles.top}>
-                    <p className={styles.data}>{dados.data}</p>
+                    <p className={styles.data}>{new Date(dados.data + "T00:00:00").toLocaleDateString("pt-BR")}</p>
                     <p className={styles.horas}>{dados.horas}h</p>
                 </div>
 

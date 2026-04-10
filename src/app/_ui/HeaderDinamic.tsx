@@ -17,6 +17,7 @@ export default function HeaderDinamic({horas}: {horas: number})
         "/main/membros": "Diretório de Membros",
         "/main/perfil": "Meu Perfil",
         "/main/dashboard-principal": "Dashboard Principal",
+        "/main/controle-horas": "Horas Controle",
         "/main/free-time-geral": "Free-Time-Geral",
         "/main/escolas-parceiras": "Escolas Parceiras",
         "/main/agenda-reunioes": "Agenda de Reuniões",

@@ -1,0 +1,312 @@
+.desktop {
+    display: flex;
+}
+
+.mobile {
+    display: none;
+}
+
+.box {
+    align-items: center;
+    width: 100%;
+    gap: 1.2rem;
+    background: white;
+    border-bottom: 1px solid #e2e8f0;
+    padding: 14px 18px;
+    font-size: 14px;
+    min-height: 64px; /* 🔥 altura base consistente */
+    transition: background 0.2s ease;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+}
+
+.box:hover {
+    background: #f8fafc;
+}
+
+/* DATA */
+.data {
+    flex: 1.2;
+    font-weight: 600;
+    color: #0f172a;
+}
+
+/* NOME DO MEMBRO */
+.nome {
+    flex: 2.5;
+    color: #334155;
+    text-align: left;
+    font-weight: bold;
+    min-width: 0;
+
+    /* 🔥 Limite elegante de 2 linhas */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+
+    line-height: 1.3rem;
+    max-height: 2.6rem; /* garante consistência */
+}
+
+/* DESCRIÇÃO */
+.descricao {
+    flex: 2.5;
+    color: #334155;
+    text-align: left;
+    min-width: 0;
+
+    /* 🔥 Limite elegante de 2 linhas */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+
+    line-height: 1.3rem;
+    max-height: 2.6rem; /* garante consistência */
+}
+
+/* BADGES (TIPO) */
+.badge {
+    flex: 1.3;
+    padding: 4px 10px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 12px;
+    text-align: center;
+    white-space: nowrap;
+}
+
+/* TIPOS */
+.Reunião {
+    background: #E9D5FF;
+    color: #9333EA;
+}
+
+.Docência {
+    background: #FFF1E6;
+    color: #FF7A00;
+}
+
+.Projetos {
+    background-color: #DCEFF3;
+    color: #0F6B75;
+}
+
+.Marketing {
+    background: #DCEAFE;
+    color: #2563EB;
+}
+
+.Gestão {
+    background: #DCFCE7;
+    color: #16A34A;
+}
+
+.AudioVisual{
+    background: #FEE2E2;
+    color: #DC2626;
+}
+
+.Evento {
+    background: #E9D5FF;
+    color: #9333EA;
+}
+
+.Outro {
+    background: #FEF3C7;
+    color: #B45309;
+}
+
+/* HORAS */
+.horas {
+    flex: 0.8;
+    text-align: center;
+    font-weight: 600;
+    color: #2563eb;
+}
+
+/* STATUS */
+.status {
+    flex: 1;
+    padding: 4px 10px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    text-align: center;
+}
+
+/* STATUS CORES */
+.aprovado {
+    background: #DCFCE7;
+    color: #16A34A;
+}
+
+.pendente {
+    background: #FEF3C7;
+    color: #B45309;
+}
+
+.rejeitado {
+    background: #FEE2E2;
+    color: #DC2626;
+}
+
+/* BOTÃO */
+.excluir {
+    border: none;
+    background: none;
+    color: #dc2626;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 6px 8px;
+    border-radius: 6px;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.excluir:hover {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.actionsCell {
+    width: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    white-space: nowrap;
+}
+
+/* BOTÃO APROVAR */
+.btnAprovar {
+    padding: 6px 12px;
+    border-radius: 8px;
+    border: 1px solid #16a34a;
+    background: #22c55e;
+    color: white;
+    font-size: 13px;
+    font-weight: 500;
+    /* width: 6rem; */
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btnAprovar:hover {
+    background: #16a34a;
+    box-shadow: 0 4px 10px rgba(34, 197, 94, 0.25);
+}
+
+.btnAprovar:active {
+    transform: scale(0.96);
+}
+
+/* BOTÃO REJEITAR */
+.btnRejeitar {
+    padding: 6px 12px;
+    border-radius: 8px;
+    border: 1px solid #dc2626;
+    background: #ef4444;
+    color: white;
+    font-size: 13px;
+    font-weight: 500;
+    /* width: 6rem; */
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btnRejeitar:hover {
+    background: #dc2626;
+    box-shadow: 0 4px 10px rgba(239, 68, 68, 0.25);
+}
+
+.btnRejeitar:active {
+    transform: scale(0.96);
+}
+
+@media (max-width: 700px) {
+    .desktop {
+        display: none;
+    }
+
+    .mobile {
+        display: flex;
+    }
+
+    .box {
+        flex-direction: column;
+        align-items: stretch; /* 👈 importante */
+        gap: 12px;
+        padding: 16px;
+    }
+
+    .top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .data {
+        font-size: 13px;
+        color: #64748b;
+        font-weight: 500;
+    }
+
+    .descricao {
+        font-size: 15px;
+        font-weight: 500;
+        color: #1e293b;
+        line-height: 1.4;
+    }
+
+    .bottom {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        gap: 0.5rem;
+    }
+
+    .badge {
+        flex: 1;
+    }
+
+    .horas {
+        font-size: 15px;
+        font-weight: 700;
+        color: #2563eb;
+    }
+
+    .status {
+        flex: 1;
+    }
+
+    .excluir {
+        width: 100%;
+        justify-content: center;
+        margin-top: 6px;
+        padding: 12px;
+        border-radius: 10px;
+        background: #fee2e2;
+        font-size: 14px;
+    }
+
+    .actionsCell {
+        width: 100%;
+        justify-content: space-between;
+        gap: 0.5rem;
+    }
+
+    .btnAprovar {
+        width: 50%;
+    }
+
+    .btnRejeitar {
+        width: 50%;
+    }
+}

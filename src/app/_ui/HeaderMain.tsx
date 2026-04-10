@@ -23,6 +23,7 @@ import {
   faCheckCircle,
   faClipboardList,
   faHandshake,
+  faAlarmClock,
 } from "@fortawesome/free-solid-svg-icons";
 
 export default function HeaderMain({isAdm, userObject}: {isAdm: boolean, userObject: MembroProps | null})
@@ -66,6 +67,7 @@ export default function HeaderMain({isAdm, userObject}: {isAdm: boolean, userObj
                     <li className={`${styles.item} ${pathname === "/main/perfil" ? styles.active : ""}`} ><Link href="/main/perfil"><FontAwesomeIcon style={{marginRight: "0.5rem"}} icon={faUser} />Perfil</Link></li>
                     {isAdm && <li className={styles.separacao}>DIRETORIA</li>}
                     {isAdm && <li className={`${styles.item} ${pathname.includes("/main/dashboard-principal") ? styles.active : ""}`} ><Link href="/main/dashboard-principal">Dashboard Principal</Link></li>}
+                    {isAdm && <li className={`${styles.item} ${pathname.includes("/main/controle-horas") ? styles.active : ""}`} ><Link href="/main/controle-horas"><FontAwesomeIcon style={{marginRight: "0.5rem"}} icon={faAlarmClock} />Horas Controle</Link></li>}
                     {isAdm && <li className={`${styles.item} ${pathname.includes("/main/free-time-geral") ? styles.active : ""}`} ><Link href="/main/free-time-geral"><FontAwesomeIcon style={{marginRight: "0.5rem"}} icon={faCalendarWeek} />Free Time Geral</Link></li>}
                     {isAdm && <li className={`${styles.item} ${pathname.includes("/main/escolas-parceiras") ? styles.active : ""}`} ><Link href="/main/escolas-parceiras"><FontAwesomeIcon style={{marginRight: "0.5rem"}} icon={faSchool} />Escolas Parceiras</Link></li>}
                     {isAdm && <li className={`${styles.item} ${pathname.includes("/main/agenda-reunioes") ? styles.active : ""}`} ><Link href="/main/agenda-reunioes"><FontAwesomeIcon style={{marginRight: "0.5rem"}} icon={faCalendarPlus} />Agenda de Reuniões</Link></li>}

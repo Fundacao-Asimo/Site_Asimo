@@ -45,7 +45,6 @@ export default function ConteudoBancoHoras({listHorasInit, userId}: {listHorasIn
             toast.error("Não foi possível cadastrar suas horas!");
         else {
             toast.success("Horas cadastradas com sucesso!");
-            retorno.data = new Date(retorno.data + "T00:00:00").toLocaleDateString("pt-BR");
             setListHoras(prev => [retorno, ...prev]);
         }
     }
