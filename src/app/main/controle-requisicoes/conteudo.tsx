@@ -55,10 +55,10 @@ export default function ConteudoControleRequisicoes({listReq, listMembros}: {lis
         let lista = listReq.filter(r => r.status === null);
 
         if(dataInicioPend)
-            lista = lista.filter(r => r.data >= dataInicio);
+            lista = lista.filter(r => r.data >= dataInicioPend);
 
         if(dataFimPend)
-            lista = lista.filter(r => r.data <= dataFim);
+            lista = lista.filter(r => r.data <= dataFimPend);
 
         setFiltroPend(lista);
 
