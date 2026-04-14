@@ -155,7 +155,7 @@ export default function ConteudoControleFrequencia({dadosReuniao, listaMembros}:
                             {presenca?.presente === false && (
                                 <textarea
                                     className={styles.textarea}
-                                    placeholder="Justificativa"
+                                    placeholder="Justificativa (Caso não haja, deixe em branco)"
                                     value={presenca.justificativa || ""}
                                     onChange={(e) =>
                                         atualizarJustificativa(

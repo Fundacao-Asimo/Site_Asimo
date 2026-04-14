@@ -1,0 +1,146 @@
+.container {
+    width: 100%;
+    padding: 20px;
+}
+
+.relatorio {
+    border: none;
+    padding: 10px 18px;
+    border-radius: 6px;
+    font-weight: 600;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+    margin-bottom: 1rem;
+    background: #2f66d0;
+}
+
+/* INPUT */
+.searchInput {
+    width: 100%;
+    padding: 12px 16px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    outline: none;
+    font-size: 14px;
+    margin-bottom: 20px;
+    transition: 0.2s;
+}
+
+.searchInput:focus {
+    border-color: #888;
+}
+
+/* GRID FLEX */
+.grid {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+/* CARD */
+.card {
+    flex: 1 1 220px; /* 🔥 controla quebra automática */
+    max-width: 250px;
+
+    background: #fafafa;
+    border-radius: 16px;
+    padding: 20px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    transition: 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+}
+
+.section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* CÍRCULO INICIAIS */
+.avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-weight: bold;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+/* NOME */
+.nome {
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 6px;
+}
+
+/* ÁREA */
+.area {
+    font-size: 13px;
+    padding: 4px 10px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+/* ÍCONES */
+.actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 8px;
+}
+
+/* CORES EXEMPLO (igual da imagem) */
+.projetos {
+    background-color: #DCEFF3;
+    color: #0F6B75;
+}
+
+.marketing {
+    background: #DCEAFE;
+    color: #2563EB;
+}
+
+.docencia {
+    background: #FFF1E6;
+    color: #FF7A00;
+}
+
+.gestao {
+    background: #DCFCE7;
+    color: #16A34A;
+}
+
+.audiovisual {
+    background: #FEE2E2;
+    color: #DC2626;
+}
+
+.diretoria {
+    background: #e5e7eb;
+    color: #374151;
+}
+
+.aprovado {
+    color: #16A34A;
+    font-weight: bold;
+}
+
+.pendente {
+    color: #eab308;
+    font-weight: bold;
+}

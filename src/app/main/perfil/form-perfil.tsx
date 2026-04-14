@@ -146,9 +146,9 @@ export default function FormPerfil({membro}: {membro: MembroProps | null})
                         className={styles.profileImage}
                     />
 
-                    <div className={styles.imageOverlay} onClick={() => isEditing && fileInputRef.current?.click()}>
+                    {isEditing && <div className={styles.imageOverlay} onClick={() => isEditing && fileInputRef.current?.click()}>
                         ✏️
-                    </div>
+                    </div>}
                 </div>
 
                 <input
