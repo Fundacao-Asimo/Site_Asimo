@@ -23,6 +23,7 @@ import {
     faClipboardList,
     faHandshake,
     faAlarmClock,
+    faFileLines,
 } from "@fortawesome/free-solid-svg-icons";
 
 export default function HeaderMain({isAdm, userObject}: {isAdm: boolean, userObject: MembroProps | null})
@@ -67,12 +68,12 @@ export default function HeaderMain({isAdm, userObject}: {isAdm: boolean, userObj
                     {isAdm && <li className={styles.separacao}>DIRETORIA</li>}
                     {isAdm && <li className={`${styles.item} ${pathname.includes("/main/dashboard-principal") ? styles.active : ""}`} ><a href="/main/dashboard-principal">Dashboard Principal</a></li>}
                     {isAdm && <li className={`${styles.item} ${pathname.includes("/main/controle-horas") ? styles.active : ""}`} ><a href="/main/controle-horas"><FontAwesomeIcon style={{marginRight: "0.5rem"}} icon={faAlarmClock} />Horas Controle</a></li>}
+                    {isAdm && <li className={`${styles.item} ${pathname.includes("/main/relatorios-horas") ? styles.active : ""}`} ><a href="/main/relatorios-horas"><FontAwesomeIcon style={{marginRight: "0.5rem"}} icon={faFileLines} />Relatórios de Horas</a></li>}
                     {isAdm && <li className={`${styles.item} ${pathname.includes("/main/free-time-geral") ? styles.active : ""}`} ><a href="/main/free-time-geral"><FontAwesomeIcon style={{marginRight: "0.5rem"}} icon={faCalendarWeek} />Free Time Geral</a></li>}
                     {isAdm && <li className={`${styles.item} ${pathname.includes("/main/escolas-parceiras") ? styles.active : ""}`} ><a href="/main/escolas-parceiras"><FontAwesomeIcon style={{marginRight: "0.5rem"}} icon={faSchool} />Escolas Parceiras</a></li>}
                     {isAdm && <li className={`${styles.item} ${pathname.includes("/main/agenda-reunioes") ? styles.active : ""}`} ><a href="/main/agenda-reunioes"><FontAwesomeIcon style={{marginRight: "0.5rem"}} icon={faCalendarPlus} />Agenda de Reuniões</a></li>}
                     {isAdm && <li className={`${styles.item} ${pathname.includes("/main/controle-frequencia") ? styles.active : ""}`} ><a href="/main/controle-frequencia"><FontAwesomeIcon style={{marginRight: "0.5rem"}} icon={faClipboardList} />Controle de Frequência</a></li>}
                     {isAdm && <li className={`${styles.item} ${pathname.includes("/main/eventos") ? styles.active : ""}`} ><a href="/main/eventos">Eventos & Workshops</a></li>}
-                    {isAdm && <li className={`${styles.item} ${pathname.includes("/main/relatorios-horas") ? styles.active : ""}`} ><a href="/main/relatorios-horas">Relatórios de Horas</a></li>}
                     {isAdm && <li className={`${styles.item} ${pathname.includes("/main/controle-membros") ? styles.active : ""}`} ><a href="/main/controle-membros"><FontAwesomeIcon style={{marginRight: "0.5rem"}} icon={faUserGear} />Gestão de Membros</a></li>}
                     {isAdm && <li className={`${styles.item} ${pathname.includes("/main/controle-requisicoes") ? styles.active : ""}`} ><a href="/main/controle-requisicoes"><FontAwesomeIcon style={{marginRight: "0.5rem"}} icon={faExchangeAlt} />Requisições</a></li>}
                     {isAdm && <li className={`${styles.item} ${pathname.includes("/main/controle-atividades") ? styles.active : ""}`} ><a href="/main/controle-atividades">Atribuir Atividades</a></li>}
