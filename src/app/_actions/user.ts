@@ -2,7 +2,12 @@
 
 import DB_user from "@/app/_lib/DB_user";
 import type { MembroInfo, MembroProps } from "@/app/_lib/DB_user";
-import { isSessionValid } from "../_lib/session";
+import { createSessionToken, deleteSessionCookie, isSessionValid } from "../_lib/session";
+
+export async function update_cookie(userId: number, isAdm: boolean, status: boolean) {
+    await deleteSessionCookie();
+    await createSessionToken(userId, isAdm, status);
+}
 
 export async function query_user_id(id: number) {
     return await DB_user.query_user_id(id);

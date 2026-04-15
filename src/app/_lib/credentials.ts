@@ -35,8 +35,16 @@ export async function validateCredentials(data: LoginCredentials)
 
     if(isMatch)
     {
-        await createSessionToken(user.id, user.adm);
-        redirect('/main');
+        let status = true;
+        if(user.id !== 1 && (user.nasc_date === "" || user.nasc_date === null || user.matricula === "" || user.matricula === null || user.curso === "" || user.curso === null || user.telefone === "" || user.telefone === null || user.endereco === "" || user.endereco === null || user.cpf === "" || user.cpf === null))
+        {
+            status = false;
+        }
+        await createSessionToken(user.id, user.adm, status);
+        if(status)
+            redirect('/main');
+        else
+            redirect("/main/perfil");
     }
     else{
         return {error: 'Usuario ou senhas incorretos'};
