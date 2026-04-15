@@ -33,6 +33,11 @@ export async function middleware(req: NextRequest){
     //verificar se a requisicao possui credenciais validas para criar uma session
     const session = await isSessionValid();
     const isAdm = session as {isAdm: boolean};
+    const status = session as {status: boolean};
+
+    if (session && !status.status && pathname !== '/main/perfil') {
+        return NextResponse.redirect(new URL('/main/perfil', req.nextUrl));
+    }
 
     if(publicRoutes.includes(pathname) && session) {
         return NextResponse.redirect(new URL('/main', req.nextUrl));
@@ -47,6 +52,4 @@ export async function middleware(req: NextRequest){
     }
     
     return NextResponse.next();
-      
-
 }

@@ -5,15 +5,51 @@ import { MembroProps } from "@/app/_lib/DB_user";
 import toast from 'react-hot-toast';
 import Link from "next/link";
 import styles from "./perfil_page.module.css"
-import { edit_user, upload_foto } from '@/app/_actions/user';
+import { edit_user, update_cookie, upload_foto } from '@/app/_actions/user';
 import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 
+function isValidCPF(cpf: string) {
+    cpf = cpf.replace(/\D/g, "");
+
+    if (cpf.length !== 11) return false;
+
+    // elimina CPFs inválidos tipo 111.111.111-11
+    if (/^(\d)\1+$/.test(cpf)) return false;
+
+    let sum = 0;
+    let rest;
+
+    // 1º dígito
+    for (let i = 1; i <= 9; i++) {
+        sum += parseInt(cpf.substring(i - 1, i)) * (11 - i);
+    }
+
+    rest = (sum * 10) % 11;
+    if (rest === 10 || rest === 11) rest = 0;
+    if (rest !== parseInt(cpf.substring(9, 10))) return false;
+
+    sum = 0;
+
+    // 2º dígito
+    for (let i = 1; i <= 10; i++) {
+        sum += parseInt(cpf.substring(i - 1, i)) * (12 - i);
+    }
+
+    rest = (sum * 10) % 11;
+    if (rest === 10 || rest === 11) rest = 0;
+
+    return rest === parseInt(cpf.substring(10, 11));
+}
+
 const CreateUserSchema = z.object({
     email: z.string(),
-    //email: z.string().trim().email('Email com formato incorreto'),
     senha: z.string(),
     confSenha: z.string(),
+    cpf: z.string()
+        .refine((cpf) => isValidCPF(cpf), {
+            message: "CPF inválido",
+        }),
 }).refine((data) => data.senha === data.confSenha, {
     message: "Senhas não conferem",
     path: ["confSenha"]
@@ -28,9 +64,14 @@ export default function FormPerfil({membro}: {membro: MembroProps | null})
             router.push("/main");
             return;
         }
+        if(membro?.nasc_date === "" || membro?.nasc_date === null || membro?.matricula === "" || membro?.matricula === null || membro?.curso === "" || membro?.curso === null || membro?.telefone === "" || membro?.telefone === null || membro?.endereco === "" || membro?.endereco === null || membro?.cpf === "" || membro?.cpf === null)
+        {
+            toast.error("Atualize seus dados!");
+        }
     }, [membro, router]);
 
     const [isEditing, setIsEditing] = useState(false);
+    const [cpf, setCpf] = useState(formatCPF(membro?.cpf ? membro.cpf : ""));
     const [tel, setTel] = useState(formatTel(membro?.telefone ? membro.telefone : ""));
 
     // 🆕 preview da imagem
@@ -53,6 +94,18 @@ export default function FormPerfil({membro}: {membro: MembroProps | null})
 
         const url = URL.createObjectURL(file);
         setPreview(url);
+    }
+
+    function handleChangeCpf(e: React.ChangeEvent<HTMLInputElement>) {
+        setCpf(formatCPF(e.target.value));
+    }
+
+    function formatCPF(value: string) {
+        value = value.replace(/\D/g, "").slice(0, 11);
+        value = value.replace(/(\d{3})(\d)/, "$1.$2");
+        value = value.replace(/(\d{3})(\d)/, "$1.$2");
+        value = value.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
+        return value;
     }
 
     function handleChangeTel(e: React.ChangeEvent<HTMLInputElement>) {
@@ -91,7 +144,7 @@ export default function FormPerfil({membro}: {membro: MembroProps | null})
             curso: formData.get('curso') as string,
             telefone: formData.get('telefone') as string,
             endereco: formData.get('endereco') as string,
-            cpf: membro?.cpf ? membro.cpf : ""
+            cpf: formData.get('cpf') as string
         }
 
         editUserData.curso = editUserData.curso.toUpperCase();
@@ -130,6 +183,12 @@ export default function FormPerfil({membro}: {membro: MembroProps | null})
         } else {
             toast.success("Editado com sucesso!");
             setIsEditing(false);
+            let status = true;
+            if(newUser.id !== 1 && (newUser.nasc_date === "" || newUser.nasc_date === null || newUser.matricula === "" || newUser.matricula === null || newUser.curso === "" || newUser.curso === null || newUser.telefone === "" || newUser.telefone === null || newUser.endereco === "" || newUser.endereco === null || newUser.cpf === "" || newUser.cpf === null))
+            {
+                status = false;
+            }
+            update_cookie(newUser.id, newUser.adm, status);
         }
     }
 
@@ -201,6 +260,22 @@ export default function FormPerfil({membro}: {membro: MembroProps | null})
                         placeholder="Apelido do Membro"
                         defaultValue={membro?.apelido}
                         disabled={!isEditing}
+                    />
+                </section>
+
+                <section className={styles.inputGroup}>
+                    <label className={styles.label} htmlFor="cpf">CPF</label>
+                    <input
+                        className={styles.input}
+                        type="text"
+                        value={cpf}
+                        id="cpf"
+                        name="cpf"
+                        onChange={handleChangeCpf}
+                        placeholder="000.000.000-00"
+                        maxLength={14}
+                        disabled={!isEditing}
+                        // required
                     />
                 </section>
 

@@ -21,12 +21,12 @@ async function openSessionToken(token: string)
     
 }
 
-export async function createSessionToken(userId: number, isAdm: boolean)
+export async function createSessionToken(userId: number, isAdm: boolean, status: boolean)
 {
     const encodedKey = new TextEncoder().encode(process.env.TOKEN); 
     const expiresAt = new Date(Date.now() + 1000 * 60 * 60);
 
-    const session = await new SignJWT({userId, isAdm}).setProtectedHeader({
+    const session = await new SignJWT({userId, isAdm, status}).setProtectedHeader({
         alg: 'HS256'
     })
     .setExpirationTime('1h') 
