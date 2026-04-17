@@ -6,7 +6,7 @@ import { MembroProps } from "@/app/_lib/DB_user";
 import { delete_hora } from "@/app/_actions/hora";
 import toast from "react-hot-toast";
 
-export default function HoraDetalhe({dados, membro, onDelete, popUp}: {dados: HoraProps, membro: MembroProps | undefined, onDelete: (id: number) => void, popUp: (data: {open: boolean; hora: HoraProps; accept: boolean;}) => void})
+export default function HoraDetalhe({dados, membro, onDelete, popUp}: {dados: HoraProps, membro: MembroProps | undefined, onDelete: () => void, popUp: (data: {open: boolean; hora: HoraProps; accept: boolean;}) => void})
 {
     let status = "";
     if(dados.aprovado === true)
@@ -17,9 +17,7 @@ export default function HoraDetalhe({dados, membro, onDelete, popUp}: {dados: Ho
         status = "Pendente";
 
     async function excluir() {
-        await delete_hora(dados.id);
-        onDelete(dados.id);
-        toast.success("Registro deletado!");
+        onDelete();
     }
 
     return(
