@@ -66,7 +66,7 @@ export default function FormPerfil({membro}: {membro: MembroProps | null})
         }
         if(membro?.nasc_date === "" || membro?.nasc_date === null || membro?.matricula === "" || membro?.matricula === null || membro?.curso === "" || membro?.curso === null || membro?.telefone === "" || membro?.telefone === null || membro?.endereco === "" || membro?.endereco === null || membro?.cpf === "" || membro?.cpf === null)
         {
-            toast.error("Atualize seus dados!");
+            toast.error("Atualize seus dados! Preencha todos os campos!");
         }
     }, [membro, router]);
 
