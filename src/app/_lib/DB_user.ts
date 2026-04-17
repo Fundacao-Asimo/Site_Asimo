@@ -139,9 +139,11 @@ async function delete_user(id: number)
         .delete()
         .eq("id", id);
 
-    if(error) {
-        throw error;
-    }
+    if(error)
+        return false;
+    
+    else
+        return true;
 }
 
 async function edit_user(dadosAtualizados: any)

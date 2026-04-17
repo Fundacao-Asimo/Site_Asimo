@@ -49,7 +49,7 @@ export default function ConteudoRequisicoes({idMembro, listReq}: {idMembro: numb
             descricao: form.get('descricao') as string
         }
 
-        if(formResp.area === "Falta" || formResp.area === "Denuncia" || formResp.area === "Advertencia" || formResp.area === "Sugestao")
+        if(formResp.area === "Falta" || formResp.area === "Denúncia" || formResp.area === "Advertencia" || formResp.area === "Sugestao" || formResp.area === "Outro")
         {
             formResp.descricao = `${formResp.area} - ` + formResp.descricao;
             formResp.area = "RH";
@@ -151,9 +151,10 @@ export default function ConteudoRequisicoes({idMembro, listReq}: {idMembro: numb
                                     <>
                                         <option value="Financeiro">Reembolso Financeiro</option>
                                         <option value="Falta">Justificativa de Falta</option>
-                                        <option value="Denuncia">Denúncia</option>
+                                        <option value="Denúncia">Denúncia</option>
                                         <option value="Advertencia">Recurso de Advertência</option>
                                         <option value="Sugestao">Sugestão</option>
+                                        <option value="Outro">Outro</option>
                                     </>
                                 )}
                             </select>

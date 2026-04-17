@@ -8,7 +8,7 @@ import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { HoraProps } from "@/app/_lib/DB_horas";
 import HoraDetalhe from "./hora-detalhe";
-import { edit_hora } from "@/app/_actions/hora";
+import { delete_hora, edit_hora } from "@/app/_actions/hora";
 
 const areas = ["Docência", "Projetos", "Marketing", "Gestão", "AudioVisual"];
 
@@ -37,6 +37,13 @@ export default function ConteudoControleHoras({listHoras, listMembros}: {listHor
             open: false,
             hora: null,
             accept: false
+        });
+    const [modalExcluir, setModalExcluir] = useState<{
+            open: boolean;
+            hora: HoraProps | null;
+        }>({
+            open: false,
+            hora: null
         });
 
     useEffect(() => {
@@ -105,6 +112,7 @@ export default function ConteudoControleHoras({listHoras, listMembros}: {listHor
     return(
         <>
             {modalConfirm.open && modalConfirm.hora && <ModalConfirm accept={modalConfirm.accept} hora={modalConfirm.hora} onClose={() => setModalConfirm(prev => ({...prev, open: false}))}/>}
+            {modalExcluir.open && modalExcluir.hora && <ModalExcluir hora={modalExcluir.hora} onSucess={(H: HoraProps) => handleDelete(H.id)} onClose={() => setModalExcluir(prev => ({...prev, open: false}))}/>}
             <div className={styles.container}>
                 <div className={styles.historico}>
                     <div className={styles.historicoHeader}>
@@ -157,7 +165,7 @@ export default function ConteudoControleHoras({listHoras, listMembros}: {listHor
 
                     <div className={styles.card}>
                         <div className={styles.tableWrapper}>    
-                            {filtro.map((h: HoraProps) => <HoraDetalhe key={h.id} dados={h} membro={listMembros.find(m => m.id === h.membro)} onDelete={handleDelete} popUp={(x) => setModalConfirm(x)}/>)}
+                            {filtro.map((h: HoraProps) => <HoraDetalhe key={h.id} dados={h} membro={listMembros.find(m => m.id === h.membro)} onDelete={() => setModalExcluir({open: true, hora: h})} popUp={(x) => setModalConfirm(x)}/>)}
                         </div>
                     </div>
 
@@ -230,6 +238,49 @@ function ModalConfirm({ accept, hora, onClose }: {accept: boolean, hora: HoraPro
 
                 <div className={modal.footer}>
                     <button onClick={editar} className={modal.btnConf}>
+                        Confirmar
+                    </button>
+                    <button onClick={onClose} className={modal.btnCanc}>
+                        Cancelar
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    );
+}
+
+function ModalExcluir({ hora, onClose, onSucess }: {hora: HoraProps, onClose: () => void, onSucess: (h: HoraProps) => void})
+{
+
+    async function excluir() {
+        const retorno = await delete_hora(hora.id);
+
+        if(!retorno)
+        {
+            toast.error(`Erro ao excluir registro!`);
+            onClose();
+        }
+        else
+        {
+            toast.success(`Êxito ao excluir registro!`);
+            onSucess(hora);
+            onClose();
+        }
+    }
+
+    return(
+        <div className={modal.overlay}>
+        
+            <div className={modal.modal}>
+
+                <div className={modal.header}>
+                    <h2>Excluir Registro?</h2>
+                    <button onClick={onClose} className={modal.close}>×</button>
+                </div>
+
+                <div className={modal.footer}>
+                    <button onClick={excluir} className={modal.btnConf}>
                         Confirmar
                     </button>
                     <button onClick={onClose} className={modal.btnCanc}>
