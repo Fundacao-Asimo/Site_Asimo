@@ -131,7 +131,6 @@ export default function ConteudoFreeTimeGeral({listFree, listMembros}: {listFree
         else
             filtroArea = listMembros.filter((m: MembroProps) => m.area === value);
 
-        preencherData(listFree, filtroArea);
         setSelectedMembers(filtroArea.map((m: MembroProps) => m.id));
         setArea(value);
     }
@@ -144,19 +143,13 @@ export default function ConteudoFreeTimeGeral({listFree, listMembros}: {listFree
         );
     }
 
-    function aplicarFiltroMembros() {
-
-        if (selectedMembers.length === 0) {
-            preencherData(listFree, listMembros);
-            return;
-        }
-
+    useEffect(() => {
         const membrosSelecionados = listMembros.filter((m: MembroProps) =>
             selectedMembers.includes(m.id)
         );
 
         preencherData(listFree, membrosSelecionados);
-    }
+    }, [selectedMembers]);
 
     const membrosPorArea = areas.reduce((acc, area) => {
         acc[area] = listMembros.filter((m) => m.area === area);
@@ -266,9 +259,6 @@ export default function ConteudoFreeTimeGeral({listFree, listMembros}: {listFree
                             ))}
                         </div>
                         <div style={{width: "100%", gap: "1rem", display: "flex", justifyContent: "flex-end", marginTop: "1.5rem"}}>
-                            <button className={`${styles.button} ${styles.btnLivre}`} onClick={aplicarFiltroMembros}>
-                                Aplicar Filtro
-                            </button>
                             <button className={`${styles.button} ${styles.btnOcupado}`} onClick={() => {
                                 setSelectedMembers([]);
                                 preencherData([], listMembros);

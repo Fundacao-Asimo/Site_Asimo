@@ -154,6 +154,7 @@ export default function ModalCaixa({ entrada, onClose, onSuccess, addLista }: {e
                             <option value="Doação">Doação</option>
                             <option value="Reembolso">Reembolso</option>
                             <option value="Alimentação">Alimentação</option>
+                            <option value="Outro">Outro</option>
                         </select>
                     </section>
 
