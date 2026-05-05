@@ -66,15 +66,15 @@ export default function HoraDetalhe({dados, membro, onDelete, popUp}: {dados: Ho
 
                 {status === "Pendente" ?
                 <div className={styles.actionsCell}>
-                    <button className={styles.btnAprovar}>
+                    <button className={styles.btnAprovar} onClick={() => popUp({open: true, hora: dados, accept: true})}>
                         <FontAwesomeIcon icon={faCheck} /> Aprovar
                     </button>
-                    <button className={styles.btnRejeitar}>
+                    <button className={styles.btnRejeitar} onClick={() => popUp({open: true, hora: dados, accept: false})}>
                         <FontAwesomeIcon icon={faXmark} /> Rejeitar
                     </button>
                 </div>
                 :
-                <button className={styles.excluir}>
+                <button className={styles.excluir} onClick={excluir}>
                     <FontAwesomeIcon icon={faTrash}/> Excluir
                 </button>}
             </div>

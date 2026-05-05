@@ -82,14 +82,26 @@ async function insert_trans(dados: TransacaoInfo)
 
 async function delete_trans(id: number)
 {
+    const t = await query_trans_id(id);
+
+    if(!t)
+        return false;
+
+    const caixa = add_caixa(t.valor, !t.entrada);
+
+    if(!caixa)
+        return false;
+
     const { error } = await supabase
         .from("transacoes")
         .delete()
         .eq("id", id);
 
     if(error) {
-        throw error;
+        return false;
     }
+    else
+        return true;
 }
 
 async function edit_trans(dadosAtualizados: TransacaoProps)

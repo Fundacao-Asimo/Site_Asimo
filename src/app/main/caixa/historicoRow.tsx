@@ -1,12 +1,16 @@
 import { TransacaoProps } from "@/app/_lib/DB_transacoes";
 import styles from "./page.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPaperclip } from "@fortawesome/free-solid-svg-icons";
+import { faPaperclip, faTrash } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 
-export default function HistoricoRow({dados}: {dados: TransacaoProps})
+export default function HistoricoRow({dados, onDelete}: {dados: TransacaoProps, onDelete: () => void})
 {
     const isEntrada = dados.entrada;
+
+    async function excluir() {
+        onDelete();
+    }
 
     return (
         <tr>
@@ -35,6 +39,12 @@ export default function HistoricoRow({dados}: {dados: TransacaoProps})
             </td>
 
             <td>{dados.anexo_url && dados.anexo_url.length > 0 ? <Link href={dados.anexo_url} target="_blank"><FontAwesomeIcon icon={faPaperclip}/></Link> : "-"}</td>
+
+            <td>
+                <button className={styles.excluir} onClick={excluir}>
+                    <FontAwesomeIcon icon={faTrash}/> Excluir
+                </button>
+            </td>
 
             {/* <td>
                 <span
