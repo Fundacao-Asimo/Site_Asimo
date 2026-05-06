@@ -124,7 +124,8 @@ function HistoricoRow({dados}: {dados: EventoProps})
             </div>
 
             <form action={cancelarReuniao}>
-                {new Date(dados.data + "T00:00:00") < new Date() ? <Link href={`/main/controle-frequencia/${dados.id}`} className={`${styles.badge} ${styles.lancar}`}>Lançar Presença</Link> : <button className={`${styles.badge} ${styles.cancelar}`}>Cancelar Reunião</button>}
+                {new Date(dados.data + "T00:00:00") < new Date() && <Link href={`/main/controle-frequencia/${dados.id}`} className={`${styles.badge} ${styles.lancar}`}>Lançar Presença</Link>}
+                <button className={`${styles.badge} ${styles.cancelar}`}>Cancelar Reunião</button>
             </form>
         </div>
     );

@@ -44,6 +44,7 @@ export default function ConteudoRequisicoes({idMembro, listReq}: {idMembro: numb
     async function enviarReq(form: FormData) {
         const formResp = {
             area: form.get('area') as string,
+            data_envio: new Date().toISOString().split('T')[0],
             data: form.get('data') as string | null,
             anexo: form.get('anexo') as File | null,
             descricao: form.get('descricao') as string
@@ -68,6 +69,7 @@ export default function ConteudoRequisicoes({idMembro, listReq}: {idMembro: numb
 
         const newReq: RequiInfo = {
             membro: idMembro,
+            data_envio: formResp.data_envio,
             data: formResp.data ? formResp.data : new Date().toISOString().split('T')[0],
             descricao: formResp.descricao,
             area: formResp.area,
@@ -163,15 +165,23 @@ export default function ConteudoRequisicoes({idMembro, listReq}: {idMembro: numb
 
                         <div className={styles.col}>
                             <label className={styles.label} htmlFor={`${selecao ? "data" : "anexo"}`}>
-                                {selecao ? "Prazo Esperado" : "Anexar Arquivo (Opcional)"}
+                                {selecao ? "Prazo Esperado" : "Ocorrência"}
                             </label>
 
                             {selecao ? (
                                 <input type="date" name="data" className={styles.input} required />
                             ) : (
-                                <input type="file" name="anexo" className={styles.input} />
+                                <input type="date" name="data" className={styles.input} required />
                             )}
                         </div>
+
+                        {!selecao && <div className={styles.col}>
+                            <label className={styles.label} htmlFor="anexo">
+                                Anexar Arquivo (Opcional)
+                            </label>
+                            <input type="file" name="anexo" className={styles.input} />
+                        </div>}
+
                     </div>
 
                     <div className={styles.col}>

@@ -19,12 +19,20 @@ export default async function ListMembrosPage()
                 <div className={styles.header}>
                     <h1 className={styles.title}>Membros</h1>
 
-                    <Link
-                        href={'/main/controle-membros/create'}
-                        className={styles.addButton}
-                    >
-                        + Adicionar
-                    </Link>
+                    <div className={styles.buttons}>
+                        <Link
+                            href={'/main/controle-membros/create'}
+                            className={styles.addButton}
+                        >
+                            + Adicionar
+                        </Link>
+                        <Link
+                            href={'/main/controle-membros/inativo'}
+                            className={styles.inativeButton}
+                        >
+                            Inativos
+                        </Link>
+                    </div>
                 </div>
 
                 <div className={styles.grid}>

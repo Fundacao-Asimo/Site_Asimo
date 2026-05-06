@@ -15,7 +15,7 @@ function formatHoras(horas: number) {
 }
 
 export async function GET() {
-    const membros = await list_user();
+    const membros = await list_user(null);
     const horas = await list_horas_geral();
 
     // Agrupar horas por membro

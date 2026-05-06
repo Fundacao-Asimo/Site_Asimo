@@ -6,6 +6,7 @@ import toast from 'react-hot-toast';
 import { validateCredentials } from '@/app/_lib/credentials';
 import Image from 'next/image';
 import Link from 'next/link';
+import { criptografar_cpf, descriptografar_cpf } from '../_actions/cripto';
 
 const LoginSchema = z.object({
     email: z.string().trim().email('Email com formato incorreto'),
@@ -20,7 +21,6 @@ export interface LoginCredentials {
 export default function LoginPage(){
 
     const loginAction = async (formData: FormData) => {
-
         const loginData: LoginCredentials = {
             email: formData.get('email') as string,
             password: formData.get('password') as string
@@ -91,6 +91,7 @@ export default function LoginPage(){
                             <label>Email</label>
                             <input type="email" name="email" id="email" placeholder="seu@email.com" />
                         </div>
+
                         <div className={styles.inputGroup}>
                             <label>Senha</label>
                             <input type="password" name="password" id="password" placeholder="••••••••" />

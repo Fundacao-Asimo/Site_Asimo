@@ -2,6 +2,7 @@ import { supabase } from "./supabase";
 
 export interface RequiInfo {
     membro: number,
+    data_envio: string,
     data: string,
     descricao: string,
     area: string,
@@ -12,6 +13,7 @@ export interface RequiInfo {
 export interface RequiProps {
     id: number,
     membro: number,
+    data_envio: string,
     data: string,
     descricao: string,
     area: string,

@@ -7,7 +7,7 @@ export default function HistoricoRow({dados}: {dados: RequiProps})
         <div className={`${styles.card} ${styles[dados.area]}`}>
             <div className={styles.divCardText}>
                 <p className={styles.bold}>{dados.descricao}</p>
-                <p className={styles.data}>Data: {new Date(dados.data + "T00:00:00").toLocaleDateString("pt-BR")}</p>
+                <p className={styles.data}>Data de envio: {new Date(dados.data_envio + "T00:00:00").toLocaleDateString("pt-BR")}</p>
             </div>
 
             <div>

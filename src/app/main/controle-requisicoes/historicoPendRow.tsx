@@ -20,7 +20,11 @@ export default function HistoricoPendRow({membro, dados, open}: {
             <div className={styles.divCardText}>
                 <p className={styles.bold}>{dados.descricao}</p>
                 <p>Membro: {membro?.nome_completo}</p>
-                <p>Data: {new Date(dados.data + "T00:00:00").toLocaleDateString("pt-BR")}</p>
+                <p>Data de envio: {new Date(dados.data_envio + "T00:00:00").toLocaleDateString("pt-BR")}</p>
+                {dados.area === "RH"
+                    ? <p>Data da ocorrência: {new Date(dados.data + "T00:00:00").toLocaleDateString("pt-BR")}</p>
+                    : <p>Prazo esperado: {new Date(dados.data + "T00:00:00").toLocaleDateString("pt-BR")}</p>
+                }
             </div>
 
             <div className={styles.actionsCell}>

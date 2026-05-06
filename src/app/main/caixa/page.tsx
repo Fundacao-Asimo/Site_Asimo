@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import { query_caixa } from "@/app/_actions/caixa";
 import toast from "react-hot-toast";
 import { redirect } from "next/navigation";
-import { edit_trans, list_trans } from "@/app/_actions/transacao";
+import { delete_trans, edit_trans, list_trans } from "@/app/_actions/transacao";
 import { TransacaoProps } from "@/app/_lib/DB_transacoes";
 import HistoricoRow from "./historicoRow";
 import RequisicoesRow from "./requisicoesRow";
@@ -40,6 +40,13 @@ export default function CaixaPage()
         transacao: null,
         accept: false
     });
+    const [modalExcluir, setModalExcluir] = useState<{
+                open: boolean;
+                trans: TransacaoProps | null;
+            }>({
+                open: false,
+                trans: null
+            });
 
     useEffect(() => {
         load();
@@ -128,6 +135,8 @@ export default function CaixaPage()
                     onSuccess={load}
                 />
             )}
+
+            {modalExcluir.open && modalExcluir.trans && <ModalExcluir trans={modalExcluir.trans} onSucess={load} onClose={() => setModalExcluir(prev => ({...prev, open: false}))}/>}
 
             <main>
                 <div className={styles.container}>
@@ -227,13 +236,13 @@ export default function CaixaPage()
                                         <th>CATEGORIA</th>
                                         <th>VALOR</th>
                                         <th>ANEXO</th>
-                                        {/* <th>STATUS</th> */}
+                                        <th>EXCLUIR</th>
                                     </tr>
                                 </thead>
 
                                 <tbody>
                                     {filtroTrans.length > 0 && filtroTrans.map((t) => {
-                                        return <HistoricoRow key={t.id} dados={t}/>
+                                        return <HistoricoRow key={t.id} dados={t} onDelete={() => setModalExcluir({open: true, trans: t})}/>
                                     })}
                                 </tbody>
                             </table>
@@ -327,6 +336,49 @@ function ModalConfirm({ accept, transacao, onClose, onSuccess }: {accept: boolea
 
                 <div className={modal.footer}>
                     <button onClick={editar} className={modal.btnConf}>
+                        Confirmar
+                    </button>
+                    <button onClick={onClose} className={modal.btnCanc}>
+                        Cancelar
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    );
+}
+
+function ModalExcluir({ trans, onClose, onSucess }: {trans: TransacaoProps, onClose: () => void, onSucess: () => void})
+{
+
+    async function excluir() {
+        const retorno = await delete_trans(trans.id);
+
+        if(!retorno)
+        {
+            toast.error(`Erro ao excluir registro!`);
+            onClose();
+        }
+        else
+        {
+            toast.success(`Êxito ao excluir registro!`);
+            onSucess();
+            onClose();
+        }
+    }
+
+    return(
+        <div className={modal.overlay}>
+        
+            <div className={modal.modal}>
+
+                <div className={modal.header}>
+                    <h2>Excluir Registro?</h2>
+                    <button onClick={onClose} className={modal.close}>×</button>
+                </div>
+
+                <div className={modal.footer}>
+                    <button onClick={excluir} className={modal.btnConf}>
                         Confirmar
                     </button>
                     <button onClick={onClose} className={modal.btnCanc}>

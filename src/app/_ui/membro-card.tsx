@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { MembroProps } from "../_lib/DB_user";
-import { delete_user } from "../_actions/user";
+import { delete_user, edit_user } from "../_actions/user";
 import styles from "../_styles/MembroCard.module.css"
 import modal from "../_styles/popUp_confirmation.module.css";
 import { useState } from "react";
@@ -17,12 +17,21 @@ export default function MembroCard(props: MembroProps)
             membro: MembroProps | null;
         }>({
             open: false,
-            membro: null
+            membro: props
+        });
+
+    const [modalAtivar, setModalAtivar] = useState<{
+            open: boolean;
+            membro: MembroProps | null;
+        }>({
+            open: false,
+            membro: props
         });
 
     return(
         <>
             {modalExcluir.open && modalExcluir.membro && <ModalExcluir membro={modalExcluir.membro} onClose={() => setModalExcluir(prev => ({...prev, open: false}))}/>}
+            {modalAtivar.open && modalAtivar.membro && <ModalAtivar membro={modalAtivar.membro} onClose={() => setModalAtivar(prev => ({...prev, open: false}))}/>}
             <div className={styles.card}>
                 <h2 className={styles.name}>{props.nome_completo}</h2>
 
@@ -42,7 +51,7 @@ export default function MembroCard(props: MembroProps)
                         className={styles.image}
                     />}
 
-                    <section className={styles.actions}>
+                    {props.ativo ? <section className={styles.actions}>
                         <Link
                             href={`/main/controle-membros/edit/${props.id}`}
                             className={styles.link}
@@ -57,21 +66,74 @@ export default function MembroCard(props: MembroProps)
                             Advertência
                         </Link>
 
-                        <form action={() => setModalExcluir({open: true, membro: props})}>
-                            <button className={styles.deleteButton}>
-                                Remover
-                            </button>
-
-                            <input
-                                defaultValue={props.id}
-                                name="membro-id"
-                                hidden
-                            />
-                        </form>
-                    </section>
+                        <Link href={`/main/controle-membros/inativo/${props.id}`} className={styles.deleteButton}>
+                            Desativar
+                        </Link>
+                                
+                    </section> 
+                    : <section className={styles.actions}>
+                        <button className={styles.ativarButton} onClick={() => setModalAtivar({open: true, membro: props})}>
+                            Ativar
+                        </button>
+                        
+                        <button className={styles.deleteButton} onClick={() => setModalExcluir({open: true, membro: props})}>
+                            Remover
+                        </button>
+                    </section>}
                 </div>
             </div>
         </>
+    );
+}
+
+function ModalAtivar({ membro, onClose }: {membro: MembroProps, onClose: () => void})
+{
+
+    async function ativar() {
+        const updatedMembro = {
+            ...membro,
+            ativo: true,
+            desligamento_motivo: null,
+            desligamento_date: null
+        };
+        updatedMembro.senha = "";
+
+        const retorno = await edit_user(updatedMembro);
+
+        if(!retorno)
+        {
+            toast.error(`Erro ao ativar membro!`);
+            onClose();
+        }
+        else
+        {
+            toast.success(`Êxito ao ativar membro!`);
+            onClose();
+            redirect("/main/controle-membros");
+        }
+    }
+
+    return(
+        <div className={modal.overlay}>
+        
+            <div className={modal.modal}>
+
+                <div className={modal.header}>
+                    <h2>Ativar Membro?</h2>
+                    <button onClick={onClose} className={modal.close}>×</button>
+                </div>
+
+                <div className={modal.footer}>
+                    <button onClick={ativar} className={modal.btnConf}>
+                        Confirmar
+                    </button>
+                    <button onClick={onClose} className={modal.btnCanc}>
+                        Cancelar
+                    </button>
+                </div>
+
+            </div>
+        </div>
     );
 }
 
