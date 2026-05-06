@@ -21,12 +21,6 @@ export interface LoginCredentials {
 export default function LoginPage(){
 
     const loginAction = async (formData: FormData) => {
-        if(formData.get('cpf') as string !== "")
-            console.log(await criptografar_cpf(formData.get('cpf') as string));
-
-        if(formData.get('descpf') as string !== "")
-            console.log(await descriptografar_cpf(formData.get('descpf') as string));
-
         const loginData: LoginCredentials = {
             email: formData.get('email') as string,
             password: formData.get('password') as string
@@ -96,15 +90,6 @@ export default function LoginPage(){
                         <div className={styles.inputGroup}>
                             <label>Email</label>
                             <input type="email" name="email" id="email" placeholder="seu@email.com" />
-                        </div>
-
-                        <div className={styles.inputGroup}>
-                            <label>Cpf</label>
-                            <input type="text" name="cpf" id="cpf" placeholder="seu@email.com" />
-                        </div>
-                        <div className={styles.inputGroup}>
-                            <label>desCpf</label>
-                            <input type="text" name="descpf" id="descpf" placeholder="seu@email.com" />
                         </div>
 
                         <div className={styles.inputGroup}>
