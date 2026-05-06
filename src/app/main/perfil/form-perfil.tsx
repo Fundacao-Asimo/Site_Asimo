@@ -144,7 +144,10 @@ export default function FormPerfil({membro}: {membro: MembroProps | null})
             curso: formData.get('curso') as string,
             telefone: formData.get('telefone') as string,
             endereco: formData.get('endereco') as string,
-            cpf: formData.get('cpf') as string
+            cpf: formData.get('cpf') as string,
+            ativo: membro ? membro.ativo : true,
+            desligamento_date: membro ? membro.desligamento_date : null,
+            desligamento_motivo: membro ? membro.desligamento_motivo : null,
         }
 
         editUserData.curso = editUserData.curso.toUpperCase();
