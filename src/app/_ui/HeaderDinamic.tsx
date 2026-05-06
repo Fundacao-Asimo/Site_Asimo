@@ -27,6 +27,7 @@ export default function HeaderDinamic({horas}: {horas: number})
         "/main/controle-membros": "Gestão de Membros",
         "/main/controle-membros/create": "Adicionar Membros",
         "/main/controle-membros/edit": "Editar Dados do Membro",
+        "/main/controle-membros/inativo": "Membros Inativos",
         "/main/controle-requisicoes": "Requisições",
         "/main/controle-atividades": "Atribuir Atividades",
         "/main/caixa": "Caixa & Requisições",
@@ -37,6 +38,9 @@ export default function HeaderDinamic({horas}: {horas: number})
 
     if(pathname.startsWith("/main/controle-membros/edit")) {
         title = "Editar Dados do Membro";
+    }
+    else if(pathname.startsWith("/main/controle-membros/inativo/")) {
+        title = "Desativar Membro";
     }
     else if(pathname.startsWith("/main/escolas-parceiras/edit")) {
         title = "Editar Dados da Escola";

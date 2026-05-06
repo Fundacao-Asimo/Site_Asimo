@@ -21,12 +21,12 @@ export async function query_user_email(email: string) {
     return await DB_user.query_user_email(email);
 }
 
-export async function list_user() {
-    return await DB_user.list_user();
+export async function list_user(ativo: boolean | null = true) {
+    return await DB_user.list_user(ativo);
 }
 
-export async function list_ids_user() {
-    return await DB_user.list_ids_user();
+export async function list_ids_user(ativo: boolean | null = true) {
+    return await DB_user.list_ids_user(ativo);
 }
 
 export async function insert_user(dados: MembroInfo) {

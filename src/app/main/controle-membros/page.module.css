@@ -16,6 +16,11 @@
     font-weight: 700;
 }
 
+.buttons {
+    display: flex;
+    gap: 1rem;
+}
+
 .addButton {
     background: #4f7cff;
     color: white;
@@ -26,8 +31,22 @@
     transition: background 0.2s;
 }
 
+.inativeButton {
+    background: #ef4444;;
+    color: white;
+    padding: 10px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background 0.2s;
+}
+
 .addButton:hover {
     background: #3d63cc;
+}
+
+.inativeButton:hover {
+    background: #dc2626;
 }
 
 .grid {

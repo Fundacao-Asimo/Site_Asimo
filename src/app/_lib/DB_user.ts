@@ -34,7 +34,10 @@ export interface MembroProps {
     curso: string,
     telefone: string,
     endereco: string,
-    cpf: string
+    cpf: string,
+    ativo: boolean,
+    desligamento_date: string | null,
+    desligamento_motivo: string | null
 }
 
 async function query_user_id(id: number)
@@ -88,12 +91,18 @@ async function query_user_email(email: string)
     return usuario;
 }
 
-async function list_user()
+async function list_user(ativo: boolean | null = true)
 {
-    const { data, error } = await supabase
+    let query = supabase
         .from("usuarios")
         .select("*")
         .order("nome_completo", { ascending: true });
+
+    if(ativo !== null) {
+        query = query.eq("ativo", ativo);
+    }
+
+    const { data, error } = await query;
 
     if (error) {
         return [];
@@ -101,9 +110,9 @@ async function list_user()
     return data;
 }
 
-async function list_ids_user()
+async function list_ids_user(ativo: boolean | null = true)
 {
-    const list = await list_user();
+    const list = await list_user(ativo);
 
     if (list.length === 0) {
         return [];
@@ -148,12 +157,14 @@ async function delete_user(id: number)
 
 async function edit_user(dadosAtualizados: any)
 {
-    if (dadosAtualizados.senha && dadosAtualizados.senha.trim() !== "") {
-    dadosAtualizados.senha = await criptografar_senha(dadosAtualizados.senha);
+    if (dadosAtualizados?.senha && dadosAtualizados.senha.trim() !== "" && !(dadosAtualizados.senha.startsWith("$2"))) {
+        dadosAtualizados.senha = await criptografar_senha(dadosAtualizados.senha);
+        console.log(dadosAtualizados.senha);
     } else {
         delete dadosAtualizados.senha; // mantém a antiga no banco
     }
-    dadosAtualizados.cpf = await criptografar_cpf(dadosAtualizados.cpf);
+    if(dadosAtualizados?.cpf && !(dadosAtualizados.cpf.includes(":")))
+        dadosAtualizados.cpf = await criptografar_cpf(dadosAtualizados.cpf);
 
     const {id, ...rest} = dadosAtualizados
     const dadosNovos = {...rest}

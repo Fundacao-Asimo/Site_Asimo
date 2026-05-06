@@ -48,6 +48,21 @@
     background: #e5e7eb;
 }
 
+.ativarButton {
+    background: #22c55e;
+    border: none;
+    color: white;
+    padding: 8px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    width: 100%;
+}
+
+.ativarButton:hover {
+    background: #16a34a;
+}
+
 .deleteButton {
     background: #ef4444;
     border: none;
