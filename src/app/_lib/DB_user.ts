@@ -159,7 +159,6 @@ async function edit_user(dadosAtualizados: any)
 {
     if (dadosAtualizados?.senha && dadosAtualizados.senha.trim() !== "" && !(dadosAtualizados.senha.startsWith("$2"))) {
         dadosAtualizados.senha = await criptografar_senha(dadosAtualizados.senha);
-        console.log(dadosAtualizados.senha);
     } else {
         delete dadosAtualizados.senha; // mantém a antiga no banco
     }
