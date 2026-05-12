@@ -1,0 +1,253 @@
+.content {
+    width: 100%;
+    padding: 1.25rem;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1f2937;
+}
+
+.actions {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.newButton,
+.exportButton {
+    border: none;
+    border-radius: 0.5rem;
+    padding: 0.75rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: white;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.newButton {
+    background: #16a34a;
+}
+
+.newButton:hover {
+    background: #15803d;
+}
+
+.exportButton {
+    background: #2563eb;
+}
+
+.exportButton:hover {
+    background: #1d4ed8;
+}
+
+.tabs {
+    display: flex;
+    gap: 0.5rem;
+    border-bottom: 0.0625rem solid #dcdcdc;
+    margin-bottom: 1.25rem;
+}
+
+.tab {
+    background: transparent;
+    border: none;
+    padding: 0.875rem 1.25rem;
+    cursor: pointer;
+    color: #777;
+    font-size: 0.95rem;
+    font-weight: 600;
+    transition: 0.2s ease;
+}
+
+.tab:hover {
+    background: #ececec;
+}
+
+.activeTab {
+    background: #fff;
+    color: #2f6fed;
+    border-bottom: 0.1875rem solid #2f6fed;
+}
+
+.card {
+    background-color: white;
+    border: 0.00625rem solid rgba(0, 0, 0, 0.12);
+    border-radius: 1rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 0.125rem 0.375rem rgba(0,0,0,0.05);
+    overflow: hidden;
+}
+
+.cardHeader {
+    padding: 1.5rem;
+    border-bottom: 1px solid #eee;
+}
+
+.cardTitle {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #222;
+    margin-bottom: 0.75rem;
+}
+
+.subtitle {
+    font-size: 0.95rem;
+    color: #666;
+}
+
+.average {
+    color: #1f9d55;
+    font-weight: bold;
+    margin: 0 0.25rem;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table thead {
+    background: #f8fafc;
+}
+
+.table th {
+    text-align: left;
+    font-size: 0.75rem;
+    color: #6b7a90;
+    padding: 1rem 1.5rem;
+    text-transform: uppercase;
+}
+
+.table td {
+    padding: 1rem 1.5rem;
+    border-top: 1px solid #eee;
+    font-size: 0.875rem;
+}
+
+.memberName {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #1f2937;
+}
+
+.areaBadge,
+.statusBadge {
+    padding: 0.35rem 0.75rem;
+    border-radius: 0.5rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.areaDiretoria {
+    background: #e5e7eb;
+    color: #374151;
+}
+
+.areaProjetos {
+    background: #dbeafe;
+    color: #1d4ed8;
+}
+
+.areaDocencia {
+    background: #dcfce7;
+    color: #15803d;
+}
+
+.areaMarketing {
+    background: #fce7f3;
+    color: #be185d;
+}
+
+.areaDefault {
+    background: #e5e7eb;
+    color: #374151;
+}
+
+.progressBar {
+    width: 8rem;
+    height: 1.5rem;
+    background: #e5e7eb;
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.progressFill {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 700;
+    border-radius: 999px;
+}
+
+.progressGreen {
+    background: #22c55e;
+}
+
+.progressYellow {
+    background: #eab308;
+}
+
+.progressRed {
+    background: #ef4444;
+}
+
+.frequency {
+    font-weight: 700;
+    color: #1f2937;
+}
+
+.statusExcellent,
+.statusGood {
+    background: #dcfce7;
+    color: #15803d;
+}
+
+.statusRegular {
+    background: #fef3c7;
+    color: #b45309;
+}
+
+.statusCritical {
+    background: #fee2e2;
+    color: #dc2626;
+}
+
+.statusDefault {
+    background: #e5e7eb;
+    color: #374151;
+}
+
+@media (max-width: 700px) {
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .actions {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .table {
+        min-width: 700px;
+    }
+
+    .card {
+        overflow-x: auto;
+    }
+}
