@@ -5,7 +5,7 @@ import { EventoProps } from "@/app/_lib/DB_reunioes-eventos";
 import { MembroProps } from "@/app/_lib/DB_user";
 import { PresencaInfo } from "@/app/_lib/DB_presencas";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
 import { insert_lista_presencas } from "@/app/_actions/presencas";
 import { edit_evento } from "@/app/_actions/reunioes-eventos";
@@ -14,6 +14,7 @@ export default function ConteudoControleFrequencia({dadosReuniao, listaMembros}:
 {
     const router = useRouter();
     const [presencas, setPresencas] = useState<PresencaInfo[]>([]);
+    const bloqueado = useRef(false);
 
     useEffect(() => {
         if (!dadosReuniao || listaMembros.length === 0) {
@@ -60,6 +61,9 @@ export default function ConteudoControleFrequencia({dadosReuniao, listaMembros}:
 
     async function salvarPresencas()
     {
+        if(bloqueado.current) return;
+        bloqueado.current = true;
+
         const naoMarcados = presencas.filter((p) => p.presente === null);
 
         if (naoMarcados.length > 0) {
@@ -93,6 +97,8 @@ export default function ConteudoControleFrequencia({dadosReuniao, listaMembros}:
             } else {
                 toast.error("Erro inesperado!");
             }
+        } finally {
+            bloqueado.current = false;
         }
     }
 

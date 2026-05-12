@@ -4,13 +4,16 @@ import { insert_evento } from "@/app/_actions/reunioes-eventos";
 import styles from "./modal.module.css";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import { useRef } from "react";
 
 export default function ModalReunioes({ onClose }: {onClose: () => void}) {
 
     const router = useRouter();
+    const bloqueado = useRef(false);
 
     async function criar(form: FormData)
     {
+        if(bloqueado.current) return;
         const newR = {
             data: form.get("data") as string,
             area: form.get("area") as string,
@@ -22,15 +25,21 @@ export default function ModalReunioes({ onClose }: {onClose: () => void}) {
         if(newR.descricao === "" || newR.descricao === null)
             newR.descricao = null;
 
-        const retorno = await insert_evento(newR);
+        bloqueado.current = true;
 
-        if(retorno)
-            toast.success("Reunião cadastrada com sucesso!");
-        else
-            toast.error("Erro ao cadastrar reunião!");
+        try{
+            const retorno = await insert_evento(newR);
 
-        router.push("/main/agenda-reunioes");
-        onClose();
+            if(retorno)
+                toast.success("Reunião cadastrada com sucesso!");
+            else
+                toast.error("Erro ao cadastrar reunião!");
+
+            router.push("/main/agenda-reunioes");
+            onClose();
+        } finally {
+            bloqueado.current = false;
+        }
     }
 
     return (
