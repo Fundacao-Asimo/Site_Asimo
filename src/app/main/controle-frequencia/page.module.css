@@ -109,29 +109,6 @@
     margin: 0 0.25rem;
 }
 
-.table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-.table thead {
-    background: #f8fafc;
-}
-
-.table th {
-    text-align: left;
-    font-size: 0.75rem;
-    color: #6b7a90;
-    padding: 1rem 1.5rem;
-    text-transform: uppercase;
-}
-
-.table td {
-    padding: 1rem 1.5rem;
-    border-top: 1px solid #eee;
-    font-size: 0.875rem;
-}
-
 .memberName {
     font-size: 1rem;
     font-weight: 600;
@@ -175,6 +152,7 @@
 }
 
 .progressBar {
+    position: relative;
     width: 8rem;
     height: 1.5rem;
     background: #e5e7eb;
@@ -182,12 +160,22 @@
     overflow: hidden;
 }
 
+.porcentagem {
+    color: black;
+    font-size: 0.75rem;
+    font-weight: 700;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
 .progressFill {
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
+    color: black;
     font-size: 0.75rem;
     font-weight: 700;
     border-radius: 999px;
@@ -243,11 +231,80 @@
         flex-direction: column;
     }
 
-    .table {
-        min-width: 700px;
-    }
-
     .card {
         overflow-x: auto;
     }
+}
+
+.list
+{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.row
+{
+    display: grid;
+    grid-template-columns: 2fr 1.2fr 2fr 1fr 1fr;
+    align-items: center;
+
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid #e5e7eb;
+    gap: 1rem;
+}
+
+.row_unique
+{
+    display: grid;
+    grid-template-columns: 2fr 1.2fr 2fr 1fr 1fr;
+    align-items: center;
+
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid #e5e7eb;
+    gap: 1rem;
+}
+
+.none {
+    display: none;
+}
+
+.headerRow
+{
+    font-weight: 600;
+    color: #6b7280;
+    background: #f9fafb;
+}
+
+.row:hover
+{
+    background: #f9fafb;
+    cursor: pointer;
+}
+
+.headerRow:hover
+{
+    background: #f9fafb;
+    cursor: inherit;
+}
+
+.dropdown {
+    overflow: hidden;
+    transition:
+        max-height 0.35s ease,
+        opacity 0.25s ease,
+        transform 0.25s ease;
+    transform-origin: top;
+}
+
+.dropdownOpen {
+    max-height: 500px;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.dropdownClosed {
+    max-height: 0;
+    opacity: 0;
+    transform: translateY(-10px);
 }
