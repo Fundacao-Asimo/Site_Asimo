@@ -62,7 +62,6 @@ export default function ConteudoControleFrequencia({dadosReuniao, listaMembros}:
     async function salvarPresencas()
     {
         if(bloqueado.current) return;
-        bloqueado.current = true;
 
         const naoMarcados = presencas.filter((p) => p.presente === null);
 
@@ -70,6 +69,8 @@ export default function ConteudoControleFrequencia({dadosReuniao, listaMembros}:
             toast.error("Marque todos os membros!");
             return;
         }
+
+        bloqueado.current = true;
 
         try {
             const response = await insert_lista_presencas(presencas);
