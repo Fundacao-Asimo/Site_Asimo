@@ -257,10 +257,11 @@
 .row_unique
 {
     display: grid;
-    grid-template-columns: 2fr 1.2fr 2fr 1fr 1fr;
+    grid-template-columns: 1.5fr 1fr 1.5fr 2fr 1fr;
     align-items: center;
 
     padding: 1rem 1.5rem;
+    background: #f9fafb;
     border-bottom: 1px solid #e5e7eb;
     gap: 1rem;
 }
@@ -284,7 +285,6 @@
 
 .headerRow:hover
 {
-    background: #f9fafb;
     cursor: inherit;
 }
 
@@ -298,7 +298,7 @@
 }
 
 .dropdownOpen {
-    max-height: 500px;
+    max-height: 200rem;
     opacity: 1;
     transform: translateY(0);
 }

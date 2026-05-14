@@ -129,7 +129,27 @@ export default function PresencaRow({ list }: { list: DadosFalta[] })
             >
                 {faltas.map((f: DadosFalta) => (
                     <div key={f.id} className={styles.row_unique}>
-                        {f.id}
+                        <div className={styles.memberName}>
+                            {f.membro}
+                        </div>
+
+                        <div className={styles.frequency}>
+                            {new Date(f.data + "T00:00:00").toLocaleDateString("pt-BR")}
+                        </div>
+
+                        <div className={styles.frequency}>
+                            {f.area === "Geral" ? "Reunião Geral" : "Reunião de " + f.area}
+                        </div>
+
+                        <div className={styles.frequency}>
+                            {f.justificativa ? f.justificativa : "(Sem Justificativa)"}
+                        </div>
+
+                        <div>
+                            <span className={`${styles.statusBadge} ${styles.statusCritical}`}>
+                                Falta
+                            </span>
+                        </div>
                     </div>
                 ))}
             </div>
