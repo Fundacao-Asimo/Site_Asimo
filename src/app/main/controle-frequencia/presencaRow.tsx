@@ -121,6 +121,35 @@ export default function PresencaRow({ list }: { list: DadosFalta[] })
                     </span>
                 </div>
             </div>
+            <div className={styles.row_mobile} onClick={trocar}>
+                <div className={styles.section_mobile}>
+                    <div className={styles.memberName}>
+                        {faltas[0].membro}
+                    </div>
+                    <div className={styles.frequency}>
+                        {`${list.length - faltas.length}/${list.length}`}
+                    </div>
+                </div>
+
+                <div  className={styles.section_mobile}>
+                    <div className={styles.progressBar}>
+                        <div
+                            className={`${styles.progressFill} ${getProgressColor(porcentagem_falta)}`}
+                            style={{
+                                width: `${porcentagem_falta}%`,
+                            }}
+                        >
+                        </div>
+                        <p className={styles.porcentagem}>{porcentagem_falta}%</p>
+                    </div>
+                </div>
+
+                <div className={styles.section_mobile}>
+                    <span className={`${styles.statusBadge} ${getStatusColor()}`}>
+                        {status}
+                    </span>
+                </div>
+            </div>
 
             <div
                 className={`${styles.dropdown} ${
@@ -128,27 +157,44 @@ export default function PresencaRow({ list }: { list: DadosFalta[] })
                 }`}
             >
                 {faltas.map((f: DadosFalta) => (
-                    <div key={f.id} className={styles.row_unique}>
-                        <div className={styles.memberName}>
-                            {f.membro}
-                        </div>
+                    <div key={f.id}>
+                        <div className={styles.row_unique}>
+                            <div className={styles.memberName}>
+                                {f.membro}
+                            </div>
 
-                        <div className={styles.frequency}>
-                            {new Date(f.data + "T00:00:00").toLocaleDateString("pt-BR")}
-                        </div>
+                            <div className={styles.frequency}>
+                                {new Date(f.data + "T00:00:00").toLocaleDateString("pt-BR")}
+                            </div>
 
-                        <div className={styles.frequency}>
-                            {f.area === "Geral" ? "Reunião Geral" : "Reunião de " + f.area}
-                        </div>
+                            <div className={styles.frequency}>
+                                {f.area === "Geral" ? "Reunião Geral" : "Reunião de " + f.area}
+                            </div>
 
-                        <div className={styles.frequency}>
-                            {f.justificativa ? f.justificativa : "(Sem Justificativa)"}
-                        </div>
+                            <div className={styles.frequency}>
+                                {f.justificativa ? f.justificativa : "(Sem Justificativa)"}
+                            </div>
 
-                        <div>
-                            <span className={`${styles.statusBadge} ${styles.statusCritical}`}>
-                                Falta
-                            </span>
+                            <div>
+                                <span className={styles.statusFalta}>
+                                    Falta
+                                </span>
+                            </div>
+                        </div>
+                        <div className={styles.row_unique_mobile}>
+                            <div className={styles.frequency}>
+                                {new Date(f.data + "T00:00:00").toLocaleDateString("pt-BR")}
+                            </div>
+
+                            <div className={styles.frequency}>
+                                {f.justificativa ? f.justificativa : "(Sem Justificativa)"}
+                            </div>
+
+                            <div>
+                                <span className={styles.statusFalta}>
+                                    Falta
+                                </span>
+                            </div>
                         </div>
                     </div>
                 ))}
