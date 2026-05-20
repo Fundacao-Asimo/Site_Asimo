@@ -54,6 +54,7 @@
     gap: 0.5rem;
     border-bottom: 0.0625rem solid #dcdcdc;
     margin-bottom: 1.25rem;
+    overflow-x: scroll;
 }
 
 .tab {
@@ -116,7 +117,8 @@
 }
 
 .areaBadge,
-.statusBadge {
+.statusBadge,
+.statusFalta {
     padding: 0.35rem 0.75rem;
     border-radius: 0.5rem;
     font-size: 0.75rem;
@@ -124,6 +126,11 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
+}
+
+.statusFalta {
+    background: #fee2e2;
+    color: #dc2626;
 }
 
 .areaDiretoria {
@@ -307,4 +314,50 @@
     max-height: 0;
     opacity: 0;
     transform: translateY(-10px);
+}
+
+.row_mobile
+{
+    display: none;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid #e5e7eb;
+    gap: 1rem;
+}
+
+.row_unique_mobile {
+    display: none;
+    padding: 1rem 1.5rem;
+    background: #f9fafb;
+    border-bottom: 1px solid #e5e7eb;
+    gap: 1rem;
+}
+
+.section_mobile {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+
+@media (max-width: 700px) {
+    .row_unique,
+    .row,
+    .headerRow {
+        display: none;
+    }
+
+    .row_mobile {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .row_unique_mobile {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .progressBar,
+    .statusBadge {
+        width: 100%;
+    }
 }
