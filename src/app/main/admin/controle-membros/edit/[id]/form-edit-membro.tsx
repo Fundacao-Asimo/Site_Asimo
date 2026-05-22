@@ -362,7 +362,7 @@ export default function FormEditMembro({membro}: {membro: MembroProps | null})
                 <button className={styles.button}>Salvar Alterações</button>
             </form>
 
-            <Link href="/main/controle-membros" className={styles.backLink}>
+            <Link href="/main/admin/controle-membros" className={styles.backLink}>
                 Voltar para lista
             </Link>
         </div>

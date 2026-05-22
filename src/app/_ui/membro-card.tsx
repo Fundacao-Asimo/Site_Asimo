@@ -53,20 +53,20 @@ export default function MembroCard(props: MembroProps)
 
                     {props.ativo ? <section className={styles.actions}>
                         <Link
-                            href={`/main/controle-membros/edit/${props.id}`}
+                            href={`/main/admin/controle-membros/edit/${props.id}`}
                             className={styles.link}
                         >
                             Editar
                         </Link>
 
                         <Link
-                            href={`/main/controle-membros/advertencia/${props.id}`}
+                            href={`/main/admin/controle-membros/advertencia/${props.id}`}
                             className={styles.link}
                         >
                             Advertência
                         </Link>
 
-                        <Link href={`/main/controle-membros/inativo/${props.id}`} className={styles.deleteButton}>
+                        <Link href={`/main/admin/controle-membros/inativo/${props.id}`} className={styles.deleteButton}>
                             Desativar
                         </Link>
                                 
@@ -109,7 +109,7 @@ function ModalAtivar({ membro, onClose }: {membro: MembroProps, onClose: () => v
         {
             toast.success(`Êxito ao ativar membro!`);
             onClose();
-            redirect("/main/controle-membros");
+            redirect("/main/admin/controle-membros");
         }
     }
 
@@ -152,7 +152,7 @@ function ModalExcluir({ membro, onClose }: {membro: MembroProps, onClose: () => 
         {
             toast.success(`Êxito ao excluir registro!`);
             onClose();
-            redirect("/main/controle-membros");
+            redirect("/main/admin/controle-membros");
         }
     }
 

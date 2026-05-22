@@ -131,8 +131,8 @@ export default function ConteudoControleEscolas({escolas, listMembros}: {escolas
                         </div>
 
                         <div className={styles.footerAcoes}>
-                            <Link href={`/main/escolas-parceiras/edit/${detail.id}`} className={styles.btnAzul}><FontAwesomeIcon icon={faPencil}/> Editar Dados</Link>
-                            <Link href={`/main/escolas-parceiras/membros/${detail.id}`} className={styles.btnRoxo}><FontAwesomeIcon icon={faUsers}/> Gerenciar Equipe</Link>
+                            <Link href={`/main/admin/escolas-parceiras/edit/${detail.id}`} className={styles.btnAzul}><FontAwesomeIcon icon={faPencil}/> Editar Dados</Link>
+                            <Link href={`/main/admin/escolas-parceiras/membros/${detail.id}`} className={styles.btnRoxo}><FontAwesomeIcon icon={faUsers}/> Gerenciar Equipe</Link>
                         </div>
                     </div>
                 }

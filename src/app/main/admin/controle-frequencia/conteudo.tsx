@@ -4,10 +4,14 @@ import styles from "./page.module.css";
 import { DictAreaFalta } from "./page";
 import { useState } from "react";
 import PresencaRow from "./presencaRow";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheckCircle, faFileExport } from "@fortawesome/free-solid-svg-icons";
+import { useRouter } from "next/navigation";
 
 export default function ConteudoControlePresencas({dict}: {dict: DictAreaFalta})
 {
     const [areaAtual, setAreaAtual] = useState<string>("Geral");
+    const router = useRouter();
 
     const tabs = [
         'Geral',
@@ -28,8 +32,11 @@ export default function ConteudoControlePresencas({dict}: {dict: DictAreaFalta})
                 </h1>
 
                 <div className={styles.actions}>
+                    <button className={styles.newButton} onClick={() => router.push("/main/admin/agenda-reunioes")}>
+                        <FontAwesomeIcon icon={faCheckCircle}/> Lançar Presença
+                    </button>
                     <button className={styles.exportButton}>
-                        Exportar Relatório
+                        <FontAwesomeIcon icon={faFileExport}/> Exportar Relatório
                     </button>
                 </div>
             </div>

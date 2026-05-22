@@ -88,7 +88,7 @@ export default function ConteudoControleFrequencia({dadosReuniao, listaMembros}:
             }
 
             toast.success("Presenças salvas!");
-            router.push("/main/agenda-reunioes");
+            router.push("/main/admin/agenda-reunioes");
 
         } catch (error: any) {
             if (error.message === "ERRO_INSERIR_PRESENCA") {

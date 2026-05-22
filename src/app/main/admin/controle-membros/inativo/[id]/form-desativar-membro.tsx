@@ -36,7 +36,7 @@ export default function FormDesativarMembro({membro}: {membro: MembroProps | nul
             toast.error("Erro!");
         } else {
             toast.success("Membro inativado!");
-            router.push("/main/controle-membros");
+            router.push("/main/admin/controle-membros");
         }
     }
 
@@ -76,7 +76,7 @@ export default function FormDesativarMembro({membro}: {membro: MembroProps | nul
                 <button className={styles.button}>Desativar Membro</button>
             </form>
 
-            <Link href="/main/controle-membros" className={styles.backLink}>
+            <Link href="/main/admin/controle-membros" className={styles.backLink}>
                 Voltar para lista
             </Link>
         </div>
