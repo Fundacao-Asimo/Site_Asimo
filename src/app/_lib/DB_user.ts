@@ -1,5 +1,6 @@
 import { criptografar_cpf, criptografar_senha, descriptografar_cpf } from "../_actions/cripto";
 import DB_free from "./DB_free";
+import { isSessionValid } from "./session";
 import { supabase } from "./supabase";
 
 export interface MembroInfo {
@@ -157,6 +158,10 @@ async function delete_user(id: number)
 
 async function edit_user(dadosAtualizados: any)
 {
+    const session = await isSessionValid();
+    if(!session || !session.isAdm)
+        delete dadosAtualizados.adm;
+
     if (dadosAtualizados?.senha && dadosAtualizados.senha.trim() !== "" && !(dadosAtualizados.senha.startsWith("$2"))) {
         dadosAtualizados.senha = await criptografar_senha(dadosAtualizados.senha);
     } else {

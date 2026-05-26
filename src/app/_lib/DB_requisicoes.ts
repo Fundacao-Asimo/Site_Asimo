@@ -58,6 +58,7 @@ async function list_req(idMembro: number = 0)
 
 async function insert_req(dados: RequiInfo)
 {
+    dados.status = null;
     const { data, error } = await supabase
         .from("requisicoes")
         .insert([dados])

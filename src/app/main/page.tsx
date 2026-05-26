@@ -47,7 +47,7 @@ export default async function MainPage()
             <h1 className={styles.h1}>
                 Bem Vindo {usuarioLogado?.apelido ?? "usuário"}!
             </h1>
-            <div className={styles.div_horizontal}>
+            {/* <div className={styles.div_horizontal}>
                 <div className={styles.quadro}>
                     <h3>Minha Presença</h3>
                     <svg viewBox="0 0 36 36" className={styles.circularChart}>
@@ -80,7 +80,7 @@ export default async function MainPage()
                 <div className={styles.quadro}>
 
                 </div>
-            </div>
+            </div> */}
             <h2 className={styles.h2}>Acesso Rápido</h2>
             <div className={styles.div_horizontal}>
                 <Link href="/main/banco-de-horas" className={styles.quadro}>
