@@ -4,7 +4,10 @@ import DB_user from "@/app/_lib/DB_user";
 import type { MembroInfo, MembroProps } from "@/app/_lib/DB_user";
 import { createSessionToken, deleteSessionCookie, isSessionValid } from "../_lib/session";
 
-export async function update_cookie(userId: number, isAdm: boolean, status: boolean) {
+export async function update_cookie(status: boolean) {
+    const session = await isSessionValid();
+    const {userId} = session as { userId: number };
+    const {isAdm} = session as { isAdm: boolean };
     await deleteSessionCookie();
     await createSessionToken(userId, isAdm, status);
 }

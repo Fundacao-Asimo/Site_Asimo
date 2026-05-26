@@ -324,7 +324,7 @@ export default function CreateMembro()
                     <button className={styles.button}>Adicionar Membro</button>
                 </form>
 
-                <Link href="/main/controle-membros" className={styles.backLink}>
+                <Link href="/main/admin/controle-membros" className={styles.backLink}>
                     Voltar para lista
                 </Link>
             </div>

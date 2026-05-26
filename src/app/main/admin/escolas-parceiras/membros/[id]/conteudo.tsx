@@ -77,7 +77,7 @@ export default function ConteudoDesignarMembrosEscola({escola, membros}: {escola
                 ))}
             </div>
             <div style={{width: "100%", gap: "1rem", display: "flex", justifyContent: "flex-end", marginTop: "1.5rem"}}>
-                <Link href={"/main/escolas-parceiras"} className={styles.btnVoltar}>
+                <Link href={"/main/admin/escolas-parceiras"} className={styles.btnVoltar}>
                     <FontAwesomeIcon icon={faArrowLeft}/> Voltar para lista
                 </Link>
             </div>

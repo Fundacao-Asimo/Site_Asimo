@@ -16,39 +16,39 @@ export default function HeaderDinamic({horas}: {horas: number})
         "/main/requisicoes": "Requisições",
         "/main/membros": "Diretório de Membros",
         "/main/perfil": "Meu Perfil",
-        "/main/dashboard-principal": "Dashboard Principal",
-        "/main/controle-horas": "Horas Controle",
-        "/main/free-time-geral": "Free-Time-Geral",
-        "/main/escolas-parceiras": "Escolas Parceiras",
-        "/main/agenda-reunioes": "Agenda de Reuniões",
-        "/main/controle-frequencia": "Controle de Frequência",
-        "/main/eventos": "Eventos & Workshops",
-        "/main/relatorios-horas": "Relatórios de Horas",
-        "/main/controle-membros": "Gestão de Membros",
-        "/main/controle-membros/create": "Adicionar Membros",
-        "/main/controle-membros/edit": "Editar Dados do Membro",
-        "/main/controle-membros/inativo": "Membros Inativos",
-        "/main/controle-requisicoes": "Requisições",
-        "/main/controle-atividades": "Atribuir Atividades",
-        "/main/caixa": "Caixa & Requisições",
-        "/main/advertencias": "Advertências",
+        "/main/admin/dashboard-principal": "Dashboard Principal",
+        "/main/admin/controle-horas": "Horas Controle",
+        "/main/admin/free-time-geral": "Free-Time-Geral",
+        "/main/admin/escolas-parceiras": "Escolas Parceiras",
+        "/main/admin/agenda-reunioes": "Agenda de Reuniões",
+        "/main/admin/eventos": "Eventos & Workshops",
+        "/main/admin/relatorios-horas": "Relatórios de Horas",
+        "/main/admin/controle-frequencia": "Controle de Frequência",
+        "/main/admin/controle-membros": "Gestão de Membros",
+        "/main/admin/controle-membros/create": "Adicionar Membros",
+        "/main/admin/controle-membros/edit": "Editar Dados do Membro",
+        "/main/admin/controle-membros/inativo": "Membros Inativos",
+        "/main/admin/controle-requisicoes": "Requisições",
+        "/main/admin/controle-atividades": "Atribuir Atividades",
+        "/main/admin/caixa": "Caixa & Requisições",
+        "/main/admin/advertencias": "Advertências",
     };
 
     let title = "Dashboard";
 
-    if(pathname.startsWith("/main/controle-membros/edit")) {
+    if(pathname.startsWith("/main/admin/controle-membros/edit")) {
         title = "Editar Dados do Membro";
     }
-    else if(pathname.startsWith("/main/controle-membros/inativo/")) {
+    else if(pathname.startsWith("/main/admin/controle-membros/inativo/")) {
         title = "Desativar Membro";
     }
-    else if(pathname.startsWith("/main/escolas-parceiras/edit")) {
+    else if(pathname.startsWith("/main/admin/escolas-parceiras/edit")) {
         title = "Editar Dados da Escola";
     }
-    else if(pathname.startsWith("/main/escolas-parceiras/membros")) {
+    else if(pathname.startsWith("/main/admin/escolas-parceiras/membros")) {
         title = "Gerenciar Equipe da Escola";
     }
-    else if(pathname.startsWith("/main/controle-frequencia")) {
+    else if(pathname.startsWith("/main/admin/controle-frequencia")) {
         title = "Controle de Frequência";
     }
     else {

@@ -173,7 +173,7 @@ export default function FormEditEscola({escola}: {escola: EscolaProps | null})
                 <button className={styles.button}>Salvar Alterações</button>
             </form>
 
-            <Link href="/main/escolas-parceiras" className={styles.backLink}>
+            <Link href="/main/admin/escolas-parceiras" className={styles.backLink}>
                 Voltar para lista
             </Link>
         </div>

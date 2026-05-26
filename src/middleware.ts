@@ -12,20 +12,6 @@ const publicRoutes = [
     '/login'
 ];
 
-const admRoutes = [
-    "/main/dashboard-principal",
-    "/main/free-time-geral",
-    "/main/escolas-parceiras",
-    "/main/agenda-reunioes",
-    "/main/controle-frequencia",
-    "/main/eventos",
-    "/main/relatorios-horas",
-    "/main/controle-membros",
-    "/main/controle-atividades",
-    "/main/caixa",
-    "/main/advertencias",
-]
-
 export async function middleware(req: NextRequest){
 
     const pathname = req.nextUrl.pathname;
@@ -47,7 +33,7 @@ export async function middleware(req: NextRequest){
         return NextResponse.redirect(new URL('/login', req.nextUrl));
     }
 
-    if(admRoutes.some(route => pathname.includes(route)) && !(isAdm.isAdm)) {
+    if(pathname.includes("/admin") && !(isAdm.isAdm)) {
         return NextResponse.redirect(new URL('/main', req.nextUrl));
     }
     

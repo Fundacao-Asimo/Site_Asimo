@@ -20,10 +20,10 @@ export default function PresencaRow({ list }: { list: DadosFalta[] })
     if (porcentagem_falta === 100)
         status = "Excelente";
 
-    else if (porcentagem_falta >= 80)
+    else if (porcentagem_falta >= 75)
         status = "Bom";
 
-    else if (porcentagem_falta >= 60)
+    else if (porcentagem_falta >= 50)
         status = "Regular";
 
     else
@@ -71,9 +71,9 @@ export default function PresencaRow({ list }: { list: DadosFalta[] })
 
     function getProgressColor(value: number)
     {
-        if (value >= 80) return styles.progressGreen;
+        if (value >= 75) return styles.progressGreen;
 
-        if (value >= 60) return styles.progressYellow;
+        if (value >= 50) return styles.progressYellow;
 
         return styles.progressRed;
     }

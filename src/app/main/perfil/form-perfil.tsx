@@ -191,7 +191,7 @@ export default function FormPerfil({membro}: {membro: MembroProps | null})
             {
                 status = false;
             }
-            update_cookie(newUser.id, newUser.adm, status);
+            update_cookie(status);
         }
     }
 

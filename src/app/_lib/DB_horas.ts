@@ -77,6 +77,7 @@ async function list_horas_membro(id: number, aprovado: boolean | null = null)
 
 async function insert_hora(dados: HoraInfo)
 {
+    dados.aprovado = null;
     const { data, error } = await supabase
         .from("horas")
         .insert([dados])

@@ -23,6 +23,10 @@
     color: black;
 }
 
+.legenda {
+    font-size: 0.8rem;
+}
+
 .quadro {
     flex: 1;
     display: flex;
@@ -152,6 +156,58 @@
   font-weight: bold;
   object-fit: cover;
   aspect-ratio: 1/1;
+}
+
+.circularChart
+{
+    width: 170px;
+    height: 170px;
+}
+
+.circleBg
+{
+    fill: none;
+    stroke: #e5e7eb;
+    stroke-width: 3;
+}
+
+.circle
+{
+    fill: none;
+    stroke-width: 3;
+    stroke-linecap: round;
+    animation: progress 1s ease-out forwards;
+}
+
+.percentage
+{
+    fill: #111827;
+    font-size: 0.5rem;
+    text-anchor: middle;
+    font-weight: bold;
+}
+
+.progressGreen {
+    color: #22c55e;
+    stroke: #22c55e;
+}
+
+.progressYellow {
+    color: #eab308;
+    stroke: #eab308;
+}
+
+.progressRed {
+    color: #ef4444;
+    stroke: #ef4444;
+}
+
+@keyframes progress
+{
+    0%
+    {
+        stroke-dasharray: 0 100;
+    }
 }
 
 @media (max-width: 700px) {

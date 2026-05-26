@@ -35,7 +35,7 @@ export default function ModalReunioes({ onClose }: {onClose: () => void}) {
             else
                 toast.error("Erro ao cadastrar reunião!");
 
-            router.push("/main/agenda-reunioes");
+            router.push("/main/admin/agenda-reunioes");
             onClose();
         } finally {
             bloqueado.current = false;

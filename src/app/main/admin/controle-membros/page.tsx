@@ -21,13 +21,13 @@ export default async function ListMembrosPage()
 
                     <div className={styles.buttons}>
                         <Link
-                            href={'/main/controle-membros/create'}
+                            href={'/main/admin/controle-membros/create'}
                             className={styles.addButton}
                         >
                             + Adicionar
                         </Link>
                         <Link
-                            href={'/main/controle-membros/inativo'}
+                            href={'/main/admin/controle-membros/inativo'}
                             className={styles.inativeButton}
                         >
                             Inativos

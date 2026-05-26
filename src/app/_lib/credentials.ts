@@ -28,8 +28,8 @@ export async function validateCredentials(data: LoginCredentials)
 
     const user = await query_user_email(email);
 
-    if(!user)
-        return {error: 'Usuário não encontrado'};
+    if(!user || user?.ativo === false)
+        return {error: 'Usuario ou senhas incorretos'};
 
     const isMatch = await descriptografar_senha(data.password, user.senha);
 
