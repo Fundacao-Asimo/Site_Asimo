@@ -6,7 +6,7 @@ import toast from 'react-hot-toast';
 import { validateCredentials } from '@/app/_lib/credentials';
 import Image from 'next/image';
 import Link from 'next/link';
-import { criptografar_cpf, descriptografar_cpf } from '../_actions/cripto';
+import { useState } from 'react';
 
 const LoginSchema = z.object({
     email: z.string().trim().email('Email com formato incorreto'),
@@ -19,35 +19,41 @@ export interface LoginCredentials {
 }
 
 export default function LoginPage(){
+    const [email, setEmail] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
 
     const loginAction = async (formData: FormData) => {
-        const loginData: LoginCredentials = {
-            email: formData.get('email') as string,
-            password: formData.get('password') as string
+        setIsLoading(true);
+
+        try {
+            const loginData: LoginCredentials = {
+                email: formData.get('email') as string,
+                password: formData.get('password') as string
+            }
+
+            const result = LoginSchema.safeParse(loginData);
+
+            if(!result.success){
+                let errorMsg = '';
+
+                result.error.issues.forEach((issue) => {
+                    errorMsg = errorMsg + issue.message + '. ';
+                });
+
+                toast.error(errorMsg);
+                return;
+            }
+
+            const loginValidacao = await validateCredentials(loginData);
+
+            if(loginValidacao){
+                toast.error(loginValidacao.error);
+            }
+        } catch {
+            toast.error('Não foi possível entrar. Tente novamente.');
+        } finally {
+            setIsLoading(false);
         }
-
-        const result = LoginSchema.safeParse(loginData);
-
-        if(!result.success){
-
-            let errorMsg = '';
-
-            result.error.issues.forEach((issue) => {
-                errorMsg = errorMsg + issue.message + '. ';
-            });
-
-            toast.error(errorMsg);
-
-            return;
-        }
-        
-        const loginValidacao = await validateCredentials(loginData);
-
-        if(loginValidacao){
-            toast.error(loginValidacao.error);
-            return;
-        }
-        
     }
 
     return (
@@ -86,17 +92,20 @@ export default function LoginPage(){
                     Acesse sua conta
                 </p>
 
-                    <form className={styles.form} action={loginAction}>
+                    <form className={styles.form} action={loginAction} onSubmit={() => setIsLoading(true)}>
                         <div className={styles.inputGroup}>
-                            <label>Email</label>
-                            <input type="email" name="email" id="email" placeholder="seu@email.com" />
+                            <label htmlFor="email">Email</label>
+                            <input type="email" name="email" id="email" placeholder="seu@email.com" value={email} onChange={(event) => setEmail(event.target.value)} autoComplete="email" />
                         </div>
 
                         <div className={styles.inputGroup}>
-                            <label>Senha</label>
-                            <input type="password" name="password" id="password" placeholder="••••••••" />
+                            <label htmlFor="password">Senha</label>
+                            <input type="password" name="password" id="password" placeholder="••••••••" autoComplete="current-password" />
                         </div>
-                        <button className={styles.loginButton}>Entrar</button>
+                        <button className={styles.loginButton} disabled={isLoading} aria-busy={isLoading}>
+                            {isLoading && <span className={styles.spinner} aria-hidden="true" />}
+                            {isLoading ? 'Entrando...' : 'Entrar'}
+                        </button>
                         <Link className={styles.voltar2} href={"/"}>← Voltar para página principal</Link>
                     </form>
                 </div>
