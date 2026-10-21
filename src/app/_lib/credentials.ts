@@ -5,13 +5,14 @@ import { MembroInfo } from "./DB_user";
 
 import { createSessionToken } from "./session";
 import { LoginCredentials } from "../login/page";
-import { insert_user, query_user_email } from "../_actions/user";
-import { criptografar_cpf, criptografar_senha, descriptografar_senha } from "../_actions/cripto";
+import { insert_user } from "../_actions/user";
+import DB_user from "./DB_user";
+import SV_cripto from "./SV_cripto";
 
 export async function createUser(data: MembroInfo)
 {
-    data.senha = await criptografar_senha(data.senha);
-    data.cpf = await criptografar_cpf(data.cpf);
+    data.senha = await SV_cripto.encryptSenha(data.senha);
+    data.cpf = SV_cripto.encryptCPF(data.cpf);
 
     const retorno = await insert_user(data);
 
@@ -26,12 +27,12 @@ export async function validateCredentials(data: LoginCredentials)
 {
     const email = data.email;
 
-    const user = await query_user_email(email);
+    const user = await DB_user.query_user_email(email);
 
     if(!user || user?.ativo === false)
         return {error: 'Usuario ou senhas incorretos'};
 
-    const isMatch = await descriptografar_senha(data.password, user.senha);
+    const isMatch = await SV_cripto.desencryptSenha(data.password, user.senha);
 
     if(isMatch)
     {

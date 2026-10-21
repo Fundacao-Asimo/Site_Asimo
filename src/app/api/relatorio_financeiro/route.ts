@@ -2,8 +2,13 @@ import { NextResponse } from "next/server";
 import { PDFDocument, StandardFonts } from "pdf-lib";
 import { query_caixa } from "@/app/_actions/caixa";
 import { list_trans } from "@/app/_actions/transacao";
+import { isSessionValid } from "@/app/_lib/session";
 
 export async function GET() {
+    const session = await isSessionValid();
+    if (!session) return NextResponse.json({ error: "Não autenticado" }, { status: 401 });
+    if (session.isAdm !== true) return NextResponse.json({ error: "Sem permissão" }, { status: 403 });
+
     const caixa = await query_caixa();
     const transacoes = await list_trans(true);
 

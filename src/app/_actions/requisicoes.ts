@@ -4,16 +4,36 @@ import type { RequiInfo, RequiProps } from "../_lib/DB_requisicoes";
 import { isSessionValid } from "../_lib/session";
 import DB_req from "../_lib/DB_requisicoes";
 
+async function requireSession() {
+    const session = await isSessionValid();
+    const userId = session ? Number(session.userId) : NaN;
+
+    if (!session || !Number.isSafeInteger(userId) || userId <= 0) {
+        throw new Error("Sessão inválida");
+    }
+
+    return { userId, isAdm: session.isAdm === true };
+}
+
 export async function query_req_id(id: number) {
+    const session = await requireSession();
+    if (!session.isAdm) throw new Error("Sem permissão");
     return await DB_req.query_req_id(id);
 }
 
 export async function list_req(idMembro: number = 0) {
+    const session = await requireSession();
+    if (!session.isAdm && idMembro !== session.userId) throw new Error("Sem permissão");
     return await DB_req.list_req(idMembro);
 }
 
 export async function insert_req(dados: RequiInfo) {
-    return await DB_req.insert_req(dados);
+    const session = await requireSession();
+    return await DB_req.insert_req({
+        ...dados,
+        membro: session.userId,
+        status: null,
+    });
 }
 
 export async function delete_req(id: number) {
@@ -26,9 +46,12 @@ export async function delete_req(id: number) {
 }
 
 export async function edit_req(dados: RequiProps) {
+    const session = await requireSession();
+    if (!session.isAdm) throw new Error("Sem permissão");
     return await DB_req.edit_req(dados);
 }
 
 export async function upload_anexo_req(foto: File, nome: string) {
+    await requireSession();
     return await DB_req.upload_anexo_req(foto, nome);
 }

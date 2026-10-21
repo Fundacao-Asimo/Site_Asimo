@@ -35,5 +35,7 @@ export async function insert_escola(dados: EscolaInfo) {
 }
 
 export async function edit_escola(dados: EscolaProps) {
+    const session = await isSessionValid();
+    if (!session || !session.isAdm) throw new Error("Sem permissão");
     return await DB_escolas.edit_escola(dados);
 }

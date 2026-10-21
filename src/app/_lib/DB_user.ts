@@ -1,4 +1,4 @@
-import { criptografar_cpf, criptografar_senha, descriptografar_cpf } from "../_actions/cripto";
+import SV_cripto from "./SV_cripto";
 import DB_free from "./DB_free";
 import { isSessionValid } from "./session";
 import { supabase } from "./supabase";
@@ -53,7 +53,7 @@ async function query_user_id(id: number)
         return null;
     }
 
-    usuario.cpf = await descriptografar_cpf(usuario.cpf);
+    usuario.cpf = SV_cripto.decryptCPF(usuario.cpf);
 
     return usuario;
 }
@@ -70,7 +70,7 @@ async function query_user_name(nome: string)
         return null;
     }
 
-    usuario.cpf = await descriptografar_cpf(usuario.cpf);
+    usuario.cpf = SV_cripto.decryptCPF(usuario.cpf);
 
     return usuario;
 }
@@ -87,7 +87,7 @@ async function query_user_email(email: string)
         return null;
     }
 
-    usuario.cpf = await descriptografar_cpf(usuario.cpf);
+    usuario.cpf = SV_cripto.decryptCPF(usuario.cpf);
 
     return usuario;
 }
@@ -163,12 +163,12 @@ async function edit_user(dadosAtualizados: any)
         delete dadosAtualizados.adm;
 
     if (dadosAtualizados?.senha && dadosAtualizados.senha.trim() !== "" && !(dadosAtualizados.senha.startsWith("$2"))) {
-        dadosAtualizados.senha = await criptografar_senha(dadosAtualizados.senha);
+        dadosAtualizados.senha = await SV_cripto.encryptSenha(dadosAtualizados.senha);
     } else {
         delete dadosAtualizados.senha; // mantém a antiga no banco
     }
     if(dadosAtualizados?.cpf && !(dadosAtualizados.cpf.includes(":")))
-        dadosAtualizados.cpf = await criptografar_cpf(dadosAtualizados.cpf);
+        dadosAtualizados.cpf = SV_cripto.encryptCPF(dadosAtualizados.cpf);
 
     const {id, ...rest} = dadosAtualizados
     const dadosNovos = {...rest}

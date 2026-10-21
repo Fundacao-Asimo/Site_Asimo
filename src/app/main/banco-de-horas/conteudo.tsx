@@ -2,13 +2,13 @@
 
 import styles from "./page.module.css";
 import HoraDetalhe from "@/app/_ui/hora-detalhe";
-import { HoraInfo, HoraProps } from "@/app/_lib/DB_horas";
+import { HoraProps } from "@/app/_lib/DB_horas";
 import toast from "react-hot-toast";
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { insert_hora } from "@/app/_actions/hora";
 
-export default function ConteudoBancoHoras({listHorasInit, userId}: {listHorasInit: HoraProps[], userId: number})
+export default function ConteudoBancoHoras({listHorasInit}: {listHorasInit: HoraProps[]})
 {
     const [listHoras, setListHoras] = useState<HoraProps[]>(listHorasInit);
     const [filtro, setFiltro] = useState<HoraProps[]>(listHorasInit);
@@ -30,13 +30,11 @@ export default function ConteudoBancoHoras({listHorasInit, userId}: {listHorasIn
 
     async function registrar(formData: FormData)
     {
-        const dados: HoraInfo = {
+        const dados = {
             horas: Number(formData.get('horas')),
             data: formData.get('data') as string,
             tipo: formData.get('atividade') as string,
             descricao: formData.get('descricao') as string,
-            aprovado: null,
-            membro: userId
         }
 
         const retorno = await insert_hora(dados);

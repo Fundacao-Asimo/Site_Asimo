@@ -201,8 +201,39 @@
     font-weight: 600;
     cursor: pointer;
     transition: 0.2s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: .65rem;
 }
 
 .loginButton:hover {
     background: #1d4ed8;
+}
+
+.loginButton:disabled {
+    cursor: wait;
+    opacity: .85;
+}
+
+.spinner {
+    width: 1.25rem;
+    height: 1.25rem;
+    flex-shrink: 0;
+    border: 3px solid #f97316;
+    border-top-color: #ffedd5;
+    border-radius: 50%;
+    animation: spin .65s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .spinner {
+        animation-duration: 1.5s;
+    }
 }

@@ -111,16 +111,18 @@ async function delete_free(id: number)
     }
 }
 
-async function edit_free(dadosAtualizados: FreeTimeProps)
+async function edit_free(dadosAtualizados: FreeTimeProps, membroId?: number)
 {
     const {id, ...rest} = dadosAtualizados
     const dadosNovos: FreeTimeInfo = {...rest}
-    const { data, error } = await supabase
+    let query = supabase
         .from("free_time")
         .update(dadosNovos)
-        .eq("id", id)
-        .select()
-        .single();
+        .eq("id", id);
+
+    if (membroId !== undefined) query = query.eq("membro", membroId);
+
+    const { data, error } = await query.select().single();
 
     if (error) {
         return null;

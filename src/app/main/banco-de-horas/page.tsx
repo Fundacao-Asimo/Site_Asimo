@@ -10,7 +10,7 @@ export default async function BancoPage()
 
     return (
         <main>
-            <ConteudoBancoHoras listHorasInit={listHorasTemp} userId={usuarioIdTemp.userId}/>
+            <ConteudoBancoHoras listHorasInit={listHorasTemp}/>
         </main>
     );
 }

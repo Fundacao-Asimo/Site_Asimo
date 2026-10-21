@@ -34,9 +34,9 @@ export default function HoraDetalhe({
                 <p className={styles.horas}>{dados.horas}h</p>
                 <span className={`${styles.status} ${styles[status.toLowerCase()]}`}>{status}</span>
 
-                <button className={styles.excluir} onClick={excluir}>
+                {dados.aprovado !== true && <button className={styles.excluir} onClick={excluir}>
                     <FontAwesomeIcon icon={faTrash}/> Excluir
-                </button>
+                </button>}
             </div>
             <div className={`${styles.box} ${styles.mobile}`}>
                 <div className={styles.top}>
@@ -55,9 +55,9 @@ export default function HoraDetalhe({
                     </span>
                 </div>
 
-                <button className={styles.excluir} onClick={excluir}>
+                {dados.aprovado !== true && <button className={styles.excluir} onClick={excluir}>
                     <FontAwesomeIcon icon={faTrash}/> Excluir
-                </button>
+                </button>}
             </div>
         </>
     );
