@@ -1,7 +1,7 @@
 'use client'
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { logout } from "../_lib/session"
+import { logout } from "../_actions/session"
 import styles from "../_styles/HeaderMain.module.css";
 import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 

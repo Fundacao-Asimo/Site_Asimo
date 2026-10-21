@@ -186,12 +186,7 @@ export default function FormPerfil({membro}: {membro: MembroProps | null})
         } else {
             toast.success("Editado com sucesso!");
             setIsEditing(false);
-            let status = true;
-            if(newUser.id !== 1 && (newUser.nasc_date === "" || newUser.nasc_date === null || newUser.matricula === "" || newUser.matricula === null || newUser.curso === "" || newUser.curso === null || newUser.telefone === "" || newUser.telefone === null || newUser.endereco === "" || newUser.endereco === null || newUser.cpf === "" || newUser.cpf === null))
-            {
-                status = false;
-            }
-            update_cookie(status);
+            await update_cookie();
         }
     }
 

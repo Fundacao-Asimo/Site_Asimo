@@ -91,18 +91,25 @@ async function insert_hora(dados: HoraInfo)
     return data;
 }
 
-async function delete_hora(id: number)
+async function delete_hora(id: number, membroId?: number)
 {
-    const { error } = await supabase
+    let query = supabase
         .from("horas")
         .delete()
         .eq("id", id);
 
+    if (membroId !== undefined) {
+        query = query
+            .eq("membro", membroId)
+            .or("aprovado.is.null,aprovado.eq.false");
+    }
+
+    const { data, error } = await query.select("id");
+
     if(error)
         return false;
 
-    else
-        return true;
+    return Boolean(data?.length);
 }
 
 async function edit_hora(dadosAtualizados: HoraProps)

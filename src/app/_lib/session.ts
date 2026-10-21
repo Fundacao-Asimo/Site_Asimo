@@ -1,8 +1,5 @@
-'use server';
-
 import { SignJWT, jwtVerify } from "jose";
 import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
 
 async function openSessionToken(token: string)
 {    
@@ -60,9 +57,4 @@ export async function deleteSessionCookie(){
     const cookieStore = await cookies();
 
     cookieStore.delete('session');
-}
-
-export async function logout() {
-    await deleteSessionCookie();
-    redirect('/login');
 }

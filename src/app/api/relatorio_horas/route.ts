@@ -2,7 +2,8 @@ import { NextResponse } from "next/server";
 import { PDFDocument, StandardFonts } from "pdf-lib";
 import { list_user } from "@/app/_actions/user";
 import { list_horas_geral } from "@/app/_actions/hora";
-import { descriptografar_cpf } from "@/app/_actions/cripto";
+import SV_cripto from "@/app/_lib/SV_cripto";
+import { isSessionValid } from "@/app/_lib/session";
 
 function formatHoras(horas: number) {
     const totalSegundos = horas * 3600;
@@ -15,6 +16,10 @@ function formatHoras(horas: number) {
 }
 
 export async function GET() {
+    const session = await isSessionValid();
+    if (!session) return NextResponse.json({ error: "Não autenticado" }, { status: 401 });
+    if (session.isAdm !== true) return NextResponse.json({ error: "Sem permissão" }, { status: 403 });
+
     const membros = await list_user(null);
     const horas = await list_horas_geral();
 
@@ -66,7 +71,7 @@ export async function GET() {
         page.drawText(`Matrícula: ${membro.matricula}`, { x: 50, y, size: 10, font });
         y -= 12;
 
-        page.drawText(`CPF: ${await descriptografar_cpf(membro.cpf)}`, { x: 50, y, size: 10, font });
+        page.drawText(`CPF: ${SV_cripto.decryptCPF(membro.cpf)}`, { x: 50, y, size: 10, font });
         y -= 12;
 
         page.drawText(`E-mail: ${membro.email}`, { x: 50, y, size: 10, font });

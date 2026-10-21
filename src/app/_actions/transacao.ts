@@ -5,10 +5,14 @@ import type { TransacaoInfo, TransacaoProps } from "../_lib/DB_transacoes";
 import { isSessionValid } from "../_lib/session";
 
 export async function query_trans_id(id: number) {
+    const session = await isSessionValid();
+    if (!session || !session.isAdm) throw new Error("Sem permissão");
     return await DB_transacoes.query_trans_id(id);
 }
 
 export async function list_trans(all: boolean, status: boolean | null = null) {
+    const session = await isSessionValid();
+    if (!session || !session.isAdm) throw new Error("Sem permissão");
     return await DB_transacoes.list_trans(all, status);
 }
 
@@ -31,9 +35,16 @@ export async function delete_trans(id: number) {
 }
 
 export async function edit_trans(dados: TransacaoProps) {
+    const session = await isSessionValid()
+
+    if(!session || !session.isAdm)
+        throw new Error("Sem permissão")
+
     return await DB_transacoes.edit_trans(dados);
 }
 
 export async function upload_anexo_trans(foto: File, nome: string) {
+    const session = await isSessionValid();
+    if (!session || !session.isAdm) throw new Error("Sem permissão");
     return await DB_transacoes.upload_anexo_trans(foto, nome);
 }
