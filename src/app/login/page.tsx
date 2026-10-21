@@ -49,9 +49,11 @@ export default function LoginPage(){
             if(loginValidacao){
                 toast.error(loginValidacao.error);
             }
-        } catch {
-            toast.error('Não foi possível entrar. Tente novamente.');
-        } finally {
+        } catch (error) {
+            const digest = (error as { digest?: string })?.digest;
+            if (typeof digest === 'string' && digest.startsWith('NEXT_REDIRECT')) throw error;
+                toast.error('Não foi possível entrar. Tente novamente.');
+            } finally {
             setIsLoading(false);
         }
     }
